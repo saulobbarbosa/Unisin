@@ -1,0 +1,42 @@
+.headerContainer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: 100vw;
+    background-color: #141531;
+    user-select: none;
+}
+
+.logo{
+    width: 6rem;
+    margin: 1rem 1rem 1rem 3rem;
+}
+
+.headerMenu{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    color: #fff;
+}
+.opcoes{
+    cursor: pointer;
+    margin: 0rem 2rem;
+}
+
+.btnLogar{
+    cursor: pointer;
+    color: #295384;
+    font-size: large;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 3rem;
+}
+.btnLogar:hover{
+    background-color: #295384;
+    color: #fff;
+    transition: 0.8s;
+}
