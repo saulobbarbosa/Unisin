@@ -42,7 +42,7 @@ const TextType = ({
   };
 
   const getCurrentTextColor = () => {
-    if (textColors.length === 0) return "#000";
+    if (textColors.length === 0) return "#fff";
     return textColors[currentTextIndex % textColors.length];
   };
 
