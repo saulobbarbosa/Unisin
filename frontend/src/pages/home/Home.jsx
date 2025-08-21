@@ -4,13 +4,13 @@ import React from "react";
 
 // Import Componentes
 import Header from "../../components/headers/HeaderHome";
-import Carousel from "../../components/carousels/home-carrossel/HCarousel";
+import Carrossel from "../../components/carrossels/home-carrossel/HCarrossel";
 
 export default function TelaHome(){
     return(
         <div>
             <Header />
-            <Carousel />
+            <Carrossel />
         </div>
     )
 }
