@@ -18,7 +18,7 @@ export default function CompHeaderHome(){
             {/* Parte do Menu */}
             <div className={HeaderStyle.headerMenu}>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Home</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Metérias</h1>
+                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Matérias</h1>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Sobre Nós</h1>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Beneficios</h1>
                 <button className={HeaderStyle.btnLogar}>Logar</button>
