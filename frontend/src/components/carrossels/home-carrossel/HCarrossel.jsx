@@ -58,12 +58,10 @@ export default function Home_Carrossel(){
             
             <div className={CarrosselStyle.divArrows}>
                 <button className={CarrosselStyle.arrow} onClick={prevSlide}>
-                    <img src={require('../../../imgs/icons/seta-esquerda.png')} alt="seta-esquerda"
-                    className={CarrosselStyle.arrowImg}/>
+                    <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#000' }}></i>
                 </button>
                 <button className={CarrosselStyle.arrow} onClick={nextSlide}>
-                    <img src={require('../../../imgs/icons/seta-direita.png')} alt="seta-direita"
-                    className={CarrosselStyle.arrowImg}/>
+                    <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#000' }}></i>
                 </button>
             </div>
 

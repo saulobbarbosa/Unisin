@@ -9,7 +9,7 @@ import Cards from "../../components/carrossels/home-cards/HCards";
 
 export default function TelaHome(){
     return(
-        <div style={{backgroundColor: '#141531', height: '86.5vh'}}>
+        <div style={{backgroundColor: '#141531'}}>
             <Header />
             <Carrossel />
             <Cards />
