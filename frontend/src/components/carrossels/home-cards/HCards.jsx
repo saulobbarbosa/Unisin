@@ -20,7 +20,10 @@ const images = [
 
 export default function Home_Card(){
     return(
-        <div style={{ height: '600px', position: 'relative', overflowX: 'none'}}>
+        <div style={{ height: '400px' }}>
+            <div className={CardsStyle.divTitulo}>
+                <h1>Matérias Disponiveis</h1>
+            </div>
             <CircularGallery items={images} bend={0} textColor="#ffffff" borderRadius={0.0}
             scrollSpeed={2.5} scrollEase={0.2}/>
         </div>
