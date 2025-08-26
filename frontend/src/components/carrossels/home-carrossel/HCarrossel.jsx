@@ -36,34 +36,38 @@ export default function Home_Carrossel(){
     return(
         <div className={CarrosselStyle.carouselContainer}>
             {images.map((item, index) => (
-                <div key={index}
-                className={`${CarrosselStyle.slide} ${index === current ? CarrosselStyle.active : ""}`}
-                >
+                <div key={index} className={CarrosselStyle.slide}>
                     {index === current && (
                         <>
                             <img src={item.src} alt="slide" className={CarrosselStyle.image} draggable="false"/>
-                            <h2 className={CarrosselStyle.text}>
-                                <TextType 
-                                text={item.text}
-                                typingSpeed={75}
-                                pauseDuration={1500}
-                                showCursor={true}
-                                cursorCharacter="_"
-                                />
-                            </h2>
+                            <div className={CarrosselStyle.divText}>
+                                <h2 className={CarrosselStyle.text}>
+                                    <TextType
+                                    text={item.text}
+                                    typingSpeed={75}
+                                    pauseDuration={1500}
+                                    showCursor={true}
+                                    cursorCharacter="_"
+                                    />
+                                </h2>
+                            </div>
                         </>
                     )}
                 </div>
             ))}
             
-            <button className={CarrosselStyle.arrow + " " + CarrosselStyle.left} onClick={prevSlide}>
-                ❮
-            </button>
-            <button className={CarrosselStyle.arrow + " " + CarrosselStyle.right} onClick={nextSlide}>
-                ❯
-            </button>
+            <div className={CarrosselStyle.divArrows}>
+                <button className={CarrosselStyle.arrow} onClick={prevSlide}>
+                    <img src={require('../../../imgs/icons/seta-esquerda.png')} alt="seta-esquerda"
+                    className={CarrosselStyle.arrowImg}/>
+                </button>
+                <button className={CarrosselStyle.arrow} onClick={nextSlide}>
+                    <img src={require('../../../imgs/icons/seta-direita.png')} alt="seta-direita"
+                    className={CarrosselStyle.arrowImg}/>
+                </button>
+            </div>
 
-            <div className={CarrosselStyle.dots}>
+            <div className={CarrosselStyle.divDot}>
                 {images.map((_, index) => (
                     <span
                     key={index}
