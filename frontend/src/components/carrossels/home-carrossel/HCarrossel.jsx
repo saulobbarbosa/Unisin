@@ -36,7 +36,7 @@ export default function Home_Carrossel(){
     return(
         <div className={CarrosselStyle.carouselContainer}>
             {images.map((item, index) => (
-                <div key={index} className={CarrosselStyle.slide}>
+                <div key={index}>
                     {index === current && (
                         <>
                             <img src={item.src} alt="slide" className={CarrosselStyle.image} draggable="false"/>

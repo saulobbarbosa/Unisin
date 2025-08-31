@@ -2,30 +2,50 @@ import React from "react";
 
 import CardsStyle from "./card.module.css";
 
-import CircularGallery from '../../react-bits/circular-gallery/CircularGallery';
+import LogoLoop from "../../react-bits/logo-loop/LogoLoop";
 
-// Import Imagens
-import img1 from "../../../imgs/carrossel-imgs/img1.webp";
-import img2 from "../../../imgs/carrossel-imgs/img2.webp";
-import img3 from "../../../imgs/carrossel-imgs/img3.webp";
 
-const images = [
-    { image: img1, text: "Matemática" },
-    { image: img2, text: "Português" },
-    { image: img3, text: "Ciências" },
-    { image: img1, text: "História" },
-    { image: img2, text: "Educação Física" },
-    { image: img3, text: "Informática" },
+// Lista com os nomes das matérias
+const array = [
+  {text: "Matemática", icon: "pi pi-calculator"},
+  {text: "Português", icon: "pi pi-book"},
+  {text: "Inglês", icon: "pi pi-globe"},
+  {text: "História", icon: "pi pi-history"},
+  {text: "Geografia", icon: "pi pi-map-marker"},
+  {text: "Química", icon: "pi pi-cog"},
+  {text: "Física", icon: "pi pi-sliders-h"},
+  {text: "Artes", icon: "pi pi-palette"},
+  {text: "Ed. Física", icon: "pi pi-heart"},
 ];
+
+// Montando o array para o LogoLoop
+const techLogos = array.map(({ text, icon }) => ({
+  node: (
+    <div className={CardsStyle.logoItem}>
+      <i className={icon} style={{ fontSize: "5rem", color: "#fff" }}></i>
+      <span>{text}</span>
+    </div>
+  )
+}));
 
 export default function Home_Card(){
     return(
-        <div style={{ height: '400px' }}>
+        <div>
             <div className={CardsStyle.divTitulo}>
                 <h1>Matérias Disponiveis</h1>
             </div>
-            <CircularGallery items={images} bend={0} textColor="#ffffff" borderRadius={0.0}
-            scrollSpeed={2.5} scrollEase={0.2}/>
+            <div>
+                <LogoLoop
+                  logos={techLogos}
+                  speed={120}
+                  direction="left"
+                  logoHeight={0}
+                  gap={80}
+                  pauseOnHover
+                  scaleOnHover
+                  ariaLabel="Partner logos"
+                />
+            </div>
         </div>
     )
 }

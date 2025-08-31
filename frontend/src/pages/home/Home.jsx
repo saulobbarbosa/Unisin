@@ -1,6 +1,6 @@
 import React from "react";
 
-// import HomeStyle from "./home.module.css";
+import HomeStyle from "./home.module.css";
 
 // Import Componentes
 import Header from "../../components/headers/HeaderHome";
@@ -9,7 +9,7 @@ import Cards from "../../components/carrossels/home-cards/HCards";
 
 export default function TelaHome(){
     return(
-        <div style={{backgroundColor: '#141531'}}>
+        <div className={HomeStyle.container}>
             <Header />
             <Carrossel />
             <Cards />
