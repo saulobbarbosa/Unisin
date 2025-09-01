@@ -4,7 +4,6 @@ import CardsStyle from "./card.module.css";
 
 import LogoLoop from "../../react-bits/logo-loop/LogoLoop";
 
-
 // Lista com os nomes das matérias
 const array = [
   {text: "Matemática", icon: "pi pi-calculator"},
