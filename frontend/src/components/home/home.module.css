@@ -2,3 +2,23 @@
     overflow-x: hidden;
     background-color: #141531;
 }
+
+.divSobre{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    background-color: #366091;
+    color: #fff;
+}
+
+.tituloSobre{
+    margin: 1rem 0 1rem 0;
+}
+.paragrafoSobre{
+    width: 60%;
+}

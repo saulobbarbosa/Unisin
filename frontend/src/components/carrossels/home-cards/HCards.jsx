@@ -10,7 +10,7 @@ const array = [
   {text: "Português", icon: "pi pi-book"},
   {text: "Inglês", icon: "pi pi-globe"},
   {text: "História", icon: "pi pi-history"},
-  {text: "Geografia", icon: "pi pi-map-marker"},
+  {text: "Geografia", icon: "pi pi-map"},
   {text: "Química", icon: "pi pi-cog"},
   {text: "Física", icon: "pi pi-sliders-h"},
   {text: "Artes", icon: "pi pi-palette"},
@@ -39,7 +39,7 @@ export default function Home_Card(){
                   speed={120}
                   direction="left"
                   logoHeight={0}
-                  gap={80}
+                  gap={100}
                   pauseOnHover
                   scaleOnHover
                   ariaLabel="Partner logos"
