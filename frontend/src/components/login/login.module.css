@@ -1,8 +1,5 @@
-body {
-  font-family: 'Inter', sans-serif;
-}
 /* Fundo escurecido por cima do site */
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +13,7 @@ body {
 }
 
 /* Caixa branca arredondada */
-.modal-box {
+.modalBox {
   background: #fff;
   padding: 2rem;
   border-radius: 25px;
@@ -28,7 +25,7 @@ body {
 }
 
 /* Botão de fechar */
-.close-btn {
+.closeBtn {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -39,7 +36,7 @@ body {
 }
 
 /* Logo */
-.login-logo {
+.loginLogo {
   width: 6.5rem;
   height: 6.5rem;
   margin: 10px 0 20px;
@@ -47,7 +44,7 @@ body {
 }
 
 /* Inputs */
-.modal-box input {
+.modalBox input {
   width: 94%;
   margin: 10px 0;
   padding: 10px;
@@ -57,13 +54,13 @@ body {
 }
 
 /* Titulo */
-.modal-title {
+.modalTitle {
   font-size: 1.5rem;
   color: #295384;
 }
 
 /* Labels */
-.modal-box label {
+.modalBox label {
   display: block;
   text-align: left;
   font-weight: bold;
@@ -72,19 +69,19 @@ body {
 }
 
 /* Link de cadastro */
-.register-link {
+.registerLink {
   font-size: 0.85rem;
   margin: 10px 0;
 }
 
-.register-link a {
+.registerLink a {
   color: #007BFF;
   text-decoration: none;
   font-weight: bold;
 }
 
 /* Botão de login */
-.login-btn {
+.loginBtn {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -97,7 +94,7 @@ body {
   transition: 0.2s;
 }
 
-.login-btn:hover {
+.loginBtn:hover {
   background: #1a8cff;
 }
 
