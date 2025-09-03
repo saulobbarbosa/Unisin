@@ -5,8 +5,7 @@ import HeaderStyle from "./header.module.css";
 import Login from "../login/Login";
 
 export default function CompHeaderHome(){
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [mostrar, setMostrar] = useState(false);
 
     const cricano = () => {
         alert("Tá Cricando");
@@ -23,9 +22,9 @@ export default function CompHeaderHome(){
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Sobre Nós</h1>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Beneficios</h1>
 
-                <button className={HeaderStyle.btnLogar} onClick={() => setIsModalOpen(true)}>Logar</button>
+                <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>
             </div>
-            <Login isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <Login mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
         </div>
     );
 }
