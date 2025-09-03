@@ -1,0 +1,108 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+/* Fundo escurecido por cima do site */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* escurece */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* garante que fica por cima */
+}
+
+/* Caixa branca arredondada */
+.modal-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 350px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Botão de fechar */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Logo */
+.login-logo {
+  width: 6.5rem;
+  height: 6.5rem;
+  margin: 10px 0 20px;
+  border-radius: 0.8rem;
+}
+
+/* Inputs */
+.modal-box input {
+  width: 94%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* Titulo */
+.modal-title {
+  font-size: 1.5rem;
+  color: #295384;
+}
+
+/* Labels */
+.modal-box label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #295384;
+}
+
+/* Link de cadastro */
+.register-link {
+  font-size: 0.85rem;
+  margin: 10px 0;
+}
+
+.register-link a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Botão de login */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #4da6ff;
+  border: none;
+  border-radius: 12px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  background: #1a8cff;
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

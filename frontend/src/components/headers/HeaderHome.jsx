@@ -1,11 +1,14 @@
-import React from "react";
 
+import React, { useState } from "react";
 import HeaderStyle from "./header.module.css";
+import LoginModal from "../modal/loginModal";
 
 // Import Componentes
 
 
 export default function CompHeaderHome(){
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const cricano = () => {
         alert("Tá Cricando");
@@ -21,8 +24,11 @@ export default function CompHeaderHome(){
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Matérias</h1>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Sobre Nós</h1>
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Beneficios</h1>
-                <button className={HeaderStyle.btnLogar}>Logar</button>
+
+
+                <button className={HeaderStyle.btnLogar} onClick={() => setIsModalOpen(true)}>Logar</button>
             </div>
+            <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
-    )
+    );
 }
