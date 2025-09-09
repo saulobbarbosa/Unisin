@@ -9,9 +9,8 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 1rem;
+    padding: 5rem 1rem;
     margin-top: 3rem;
-    font-size: 1.5rem;
     background-color: #366091;
     color: #fff;
 }

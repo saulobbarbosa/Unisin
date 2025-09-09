@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import HomeStyle from "./home.module.css";
+import HeaderStyle from "../headers/header.module.css";
 
 // Import Componentes
 import Header from "../headers/HeaderHome";
 import Carrossel from "../carrossels/home-carrossel/HCarrossel";
 import Cards from "../carrossels/home-cards/HCards";
-import HeaderStyle from "../headers/header.module.css";
+import ScrollFloat from "../react-bits/scroll-float/ScrollFloat";
+import ScrollReveal from "../react-bits/scroll-reveal/ScrollReveal";
 import Escola from "../login/Escola";
 
 /* 
@@ -22,12 +24,36 @@ export default function TelaHome(){
             <Cards />
             <div className={HomeStyle.divSobre}>
                 <h1 className={HomeStyle.tituloSobre}>
-                    Sobre Nós
+                    <ScrollFloat
+                        animationDuration={1}
+                        ease='back.inOut(2)'
+                        scrollStart='center bottom+=50%'
+                        scrollEnd='bottom bottom-=40%'
+                        stagger={0.1}
+                    >
+                        Sobre Nós
+                    </ScrollFloat>
                 </h1>
                 <p className={HomeStyle.paragrafoSobre}>
-                    What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-                    and scrambled it to make a type specimen book. 
+                    <ScrollReveal
+                        enableBlur={true}
+                        blurStrength={15}
+                        baseOpacity={1}
+                        baseRotation={10}
+                    >
+                        O Unisin é um projeto desenvolvido para facilitar o aprendizado de forma acessível, simples e envolvente. 
+                        Nosso objetivo é apoiar estudantes que encontram dificuldades em acompanhar o ensino tradicional, oferecendo uma forma de reforço leve, 
+                        clara e motivadora.
+                    </ScrollReveal>
+                    <ScrollReveal
+                        enableBlur={true}
+                        blurStrength={15}
+                        baseOpacity={1}
+                        baseRotation={10}
+                    >
+                        Este projeto faz parte do Projeto Integrador do curso de Análise e Desenvolvimento de Sistemas - AMS da FATEC Lins, 
+                        unindo criatividade, tecnologia e inovação para transformar a experiência de estudo em algo mais prazeroso e eficiente.
+                    </ScrollReveal>
                 </p>
             </div>
             <div>
@@ -36,6 +62,8 @@ export default function TelaHome(){
             <div>
                 <Escola mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
             </div>
+            <Cards />
+            <Cards />
         </div>
     )
 }
