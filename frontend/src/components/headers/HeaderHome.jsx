@@ -3,6 +3,8 @@ import HeaderStyle from "./header.module.css";
 
 // Import Componentes
 import Login from "../login/Login";
+import Professor from "../login/Professor";
+
 
 export default function CompHeaderHome(){
     const [mostrar, setMostrar] = useState(false);
@@ -10,7 +12,17 @@ export default function CompHeaderHome(){
     const cricano = () => {
         alert("Tá Cricando");
     }
+/* 
+export default function CompHeaderHome(){
+    const [mostrar, setMostrar] = useState(false);
 
+    const cricano = () => {
+        alert("Tá Cricando");
+    }
+/* 
+ <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>
+<Escola mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
+*/ 
     return(
         <div className={HeaderStyle.headerContainer}>
             <img src={require('../../imgs/logo.jpg')} alt="logo do unisin"
@@ -23,8 +35,12 @@ export default function CompHeaderHome(){
                 <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Beneficios</h1>
 
                 <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>
+                <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>
+             
             </div>
             <Login mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
+            <Professor mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
+          
         </div>
     );
 }

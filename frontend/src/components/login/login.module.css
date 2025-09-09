@@ -23,7 +23,27 @@
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
 }
+/* Caixa branca arredondada Escola */
+.modalBoxEscola {
+  display: grid;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 600px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+.cadastroForm{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
+.cadastroEscola {
+  display: flex;
+  flex-direction: column;
+}
 /* Botão de fechar */
 .closeBtn {
   position: absolute;
@@ -52,11 +72,26 @@
   border-radius: 8px;
   outline: none;
 }
+/* Inputs Escola */
+.modalBoxEscola input {
+  width: 94%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
 
 /* Titulo */
 .modalTitle {
   font-size: 1.5rem;
   color: #295384;
+}
+/*Titulo da Escola*/
+.modalTitleEscola {
+  font-size:1.8em;
+  color: #295384;
+  padding:  0 0 15px 0;
 }
 
 /* Labels */
@@ -65,6 +100,14 @@
   text-align: left;
   font-weight: bold;
   margin-top: 10px;
+  color: #295384;
+}
+/*Label da Escola*/
+.modalBoxEscola label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 5px;
   color: #295384;
 }
 

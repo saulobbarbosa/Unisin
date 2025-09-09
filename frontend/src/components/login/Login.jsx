@@ -7,12 +7,6 @@ export default function LoginModal({ mostra, fecha }) {
 
     if (!mostra) return null;
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Login enviado:", { email, senha });
-
-    // };
-
     return (
         <div className={LoginStyle.modalOverlay}>
             <div className={LoginStyle.modalBox}>
