@@ -31,7 +31,7 @@ export default function Home_Card(){
     return(
         <div>
             <div className={CardsStyle.divTitulo}>
-                <h1>Matérias Disponiveis</h1>
+                <span>Matérias Disponiveis</span>
             </div>
             <div>
                 <LogoLoop
