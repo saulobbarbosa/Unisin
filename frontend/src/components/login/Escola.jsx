@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginStyle from "./login.module.css";
+import EscolaStyle from "./login.module.css";
 
 export default function LoginModal({ mostra, fecha }) {
     const [nome, setNome] = useState("");
@@ -15,19 +15,18 @@ export default function LoginModal({ mostra, fecha }) {
 
     if (!mostra) return null;
 
-
     return (
-        <div className={LoginStyle.modalOverlay}>
-            <div className={LoginStyle.modalBoxEscola}>
-                <button className={LoginStyle.closeBtn} onClick={fecha}>
+        <div className={EscolaStyle.modalOverlay}>
+            <div className={EscolaStyle.modalBoxEscola}>
+                <button className={EscolaStyle.closeBtn} onClick={fecha}>
                     <i className="pi pi-times" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
                 {/* Primeira Parte */}
-                <h2 className={LoginStyle.modalTitleEscola}>Cadastro Escola</h2>
+                <h2 className={EscolaStyle.modalTitleEscola}>Cadastro Escola</h2>
 
                 {/* Formulario */}
-                <form className={LoginStyle.cadastroForm}>
-                    <div className={LoginStyle.cadastroEscola}>
+                <form className={EscolaStyle.cadastroForm}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Nome</label>
                     <input
                       type="text"
@@ -37,7 +36,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>CEP</label>
                     <input
                       type="text"
@@ -47,7 +46,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Endereço</label>
                     <input
                       type="text"
@@ -57,7 +56,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Número</label>
                     <input
                       type="text"
@@ -67,7 +66,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Cidade</label>
                     <input
                       type="text"
@@ -77,7 +76,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Estado</label>
                     <input
                       type="text"
@@ -88,7 +87,7 @@ export default function LoginModal({ mostra, fecha }) {
                     />
                     </div>
                     {/* Segunda Parte */}
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>E-mail</label>
                     <input
                       type="email"
@@ -98,7 +97,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Telefone</label>
                     <input
                       type="tel"
@@ -108,7 +107,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Senha</label>
                     <input
                       type="password"
@@ -118,7 +117,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={LoginStyle.cadastroEscola}>
+                    <div className={EscolaStyle.cadastroEscola}>
                     <label>Confirmar Senha</label>
                     <input
                       type="password"
@@ -128,12 +127,12 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <p className={LoginStyle.registerLink}>
+                    <p className={EscolaStyle.registerLink}>
                       Ja tem Conta? <a href="./Login.jsx">Faça Login Aqui!!!</a>
                     </p>
-                    <button type="submit" className={LoginStyle.loginBtn}>Cadastrar</button>
+                    <button type="submit" className={EscolaStyle.loginBtn}>Cadastrar</button>
                 </form>
-              </div>
-          </div>
-      );
+            </div>
+        </div>
+    );
 }

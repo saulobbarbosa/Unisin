@@ -5,7 +5,6 @@ import HeaderStyle from "./header.module.css";
 import Login from "../login/Login";
 import Professor from "../login/Professor";
 
-
 export default function CompHeaderHome(){
     const [mostrar, setMostrar] = useState(false);
 

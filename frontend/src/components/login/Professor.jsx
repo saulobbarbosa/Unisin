@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LoginStyle from "./login.module.css";
+import ProfessorStyle from "./login.module.css";
 
 export default function LoginModal({ mostra, fecha }) {
     const [nome, setNome] = useState("");
@@ -15,13 +15,13 @@ export default function LoginModal({ mostra, fecha }) {
 
 
     return (
-        <div className={LoginStyle.modalOverlay}>
-            <div className={LoginStyle.modalBox}>
-                <button className={LoginStyle.closeBtn} onClick={fecha}>
+        <div className={ProfessorStyle.modalOverlay}>
+            <div className={ProfessorStyle.modalBox}>
+                <button className={ProfessorStyle.closeBtn} onClick={fecha}>
                     <i className="pi pi-times" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
                 {/* Primeira Parte */}
-                <h2 className={LoginStyle.modalTitle}>Cadastro Professor</h2>
+                <h2 className={ProfessorStyle.modalTitle}>Cadastro Professor</h2>
 
                 {/* Formulario */}
                 <form>
@@ -72,10 +72,10 @@ export default function LoginModal({ mostra, fecha }) {
                       onChange={(e) => setConfirmarSenha(e.target.value)}
                       required
                     />
-                    <p className={LoginStyle.registerLink}>
+                    <p className={ProfessorStyle.registerLink}>
                       Ja tem Conta? <a href="./Login.jsx">Faça Login Aqui!!!</a>
                     </p>
-                    <button type="submit" className={LoginStyle.loginBtn}>Cadastrar</button>
+                    <button type="submit" className={ProfessorStyle.loginBtn}>Cadastrar</button>
                 </form>
               </div>
           </div>

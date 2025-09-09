@@ -9,13 +9,9 @@ import HeaderStyle from "../headers/header.module.css";
 import Escola from "../login/Escola";
 
 /* 
-
-/* 
  <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>
 <Escola mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
 */ 
-
-
 
 export default function TelaHome(){
     const [mostrar, setMostrar] = useState(false);
