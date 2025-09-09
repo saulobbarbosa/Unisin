@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -11,23 +11,18 @@ class Aluno extends Model
 
     protected $table = 'alunos';
     protected $primaryKey = 'id_usuario';
-    public $incrementing = false; // porque a PK não é auto_increment
+    public $incrementing = false; // PK continua sendo o mesmo ID do usuário
     protected $keyType = 'int';
 
     protected $fillable = [
         'id_usuario',
-        'responsavel_id_usuario',
         'moedas',
     ];
 
-    // Relacionamentos (opcional)
+    // Relacionamento com usuário
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'id_usuario');
     }
-
-    public function responsavel()
-    {
-        return $this->belongsTo(Responsavel::class, 'responsavel_id_usuario');
-    }
 }
+

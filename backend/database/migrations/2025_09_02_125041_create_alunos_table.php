@@ -10,19 +10,13 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->unsignedBigInteger('id_usuario')->primary();
-            $table->unsignedBigInteger('responsavel_id_usuario');
             $table->integer('moedas')->default(0);
 
-            // Foreign keys
+            // Chave estrangeira para usuários
             $table->foreign('id_usuario')
                 ->references('id_usuario')->on('usuarios')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
-            $table->foreign('responsavel_id_usuario')
-                ->references('id_usuario')->on('responsaveis')
-                ->onDelete('no action')
-                ->onUpdate('no action');
         });
     }
 
