@@ -8,30 +8,23 @@ import Professor from "../login/Professor";
 export default function CompHeaderHome(){
     const [mostrar, setMostrar] = useState(false);
 
-    const cricano = () => {
-        alert("Tá Cricando");
-    }
-/* 
-export default function CompHeaderHome(){
-    const [mostrar, setMostrar] = useState(false);
+    const scrollToSection = (id) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
-    const cricano = () => {
-        alert("Tá Cricando");
-    }
-/* 
- <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>
-<Escola mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
-*/ 
     return(
         <div className={HeaderStyle.headerContainer}>
             <img src={require('../../imgs/logo.jpg')} alt="logo do unisin"
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte do Menu */}
             <div className={HeaderStyle.headerMenu}>
-                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Home</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Matérias</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Sobre Nós</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=>{cricano()}}>Beneficios</h1>
+                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("home")}>Home</h1>
+                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("materias")}>Matérias</h1>
+                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("sobre")}>Sobre Nós</h1>
+                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("beneficios")}>Beneficios</h1>
 
                 <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>
                 <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>

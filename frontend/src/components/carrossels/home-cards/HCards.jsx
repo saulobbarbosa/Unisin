@@ -29,22 +29,21 @@ const techLogos = array.map(({ text, icon }) => ({
 
 export default function Home_Card(){
     return(
-        <div>
+        <div className={CardsStyle.divCards} id="materias">
             <div className={CardsStyle.divTitulo}>
                 <span>Matérias Disponiveis</span>
             </div>
-            <div>
-                <LogoLoop
-                  logos={techLogos}
-                  speed={120}
-                  direction="left"
-                  logoHeight={0}
-                  gap={100}
-                  pauseOnHover
-                  scaleOnHover
-                  ariaLabel="Partner logos"
-                />
-            </div>
+            
+            <LogoLoop
+              logos={techLogos}
+              speed={120}
+              direction="left"
+              logoHeight={0}
+              gap={100}
+              pauseOnHover
+              scaleOnHover
+              ariaLabel="Partner logos"
+            />
         </div>
     )
 }
