@@ -66,7 +66,7 @@ export default function TelaHome(){
                     </ScrollFloat>
                 </h1>
                 <div className={HomeStyle.separacaoBeneficio}>
-                    <img src={require('../../imgs/logo.jpg')} alt="logo"
+                    <img src={require('../../imgs/logo.png')} alt="logo"
                     className={HomeStyle.imgsBeneficios} draggable="false" />
                     <p className={HomeStyle.paragrafoPadrao}>
                         <ScrollReveal

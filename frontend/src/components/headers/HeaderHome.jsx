@@ -9,7 +9,7 @@ export default function CompHeaderHome(){
 
     return(
         <div className={HeaderStyle.headerContainer}>
-            <img src={require('../../imgs/logo.jpg')} alt="logo do unisin"
+            <img src={require('../../imgs/logo.png')} alt="logo do unisin"
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte do Menu */}
             <div className={HeaderStyle.headerMenu}>

@@ -26,14 +26,27 @@ export default function CompFooterHome(){
             <div>
                 <h1 className={FooterStyle.tituloFooter}>Tecnologias:</h1>
                 <ul>
-                    <li>React.js</li>
-                    <li>Node.js</li>
-                    <li>MySQL</li>
-                    <li>PHP</li>
+                    <li>
+                        <a href="https://react.dev/" target="blank">
+                            React.js
+                            <i className="fa-brands fa-react" style={{ fontSize: "1rem", color: "#fff", marginLeft: "1rem" }}></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mysql.com/" target="blank">
+                            MySQL
+                            <i className="fa-solid fa-database" style={{ fontSize: "1rem", color: "#fff", marginLeft: "1rem" }}></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://laravel.com/" target="blank">
+                            Laravel
+                            <i className="fa-brands fa-laravel" style={{ fontSize: "1rem", color: "#fff", marginLeft: "1rem" }}></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div className={FooterStyle.divFooter}>
-                <h1 className={FooterStyle.tituloFooter}>Guia de Uso</h1>
                 <h1 className={FooterStyle.tituloFatec}>
                     FATEC LINS
                     <br />
