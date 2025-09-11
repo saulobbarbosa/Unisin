@@ -9,10 +9,7 @@ export default function LoginModal({ mostra, fecha }) {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
 
-
-
     if (!mostra) return null;
-
 
     return (
         <div className={ProfessorStyle.modalOverlay}>

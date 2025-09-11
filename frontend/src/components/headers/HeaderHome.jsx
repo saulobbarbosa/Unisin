@@ -3,17 +3,9 @@ import HeaderStyle from "./header.module.css";
 
 // Import Componentes
 import Login from "../login/Login";
-import Professor from "../login/Professor";
 
 export default function CompHeaderHome(){
     const [mostrar, setMostrar] = useState(false);
-
-    const scrollToSection = (id) => {
-        const section = document.getElementById(id);
-        if (section) {
-            section.scrollIntoView({ behavior: "smooth" });
-        }
-    };
 
     return(
         <div className={HeaderStyle.headerContainer}>
@@ -21,18 +13,15 @@ export default function CompHeaderHome(){
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte do Menu */}
             <div className={HeaderStyle.headerMenu}>
-                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("home")}>Home</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("materias")}>Matérias</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("sobre")}>Sobre Nós</h1>
-                <h1 className={HeaderStyle.opcoes} onClick={()=> scrollToSection("beneficios")}>Beneficios</h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#home">Home</a></h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#materias">Matérias</a></h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#sobre">Sobre Nós</a></h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#beneficios">Beneficios</a></h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#escola">Escola</a></h1>
 
-                <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>
-                <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Cadastrar</button>
-             
+                <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>             
             </div>
             <Login mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
-            <Professor mostra={mostrar} fecha={()=>{setMostrar(false)}}/>
-          
         </div>
     );
 }

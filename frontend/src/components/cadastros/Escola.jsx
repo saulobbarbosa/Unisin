@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EscolaStyle from "./login.module.css";
+import EscolaStyle from "../login/login.module.css";
 
 export default function LoginModal({ mostra, fecha }) {
     const [nome, setNome] = useState("");
