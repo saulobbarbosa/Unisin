@@ -8,6 +8,7 @@ import Cards from "../carrossels/home-cards/HCards";
 import ScrollFloat from "../react-bits/scroll-float/ScrollFloat";
 import ScrollReveal from "../react-bits/scroll-reveal/ScrollReveal";
 import CadastroEscola from "../cadastros/Escola";
+import Footer from "../footers/FooterHome";
 
 export default function TelaHome(){
     const [mostrar, setMostrar] = useState(false);
@@ -164,6 +165,7 @@ export default function TelaHome(){
                 </div>
             </div>
             <CadastroEscola mostra={mostrar} fecha={()=>{setMostrar(false)}} />
+                <Footer />
         </div>
     )
 }

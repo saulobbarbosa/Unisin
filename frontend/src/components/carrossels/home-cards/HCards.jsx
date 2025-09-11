@@ -8,20 +8,20 @@ import LogoLoop from "../../react-bits/logo-loop/LogoLoop";
 const array = [
   {text: "Matemática", icon: "pi pi-calculator"},
   {text: "Português", icon: "pi pi-book"},
-  {text: "Inglês", icon: "pi pi-globe"},
-  {text: "História", icon: "pi pi-history"},
+  {text: "Inglês", icon: "fas fa-comments"},
+  {text: "História", icon: "fas fa-landmark"},
   {text: "Geografia", icon: "pi pi-map"},
-  {text: "Química", icon: "pi pi-cog"},
-  {text: "Física", icon: "pi pi-sliders-h"},
+  {text: "Química", icon: "fa-solid fa-flask"},
+  {text: "Física", icon: "fas fa-atom"},
   {text: "Artes", icon: "pi pi-palette"},
-  {text: "Ed. Física", icon: "pi pi-heart"},
+  {text: "Ed. Física", icon: "fa-solid fa-volleyball"},
 ];
 
 // Montando o array para o LogoLoop
 const techLogos = array.map(({ text, icon }) => ({
   node: (
     <div className={CardsStyle.logoItem}>
-      <i className={icon} style={{ fontSize: "5rem", color: "#fff" }}></i>
+      <i className={icon} style={{ fontSize: "8rem", color: "#fff" }}></i>
       <span>{text}</span>
     </div>
   )
