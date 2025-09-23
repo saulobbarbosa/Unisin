@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import HeaderStyle from "./header.module.css";
 
 // Import Componentes
-import Login from "../login/Login";
+import Login from "../../login/Login";
 
 export default function CompHeaderHome(){
     const [mostrar, setMostrar] = useState(false);
 
     return(
         <div className={HeaderStyle.headerContainer}>
-            <img src={require('../../imgs/logo.png')} alt="logo do unisin"
+            <img src={require('../../../imgs/logo.png')} alt="logo do unisin"
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte do Menu */}
             <div className={HeaderStyle.headerMenu}>

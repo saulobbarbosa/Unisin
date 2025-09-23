@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import HomeStyle from "./home.module.css";
 
 // Import Componentes
-import Header from "../headers/HeaderHome";
+import Header from "../layout/headers/HeaderHome";
 import Carrossel from "../carrossels/home-carrossel/HCarrossel";
 import Cards from "../carrossels/home-cards/HCards";
 import ScrollFloat from "../react-bits/scroll-float/ScrollFloat";
 import ScrollReveal from "../react-bits/scroll-reveal/ScrollReveal";
 import CadastroEscola from "../cadastros/Escola";
-import Footer from "../footers/FooterHome";
+import Footer from "../layout/footers/FooterHome";
 
 export default function TelaHome(){
     const [mostrar, setMostrar] = useState(false);

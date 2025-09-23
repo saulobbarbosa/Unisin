@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginStyle from "./login.module.css";
 
 export default function LoginModal({ mostra, fecha }) {
+    const navigate = useNavigate("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
@@ -24,7 +26,7 @@ export default function LoginModal({ mostra, fecha }) {
                       placeholder="Insira seu e-mail aqui"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      required
+                      // required
                     />
                     <label>Senha</label>
                     <input
@@ -32,12 +34,13 @@ export default function LoginModal({ mostra, fecha }) {
                       placeholder="Insira sua senha aqui"
                       value={senha}
                       onChange={(e) => setSenha(e.target.value)}
-                      required
+                      // required
                     />
                     <p className={LoginStyle.registerLink}>
                       Não tem Conta? <a href="#">Cadastre-se Agora!!!</a>
                     </p>
-                    <button type="submit" className={LoginStyle.loginBtn}>Entrar</button>
+                    <button type="submit" className={LoginStyle.loginBtn}
+                    onClick={()=>{navigate("/Aluno/Home")}}>Entrar</button>
                 </form>
               </div>
           </div>

@@ -3,6 +3,7 @@ import {BrowserRouter as Routers, Routes, Route} from "react-router-dom"
 
 // Import de Componentes
 import Home from "./components/home/Home";
+import Padrao from "./components/home/Home";
 
 export default function App() { 
     return(
@@ -10,6 +11,7 @@ export default function App() {
             <Routers>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/aluno/home" element={<Padrao />} />
                 </Routes>
             </Routers>
         </>
