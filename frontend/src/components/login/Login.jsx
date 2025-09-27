@@ -40,7 +40,7 @@ export default function LoginModal({ mostra, fecha }) {
                       Não tem Conta? <a href="#">Cadastre-se Agora!!!</a>
                     </p>
                     <button type="submit" className={LoginStyle.loginBtn}
-                    onClick={()=>{navigate("/Aluno/Home")}}>Entrar</button>
+                    onClick={()=>{navigate("/aluno/home")}}>Entrar</button>
                 </form>
               </div>
           </div>
