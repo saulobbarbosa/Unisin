@@ -45,3 +45,28 @@ a{
     color: #fff;
     transition: 0.8s;
 }
+
+/* Estilo do Header Aluno */
+.divNMP{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 13.125rem;
+    height: 2.875rem;
+    margin: 0 1rem;
+    border-radius: 1.25rem;
+    background-color: #fff;
+    font-size: 2.25rem;
+    font-weight: bold;
+}
+.imgMoeda{
+    width: 3.125rem;
+}
+
+.divPerfil{
+    justify-content: center !important;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    border-radius: 100% !important;
+    cursor: pointer;
+}

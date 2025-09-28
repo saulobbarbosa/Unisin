@@ -4,18 +4,30 @@ import HeaderStyle from "./header.module.css";
 // Import Componentes
 
 export default function CompHeaderAluno(){
+    const [nivel, setNivel] = useState(20);
+    const [moeda, setMoeda] = useState(2500);
+
     return(
         <div className={HeaderStyle.headerContainer}>
             <img src={require('../../../imgs/logo.png')} alt="logo do unisin"
             className={HeaderStyle.logo} draggable="false" />
-            {/* Parte do Menu */}
+            {/* Parte das Info */}
             <div className={HeaderStyle.headerMenu}>
-                <h1 className={HeaderStyle.opcoes}><a href="#home">Home</a></h1>
-                <h1 className={HeaderStyle.opcoes}><a href="#materias">Matérias</a></h1>
-                <h1 className={HeaderStyle.opcoes}><a href="#sobre">Sobre Nós</a></h1>
-                <h1 className={HeaderStyle.opcoes}><a href="#beneficios">Beneficios</a></h1>
-                <h1 className={HeaderStyle.opcoes}><a href="#escola">Escola</a></h1>
+                <div className={HeaderStyle.divNMP}>
+                    <p>Nível</p>
+                    <p>{nivel}</p>
+                </div>
+                <div className={HeaderStyle.divNMP}>
+                    <img src={require('../../../imgs/moeda.png')} alt="icone de moeda"
+                    className={HeaderStyle.imgMoeda} draggable="false" />
+                    <p>{moeda}</p>
+                </div>
+                <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}>
+                    <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000" }}></i>
+                </div>
             </div>
+            {/* Parte do Modal */}
+            
         </div>
     );
 }
