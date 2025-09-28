@@ -70,3 +70,39 @@ a{
     border-radius: 100% !important;
     cursor: pointer;
 }
+
+/* Estilo do Modal de Navegação do Aluno */
+.divModalNavegacao {
+    width: 21.875rem;
+    overflow: hidden;
+    position: fixed;
+    top: 8rem;
+    right: 0;
+    /* border: 0.2rem solid #000; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: height 0.4s ease-in-out;
+}
+.show {
+    height: 33.5rem;
+}
+.hide {
+    height: 0;
+}
+
+.divEscolhas{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.textEscolhas{
+    margin-left: 2rem;
+}
+
+.linhaModal{
+    height: 0.125rem;
+    background-color: #000;
+    border: none;
+}
