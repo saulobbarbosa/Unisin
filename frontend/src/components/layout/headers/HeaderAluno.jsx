@@ -70,13 +70,15 @@ export default function CompHeaderAluno(){
                     <p>{moeda}</p>
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
-                    onClick={() => { setMostrar(!mostrar) }}
+                    onMouseEnter={() => { setMostrar(!mostrar) }}
                 >
                     <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000" }}></i>
                 </div>
             </div>
             {/* Parte do Modal */}
-            <div className={`${HeaderStyle.divModalNavegacao} ${mostrar ? HeaderStyle.show : HeaderStyle.hide}`}>
+            <div className={`${HeaderStyle.divModalNavegacao} ${mostrar ? HeaderStyle.show : HeaderStyle.hide}`}
+                onMouseLeave={() => { setMostrar(!mostrar) }}
+            >
                 <div className={HeaderStyle.divEscolhas}>
                     <i className="fa-solid fa-house" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
