@@ -83,6 +83,7 @@ a{
     flex-direction: column;
     justify-content: space-evenly;
     transition: height 0.4s ease-in-out;
+    background-color: #fff;
 }
 .show {
     height: 33.5rem;
