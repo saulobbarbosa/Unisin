@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "email": "gui@gui.com",
+    "senha": "1",
+    "nome": "Guilherme",
+    "nivel": 20,
+    "moedas": 2500
+  },
+  {
+    "id": 2,
+    "email": "leo@gui.com",
+    "senha": "1",
+    "nome": "Leo",
+    "nivel": 15,
+    "moedas": 1800
+  }
+]

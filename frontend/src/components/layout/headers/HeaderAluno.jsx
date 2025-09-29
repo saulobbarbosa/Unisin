@@ -1,12 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from 'sweetalert2';
+
 import HeaderStyle from "./header.module.css";
 
 // Import Componentes
 
 export default function CompHeaderAluno(){
+    const navigate = useNavigate("");
     const [mostrar, setMostrar] = useState(false);
-    const [nivel, setNivel] = useState(20);
-    const [moeda, setMoeda] = useState(2500);
+    const [nivel, setNivel] = useState("");
+    const [moeda, setMoeda] = useState("");
+
+    const alertSair = () =>{
+        Swal.fire({
+            title: "Quer Realmente Sair?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sim, Quero Sair!",
+            cancelButtonColor: "#d33",
+            confirmButtonColor: "#295384"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                sair();
+            }
+        });
+    }
+
+    const sair = async () => {
+        try {
+            localStorage.removeItem("usuarioId");
+            navigate('/');
+        } catch (error) {
+            console.log(`Erro: ${error}`);
+        }
+    };
+
+    useEffect(() => {
+        const usuarioId = localStorage.getItem("usuarioId");
+
+        if (usuarioId) {
+            axios.get("/usuarios.json")
+            .then(res => {
+                const usuarios = res.data;
+                const usuario = usuarios.find(u => u.id === parseInt(usuarioId));
+                if (usuario) {
+                    setNivel(usuario.nivel);
+                    setMoeda(usuario.moedas);
+                }
+            })
+            .catch(error => console.error(error));
+        }
+    }, []);
 
     return(
         <div className={HeaderStyle.headerContainer}>
@@ -70,7 +116,7 @@ export default function CompHeaderAluno(){
                 <div className={HeaderStyle.divEscolhas}>
                     <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
-                    <h1 className={HeaderStyle.textEscolhas}>Sair</h1>
+                    <h1 className={HeaderStyle.textEscolhas} onClick={alertSair}>Sair</h1>
                 </div>
             </div>
         </div>

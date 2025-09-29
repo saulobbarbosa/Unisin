@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+
 import LoginStyle from "./login.module.css";
 
 export default function LoginModal({ mostra, fecha }) {
@@ -8,6 +11,73 @@ export default function LoginModal({ mostra, fecha }) {
     const [senha, setSenha] = useState("");
 
     if (!mostra) return null;
+
+    const alertError = ()=>{
+      Swal.fire({
+        title: 'O usuário ou senha está Incorreto!',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#295384'
+      });
+    }
+
+    const handleSubmitJSON = async (e) => {
+      e.preventDefault();
+        
+      try {
+        // Lê o JSON completo
+        const response = await axios.get("/usuarios.json");
+        const usuarios = response.data;
+      
+        // Procura usuário que bate com email e senha
+        const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+      
+        if (usuario) {        
+          // Salva dados do usuário no localStorage
+          localStorage.setItem("usuarioId", usuario.id);
+          setTimeout(() => {
+            navigate("/aluno/home");
+          }, 2000);
+        } else {
+          alertError();
+        }
+      
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Erro",
+          text: "Não foi possível carregar os usuários.",
+        });
+      }
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+        // POST para a API real
+        const response = await axios.post("/api/login", { email, senha });
+      
+        if (response.data.sucesso) {        
+          // Salva token/dados do usuário
+          // localStorage.setItem("usuario", JSON.stringify(response.data));
+        
+          setTimeout(() => {
+            navigate("/aluno/home");
+          }, 2000);
+        } else {
+          alertError();
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Erro de conexão",
+          text: "Não foi possível conectar com o servidor.",
+        });
+      }
+    };
 
     return (
         <div className={LoginStyle.modalOverlay}>
@@ -19,14 +89,14 @@ export default function LoginModal({ mostra, fecha }) {
                 <h2 className={LoginStyle.modalTitle}>Login</h2>
                 <img src={require('../../imgs/logo.jpg')} className={LoginStyle.loginLogo}/>
                 {/* Formulario */}
-                <form /*onSubmit={handleSubmit}*/>
+                <form onSubmit={handleSubmitJSON}>
                     <label>E-mail</label>
                     <input
                       type="email"
                       placeholder="Insira seu e-mail aqui"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      // required
+                      required
                     />
                     <label>Senha</label>
                     <input
@@ -34,13 +104,14 @@ export default function LoginModal({ mostra, fecha }) {
                       placeholder="Insira sua senha aqui"
                       value={senha}
                       onChange={(e) => setSenha(e.target.value)}
-                      // required
+                      required
                     />
                     <p className={LoginStyle.registerLink}>
                       Não tem Conta? <a href="#">Cadastre-se Agora!!!</a>
                     </p>
-                    <button type="submit" className={LoginStyle.loginBtn}
-                    onClick={()=>{navigate("/aluno/home")}}>Entrar</button>
+                    <button type="submit" className={LoginStyle.loginBtn}>
+                      Entrar
+                    </button>
                 </form>
               </div>
           </div>
