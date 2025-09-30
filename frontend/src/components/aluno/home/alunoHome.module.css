@@ -4,12 +4,14 @@
     font-weight: bold;
     font-size: 3rem;
     margin-top: 5rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .divMenu{
-    width: 60%;
+    width: 70%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -17,11 +19,15 @@
 .divEscolha{
     padding: 2rem 1rem;
     background-color: #fff;
+    border: 0.125rem solid;
     border-radius: 1rem;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    transition: 0.4s ease;
 }
 .divEscolha:hover{
     background-color: #64B5F6;
     color: #fff !important;
-    transition: 0.5s;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(100, 181, 246, 0.8);
 }

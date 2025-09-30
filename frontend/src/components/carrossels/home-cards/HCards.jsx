@@ -6,14 +6,14 @@ import LogoLoop from "../../react-bits/logo-loop/LogoLoop";
 
 // Lista com os nomes das matérias
 const array = [
-  {text: "Matemática", icon: "pi pi-calculator"},
-  {text: "Português", icon: "pi pi-book"},
-  {text: "Inglês", icon: "fas fa-comments"},
-  {text: "História", icon: "fas fa-landmark"},
-  {text: "Geografia", icon: "pi pi-map"},
+  {text: "Matemática", icon: "fa-solid fa-calculator"},
+  {text: "Português", icon: "fa-solid fa-book"},
+  {text: "Inglês", icon: "fa-solid fa-comments"},
+  {text: "História", icon: "fa-solid fa-landmark"},
+  {text: "Geografia", icon: "fa-solid fa-map"},
   {text: "Química", icon: "fa-solid fa-flask"},
-  {text: "Física", icon: "fas fa-atom"},
-  {text: "Artes", icon: "pi pi-palette"},
+  {text: "Física", icon: "fa-solid fa-atom"},
+  {text: "Artes", icon: "fa-solid fa-palette"},
   {text: "Ed. Física", icon: "fa-solid fa-volleyball"},
 ];
 

@@ -8,7 +8,7 @@ import LoginStyle from "./login.module.css";
 // Import Componente
 
 export default function LoginModal({ mostra, fecha }) {
-    const navigate = useNavigate("");
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
@@ -85,7 +85,7 @@ export default function LoginModal({ mostra, fecha }) {
         <div className={LoginStyle.modalOverlay}>
             <div className={LoginStyle.modalBox}>
                 <button className={LoginStyle.closeBtn} onClick={fecha}>
-                    <i className="pi pi-times" style={{ fontSize: "1.5rem", color: "#000" }}></i>
+                    <i className="fa-solid fa-circle-xmark" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
                 {/* Primeira Parte */}
                 <h2 className={LoginStyle.modalTitle}>Login</h2>

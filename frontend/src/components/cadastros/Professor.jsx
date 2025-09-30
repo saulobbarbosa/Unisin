@@ -15,7 +15,7 @@ export default function LoginModal({ mostra, fecha }) {
         <div className={ProfessorStyle.modalOverlay}>
             <div className={ProfessorStyle.modalBox}>
                 <button className={ProfessorStyle.closeBtn} onClick={fecha}>
-                    <i className="pi pi-times" style={{ fontSize: "1.5rem", color: "#000" }}></i>
+                    <i className="fa-solid fa-circle-xmark" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
                 {/* Primeira Parte */}
                 <h2 className={ProfessorStyle.modalTitle}>Cadastro Professor</h2>

@@ -8,7 +8,7 @@ import Ajuste from "../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoHome(){
-    const navigate = useNavigate("");
+    const navigate = useNavigate();
 
     const array = [
         {text: "Matemática", cor: "#1565C0", url: "matematica"},
@@ -23,20 +23,20 @@ export default function TelaAlunoHome(){
     ];
 
     return(
-        <div>
+        <div className={Ajuste.wrapper}>
             <Header />
-            <div className={Ajuste.container}>
-                <h1 className={Style.tituloHome}>O que Vamos Estudar?</h1>
+            <main className={Ajuste.container}>
+                <h1 className={Style.tituloHome}>Área de estudo: escolha seu destino</h1>
                 <div className={Style.divMenu}>
-                    {array.map(({ text, cor, url }) => (
-                        <div className={Style.divEscolha} style={{ color: cor }} 
+                    {array.map(({ text, cor, url }, index) => (
+                        <div key={index} className={Style.divEscolha} style={{ color: cor }} 
                             onClick={()=>{navigate(`/aluno/${url}`)}}
                         >
                             <h2>{text}</h2>
                         </div>
                     ))}
                 </div>
-            </div>
+            </main>
         </div>
     )
 }

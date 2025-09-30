@@ -8,7 +8,7 @@ import HeaderStyle from "./header.module.css";
 // Import Componentes
 
 export default function CompHeaderAluno(){
-    const navigate = useNavigate("");
+    const navigate = useNavigate();
     const [mostrar, setMostrar] = useState(false);
     const [nivel, setNivel] = useState("");
     const [moeda, setMoeda] = useState("");
@@ -86,6 +86,12 @@ export default function CompHeaderAluno(){
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
                 <div className={HeaderStyle.divEscolhas}>
+                    <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000", 
+                    marginLeft: "2rem" }}></i>
+                    <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>
+                </div>
+                <hr className={HeaderStyle.linhaModal}/>
+                <div className={HeaderStyle.divEscolhas}>
                     <i className="fa-solid fa-people-group" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Amigos</h1>
@@ -98,6 +104,12 @@ export default function CompHeaderAluno(){
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
                 <div className={HeaderStyle.divEscolhas}>
+                    <i className="fa-solid fa-cubes" style={{ fontSize: "2.5rem", color: "#000", 
+                    marginLeft: "2rem" }}></i>
+                    <h1 className={HeaderStyle.textEscolhas}>Inventário</h1>
+                </div>
+                <hr className={HeaderStyle.linhaModal}/>
+                <div className={HeaderStyle.divEscolhas}>
                     <i className="fa-solid fa-medal" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Conquistas</h1>
@@ -107,12 +119,6 @@ export default function CompHeaderAluno(){
                     <i className="fa-solid fa-ranking-star" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Ranking</h1>
-                </div>
-                <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas}>
-                    <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000", 
-                    marginLeft: "2rem" }}></i>
-                    <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
                 <div className={HeaderStyle.divEscolhas} onClick={alertSair}>
