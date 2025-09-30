@@ -16,7 +16,7 @@ export default function CompHeaderHome(){
                 <h1 className={HeaderStyle.opcoes}><a href="#home">Home</a></h1>
                 <h1 className={HeaderStyle.opcoes}><a href="#materias">Matérias</a></h1>
                 <h1 className={HeaderStyle.opcoes}><a href="#sobre">Sobre Nós</a></h1>
-                <h1 className={HeaderStyle.opcoes}><a href="#beneficios">Beneficios</a></h1>
+                <h1 className={HeaderStyle.opcoes}><a href="#beneficios">Benefícios</a></h1>
                 <h1 className={HeaderStyle.opcoes}><a href="#escola">Escola</a></h1>
 
                 <button className={HeaderStyle.btnLogar} onClick={() => setMostrar(true)}>Logar</button>             

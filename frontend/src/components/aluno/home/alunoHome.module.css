@@ -1,12 +1,3 @@
-.containerHome{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 8rem;
-    height: 86.5vh;
-    background-color: #366091;
-}
-
 .tituloHome{
     text-align: center;
     color: #fff;

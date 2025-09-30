@@ -79,7 +79,7 @@ export default function CompHeaderAluno(){
             <div className={`${HeaderStyle.divModalNavegacao} ${mostrar ? HeaderStyle.show : HeaderStyle.hide}`}
                 onMouseLeave={() => { setMostrar(false) }}
             >
-                <div className={HeaderStyle.divEscolhas}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate("/aluno/home")}}>
                     <i className="fa-solid fa-house" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Home</h1>

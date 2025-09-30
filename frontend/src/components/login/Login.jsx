@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 
 import LoginStyle from "./login.module.css";
 
+// Import Componente
+
 export default function LoginModal({ mostra, fecha }) {
     const navigate = useNavigate("");
     const [email, setEmail] = useState("");
@@ -61,7 +63,7 @@ export default function LoginModal({ mostra, fecha }) {
       
         if (response.data.sucesso) {        
           // Salva token/dados do usuário
-          // localStorage.setItem("usuario", JSON.stringify(response.data));
+          localStorage.setItem("usuario", JSON.stringify(response.data));
         
           setTimeout(() => {
             navigate("/aluno/home");

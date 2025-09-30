@@ -62,7 +62,7 @@ export default function TelaHome(){
                         scrollEnd='bottom bottom-=40%'
                         stagger={0.1}
                     >
-                        Beneficios
+                        Benefícios
                     </ScrollFloat>
                 </h1>
                 <div className={HomeStyle.separacaoBeneficio}>
