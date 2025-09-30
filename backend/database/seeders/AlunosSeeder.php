@@ -12,7 +12,6 @@ class AlunosSeeder extends Seeder
         DB::table('alunos')->insert([
             [
                 'id_usuario' => 1,
-                'responsavel_id_usuario' => 1,
                 'moedas' => 50,
             ]
         ]);
