@@ -55,11 +55,11 @@ export default function CompHeaderAluno(){
     }, []);
 
     return(
-        <div className={HeaderStyle.headerContainer}>
+        <div className={HeaderStyle.headerContainer} onMouseLeave={() => { setMostrar(false) }}>
             <img src={require('../../../imgs/logo.png')} alt="logo do unisin"
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte das Info */}
-            <div className={HeaderStyle.headerMenu}>
+            <div className={HeaderStyle.headerMenu} style={{ marginRight: "2rem" }}>
                 <div className={HeaderStyle.divNMP}>
                     <p>Nível</p>
                     <p>{nivel}</p>
@@ -70,14 +70,14 @@ export default function CompHeaderAluno(){
                     <p>{moeda}</p>
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
-                    onMouseEnter={() => { setMostrar(!mostrar) }}
+                    onMouseEnter={() => { setMostrar(true) }}
                 >
                     <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000" }}></i>
                 </div>
             </div>
             {/* Parte do Modal */}
             <div className={`${HeaderStyle.divModalNavegacao} ${mostrar ? HeaderStyle.show : HeaderStyle.hide}`}
-                onMouseLeave={() => { setMostrar(!mostrar) }}
+                onMouseLeave={() => { setMostrar(false) }}
             >
                 <div className={HeaderStyle.divEscolhas}>
                     <i className="fa-solid fa-house" style={{ fontSize: "2.5rem", color: "#000", 
@@ -115,10 +115,10 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas}>
+                <div className={HeaderStyle.divEscolhas} onClick={alertSair}>
                     <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
-                    <h1 className={HeaderStyle.textEscolhas} onClick={alertSair}>Sair</h1>
+                    <h1 className={HeaderStyle.textEscolhas}>Sair</h1>
                 </div>
             </div>
         </div>
