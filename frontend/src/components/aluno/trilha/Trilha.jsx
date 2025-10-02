@@ -44,7 +44,7 @@ export default function TelaAlunoTrilha(){
                         return (
                         <div
                             key={atv}
-                            className={`${Style.atv} ${Style[classeExtra]}`}
+                            className={`${Style.etapa} ${Style[classeExtra]}`}
                             style={{ marginLeft: `${deslocamento}rem`, marginTop: "1rem" }}
                             onClick={()=>{navigate(`/aluno/${materia}/atividade/${atv.id}`)}}
                         >

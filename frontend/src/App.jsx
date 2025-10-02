@@ -15,7 +15,7 @@ export default function App() {
                 <Route path="/aluno/home" element={<AlunoHome />} />
 
                 <Route path="/aluno/:materia" element={<AlunoTrilha />} />
-                <Route path="/aluno/:materia/:atividade" element={<Atividade />} />
+                <Route path="/aluno/:materia/atividade/:id" element={<Atividade />} />
             </Routes>
         </Routers>
     );
