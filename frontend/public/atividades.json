@@ -1,0 +1,86 @@
+{
+  "Matemática": [
+    {
+      "id": 1,
+      "pergunta": "Quanto é 7 × 8?",
+      "respostas": ["54", "56", "58", "60"],
+      "correta": "56"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual é a raiz quadrada de 81?",
+      "respostas": ["9", "8", "7", "6"],
+      "correta": "9"
+    }
+  ],
+  "Português": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o plural de 'cidadão'?",
+      "respostas": ["cidadões", "cidadãos", "cidadães", "cidades"],
+      "correta": "cidadãos"
+    }
+  ],
+  "Inglês": [
+    {
+      "id": 1,
+      "pergunta": "What is the past tense of 'go'?",
+      "respostas": ["goed", "went", "goes", "going"],
+      "correta": "went"
+    },
+    {
+      "id": 2,
+      "pergunta": "Choose the correct article: ___ apple a day keeps the doctor away.",
+      "respostas": ["A", "An", "The", "No article"],
+      "correta": "An"
+    }
+  ],
+  "História": [
+    {
+      "id": 1,
+      "pergunta": "Quem foi o primeiro presidente do Brasil?",
+      "respostas": ["Dom Pedro II", "Deodoro da Fonseca", "Getúlio Vargas", "Marechal Floriano"],
+      "correta": "Deodoro da Fonseca"
+    }
+  ],
+  "Geografia": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o maior país do mundo em extensão territorial?",
+      "respostas": ["Brasil", "China", "Rússia", "Canadá"],
+      "correta": "Rússia"
+    }
+  ],
+  "Química": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o símbolo químico da água?",
+      "respostas": ["O2", "H2O", "CO2", "HO"],
+      "correta": "H2O"
+    }
+  ],
+  "Física": [
+    {
+      "id": 1,
+      "pergunta": "Qual a unidade de medida da força no SI?",
+      "respostas": ["Joule", "Newton", "Pascal", "Watt"],
+      "correta": "Newton"
+    }
+  ],
+  "Artes": [
+    {
+      "id": 1,
+      "pergunta": "Quem pintou a Mona Lisa?",
+      "respostas": ["Michelangelo", "Leonardo da Vinci", "Van Gogh", "Picasso"],
+      "correta": "Leonardo da Vinci"
+    }
+  ],
+  "Educação Física": [
+    {
+      "id": 1,
+      "pergunta": "Quantos jogadores cada time tem no voleibol?",
+      "respostas": ["5", "6", "7", "11"],
+      "correta": "6"
+    }
+  ]
+}
