@@ -1,0 +1,75 @@
+.container{
+    margin-top: 2rem;
+    width: 70%;
+    height: auto;
+    min-height: 83vh;
+    background-color: #fff;
+}
+
+.divGeral{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divFotoNome{
+    display: flex;
+    flex-direction: row;
+    padding: 5rem;
+}
+.imgPerfil{
+    width: 13rem;
+    border: 1rem solid #1A00FF;
+    border-radius: 1rem;
+}
+.nomeAluno{
+    margin: 2rem 0 0 3rem;
+}
+
+.divNivelEditar{
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    padding: 5rem;
+    margin: 1.8rem 2rem 0 0;
+}
+.nivel{
+    padding: 0.8rem;
+    border-radius: 100%;
+    background-color: #D9D9D9;
+    margin-left: 2rem;
+}
+.divInsigna{
+    display: flex;
+    align-items: center;
+    width: 19rem;
+    height: 4.5rem;
+    background-color: #D9D9D9;
+}
+.insigna{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+.editar{
+    font-size: 1.3rem;
+    padding: 1rem 5rem;
+    background-color: #D9D9D9;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: 0.4s ease;
+    border: none;
+}
+.editar:hover{
+    background-color: #C7C7C7;
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.divisao{
+    border: none;
+    height: 2.25rem;
+    background-color: #C7C7C7;
+}

@@ -71,6 +71,12 @@ a{
     cursor: pointer;
 }
 
+.imgPerfil{
+    width: 3.6rem !important;
+    height: 3.6rem !important;
+    border-radius: 100%;
+}
+
 /* Estilo do Modal de Navegação do Aluno */
 .divModalNavegacao {
     width: 21.875rem;

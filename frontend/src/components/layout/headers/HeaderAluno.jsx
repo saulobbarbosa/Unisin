@@ -12,6 +12,7 @@ export default function CompHeaderAluno(){
     const [mostrar, setMostrar] = useState(false);
     const [nivel, setNivel] = useState("");
     const [moeda, setMoeda] = useState("");
+    const [caminho, setCaminho] = useState("");
 
     const alertSair = () =>{
         Swal.fire({
@@ -48,6 +49,7 @@ export default function CompHeaderAluno(){
                 if (usuario) {
                     setNivel(usuario.nivel);
                     setMoeda(usuario.moedas);
+                    setCaminho(usuario.caminhoimg);
                 }
             })
             .catch(error => console.error(error));
@@ -71,8 +73,10 @@ export default function CompHeaderAluno(){
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
                     onMouseEnter={() => { setMostrar(true) }}
+                    onClick={()=>{navigate("/aluno/perfil")}}
                 >
-                    <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000" }}></i>
+                    <img src={caminho} className={HeaderStyle.imgPerfil}
+                    alt="Imagem de Perfil" draggable="false" />
                 </div>
             </div>
             {/* Parte do Modal */}
@@ -85,7 +89,7 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Home</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate("/aluno/perfil")}}>
                     <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>

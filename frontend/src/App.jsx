@@ -1,21 +1,29 @@
 import React from "react";
 import {BrowserRouter as Routers, Routes, Route} from "react-router-dom"
 
-// Import de Componentes
+// Import
 import Home from "./components/home/Home";
+// Import Telas Aluno
 import AlunoHome from "./components/aluno/home/AlunoHome";
 import AlunoTrilha from "./components/aluno/trilha/Trilha";
 import Atividade from "./components/aluno/atividade/Atividade";
+import AlunoPerfil from "./components/aluno/perfil/PerfilAluno";
+// Import Telas ADM
 
 export default function App() { 
     return(
         <Routers>
             <Routes>
+                {/* Rotas Padrões */}
                 <Route path="/" element={<Home />} />
-                <Route path="/aluno/home" element={<AlunoHome />} />
 
+                {/* Rotas Aluno */}
+                <Route path="/aluno/home" element={<AlunoHome />} />
                 <Route path="/aluno/:materia" element={<AlunoTrilha />} />
                 <Route path="/aluno/:materia/atividade/:id" element={<Atividade />} />
+                <Route path="/aluno/perfil" element={<AlunoPerfil />} />
+
+                {/* Rotas ADM */}
             </Routes>
         </Routers>
     );

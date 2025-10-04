@@ -5,7 +5,8 @@
     "senha": "1",
     "nome": "Guilherme",
     "nivel": 20,
-    "moedas": 2500
+    "moedas": 2500,
+    "caminhoimg": "/imgs/perfil/boy_black.webp"
   },
   {
     "id": 2,
@@ -13,6 +14,7 @@
     "senha": "1",
     "nome": "Leo",
     "nivel": 15,
-    "moedas": 1800
+    "moedas": 1800,
+    "caminhoimg": "/imgs/perfil/boy_yellow.webp"
   }
 ]
