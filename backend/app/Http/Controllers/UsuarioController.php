@@ -21,9 +21,13 @@ class UsuarioController extends Controller
             'senha' => 'required|string|min:6',
         ]);
 
+        // Criptografa a senha antes de criar o usuário
+        $data['senha'] = bcrypt($data['senha']);
+
         $usuario = Usuario::create($data);
         return response()->json($usuario, 201);
     }
+
 
     public function show($id)
     {
@@ -41,6 +45,7 @@ class UsuarioController extends Controller
             'email' => 'required|string|email|max:255|unique:usuarios,email,' . $id . ',id_usuario',
             'senha' => 'required|string|min:6',
         ]);
+        $data['senha'] = bcrypt($data['senha']);
 
         $usuario->update($data);
         return response()->json($usuario);

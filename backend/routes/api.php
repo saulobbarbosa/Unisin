@@ -24,6 +24,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::post('/login', [AuthController::class, 'login']);
+
 // Rota para listar todos os usuários
 Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth:sanctum');
 

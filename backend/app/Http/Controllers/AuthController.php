@@ -16,17 +16,21 @@ class AuthController extends Controller
 
         // 2. Verifica se o usuário existe E se a senha está correta
         if (! $usuario || ! Hash::check($request->senha, $usuario->senha)) {
-            // Se não estiver, retorna um erro de autenticação
-            throw ValidationException::withMessages([
-                'email' => ['As credenciais fornecidas estão incorretas.'],
-            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'As credenciais fornecidas estão incorretas.'
+            ], 401);
         }
 
         // 3. Se tudo estiver certo, cria e retorna um token para o usuário
         $token = $usuario->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'token' => $token,
+            'success' => true,
+            'message' => 'Login realizado com sucesso.',
+            'usuario' => $usuario,
+            'token' => $token
         ]);
     }
+
 }
