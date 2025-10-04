@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 import LoginStyle from "./login.module.css";
+import CadastroAlunoModal from "../cadastros/Aluno"; 
 
 // Import Componente
 
@@ -11,6 +13,7 @@ export default function LoginModal({ mostra, fecha }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [mostrarCadastro, setMostrarCadastro] = useState(false);
 
     if (!mostra) return null;
 
@@ -83,7 +86,7 @@ export default function LoginModal({ mostra, fecha }) {
 
     return (
         <div className={LoginStyle.modalOverlay}>
-            <div className={LoginStyle.modalBox}>
+          <div className={LoginStyle.modalBox}>
                 <button className={LoginStyle.closeBtn} onClick={fecha}>
                     <i className="fa-solid fa-circle-xmark" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
@@ -108,14 +111,24 @@ export default function LoginModal({ mostra, fecha }) {
                       onChange={(e) => setSenha(e.target.value)}
                       required
                     />
-                    <p className={LoginStyle.registerLink}>
-                      Não tem Conta? <a href="#">Cadastre-se Agora!!!</a>
-                    </p>
+                      <p className={LoginStyle.registerLink}>
+                        Não tem conta?{" "}
+                        <a href="#" onClick={(e) => {
+                            e.preventDefault();
+                            setMostrarCadastro(true); // abre cadastro
+                          }} > Cadastre-se Agora!!!
+                        </a>
+                      </p>
                     <button type="submit" className={LoginStyle.loginBtn}>
                       Entrar
                     </button>
                 </form>
               </div>
-          </div>
+                  <CadastroAlunoModal // O componente ta que nem no header home
+                  mostra={mostrarCadastro}
+                  fecha={() => setMostrarCadastro(false)}
+                  abrirLogin={() => setMostrarCadastro(false)} // quando clicar "Já tem conta"
+                  />
+        </div>
       );
 }

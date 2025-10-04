@@ -146,3 +146,42 @@
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* Caixa branca arredondada Aluno */
+.modalboxAluno{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 25px;
+  width: 350px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+/*Estilo dos campos de cadastro*/
+.cadastroAluno {
+  display: flex;
+  flex-direction: column;
+}
+/* Labels */
+.modalboxAluno label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #295384;
+}
+/* Inputs */
+.modalboxAluno input {
+  width: 94%;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+.cadastroFormAluno{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}

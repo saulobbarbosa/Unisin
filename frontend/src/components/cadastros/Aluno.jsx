@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import AlunoStyle from "../login/login.module.css";
 
-export default function LoginModal({ mostra, fecha }) {
+export default function CadastroAlunoModal({ mostra, fecha, abrirLogin }) {
     const [nome, setNome] = useState("");
-    const [data_nascimento, setData_nascimento] = useState("");
+    const [datanascimento, setDataNascimento] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState("");
+    
 
+    
     if (!mostra) return null;
 
     return (
         <div className={AlunoStyle.modalOverlay}>
-            <div className={AlunoStyle.modalBoxEscola}>
+            <div className={AlunoStyle.modalboxAluno}>
                 <button className={AlunoStyle.closeBtn} onClick={fecha}>
                     <i className="fa-solid fa-circle-xmark" style={{ fontSize: "1.5rem", color: "#000" }}></i>
                 </button>
                 {/* Primeira Parte */}
-                <h2 className={AlunoStyle.modalTitleEscola}>Cadastro Escola</h2>
+                <h2 className={AlunoStyle.modalTitleEscola}>Cadastro Aluno</h2>
 
                 {/* Formulario */}
-                <form className={AlunoStyle.cadastroForm}>
-                    <div className={AlunoStyle.cadastroEscola}>
+                <form className={AlunoStyle.cadastroFormAluno}>
+                    <div className={AlunoStyle.cadastroAluno}>
                     <label>Nome</label>
                     <input
                       type="text"
@@ -32,18 +34,17 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={AlunoStyle.cadastroEscola}>
-                    <label>Estado</label>
+                    <div className={AlunoStyle.cadastroAluno}>
+                    <label>Data de Nascimento</label>
                     <input
-                      type="text"
-                      placeholder="Insira seu estado aqui"
-                      value={estado}
-                      onChange={(e) => setEstado(e.target.value)}
+                      type="date"
+                      placeholder="Insira sua data de nascimento aqui"
+                      value={datanascimento}
+                      onChange={(e) => setDataNascimento(e.target.value)}
                       required
                     />
                     </div>
-                    {/* Segunda Parte */}
-                    <div className={AlunoStyle.cadastroEscola}>
+                    <div className={AlunoStyle.cadastroAluno}>
                     <label>E-mail</label>
                     <input
                       type="email"
@@ -53,17 +54,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={AlunoStyle.cadastroEscola}>
-                    <label>Telefone</label>
-                    <input
-                      type="tel"
-                      placeholder="Insira seu telefone aqui"
-                      value={telefone}
-                      onChange={(e) => setTelefone(e.target.value)}
-                      required
-                    />
-                    </div>
-                    <div className={AlunoStyle.cadastroEscola}>
+                    <div className={AlunoStyle.cadastroAluno}>
                     <label>Senha</label>
                     <input
                       type="password"
@@ -73,7 +64,7 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <div className={AlunoStyle.cadastroEscola}>
+                    <div className={AlunoStyle.cadastroAluno}>
                     <label>Confirmar Senha</label>
                     <input
                       type="password"
@@ -83,8 +74,26 @@ export default function LoginModal({ mostra, fecha }) {
                       required
                     />
                     </div>
-                    <p className={AlunoStyle.registerLink}>
-                      Ja tem Conta? <a href="./Login.jsx">Faça Login Aqui!!!</a>
+                    <div className={AlunoStyle.cadastroAluno}>
+                    <label>Telefone</label>
+                    <input
+                      type="tel"
+                      placeholder="Insira seu telefone aqui"
+                      value={telefone}
+                      onChange={(e) => setTelefone(e.target.value)}
+                      required
+                    />
+
+                    </div>
+                     <p className={AlunoStyle.registerLink}>
+                        Já tem conta?{" "}
+                        <a href="#" onClick={(e) => {
+                          e.preventDefault();
+                          fecha();      // fecha cadastro
+                          abrirLogin(); // volta login
+                        }}>
+                          Faça Login Aqui!!!
+                        </a>
                     </p>
                     <button type="submit" className={AlunoStyle.loginBtn}>Cadastrar</button>
                 </form>
