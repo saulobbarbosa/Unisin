@@ -66,7 +66,26 @@ export default function TelaAlunoPerfil(){
                     </div>
                     <hr className={Style.divisao} />
                     <div className={Style.divDashboard}>
-
+                        <div>
+                            <div>
+                                <div>
+                                
+                                </div>
+                                <h1>Matématica</h1>
+                            </div>
+                            <div>
+                                <p>Progresso na matéria {`10`} de {`25`}</p>
+                                <div></div>
+                                <div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h1>Conquistas Recentes</h1>
+                        </div>
                     </div>
                 </div>
             </main>

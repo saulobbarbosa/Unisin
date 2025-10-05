@@ -62,11 +62,11 @@ export default function CompHeaderAluno(){
             className={HeaderStyle.logo} draggable="false" />
             {/* Parte das Info */}
             <div className={HeaderStyle.headerMenu} style={{ marginRight: "2rem" }}>
-                <div className={HeaderStyle.divNMP}>
+                <div className={HeaderStyle.divNMP} onClick={()=>{navigate("/aluno/home")}}>
                     <p>Nível</p>
                     <p>{nivel}</p>
                 </div>
-                <div className={HeaderStyle.divNMP}>
+                <div className={HeaderStyle.divNMP} onClick={()=>{navigate("/aluno/loja")}}>
                     <img src={require('../../../imgs/moeda.png')} alt="icone de moeda"
                     className={HeaderStyle.imgMoeda} draggable="false" />
                     <p>{moeda}</p>
@@ -101,7 +101,7 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Amigos</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate("/aluno/loja")}}>
                     <i className="fa-solid fa-store" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Loja</h1>
