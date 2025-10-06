@@ -6,7 +6,6 @@ import Ajuste from "../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoLoja() {
-    const corDeFundo = localStorage.getItem("corDeFundo");
     const carrosselBorda = useRef(null);
     const carrosselFundo = useRef(null);
     const carrosselAvatar = useRef(null);
@@ -34,9 +33,7 @@ export default function TelaAlunoLoja() {
     return (
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}
-                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
-            >
+            <main className={Ajuste.container}>
                 <div className={Style.divTituloTop}>
                     <h1>Faça Atividades, ganhe pontos</h1>
                     <h2>Personalize seu perfil no Unisin</h2>

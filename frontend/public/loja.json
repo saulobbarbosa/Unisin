@@ -9,9 +9,9 @@
   ],
   "fundos": [
     { "id": 1, "nome": "Fundo Vermelho", "preco": 1000, "color": "#FF0000" },
-    { "id": 2, "nome": "Fundo Verde", "preco": 1000, "color": "#3A7BFD" },
+    { "id": 2, "nome": "Fundo Verde", "preco": 1000, "color": "#0DFF00" },
     { "id": 3, "nome": "Fundo Azul", "preco": 1000, "color": "#3A7BFD" },
-    { "id": 4, "nome": "Fundo Marrom", "preco": 1000, "color": "#3A7BFD" },
+    { "id": 4, "nome": "Fundo Marrom", "preco": 1000, "color": "#8D6E63" },
     { "id": 5, "nome": "Fundo Preta", "preco": 1000, "color": "#000000" },
     { "id": 6, "nome": "Fundo Amarela", "preco": 1000, "color": "#FFB72D" }
   ],

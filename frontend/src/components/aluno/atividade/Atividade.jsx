@@ -12,7 +12,6 @@ import Barra from "../barra-top/BarraTop";
 
 export default function TelaAtividade(){
     const navigate = useNavigate();
-    const corDeFundo = localStorage.getItem("corDeFundo");
     const { materia, id } = useParams();
     const [atividade, setAtividade] = useState(null);
     const [level, setLevel] = useState("4");
@@ -68,9 +67,7 @@ export default function TelaAtividade(){
     return(
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}
-                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
-            >
+            <main className={Ajuste.container}>
                 <Barra level={level}/>
                 <div className={Style.divAtividade}>
                     <div className={Style.divPergunta + " " + Style.generalizacao}>

@@ -16,7 +16,6 @@ const classes = [
 
 export default function TelaAlunoTrilha(){
     const navigate = useNavigate();
-    const corDeFundo = localStorage.getItem("corDeFundo");
     const { materia } = useParams();
     const [atividades, setAtividades] = useState([]);
     const [level, setLevel] = useState("4");
@@ -33,9 +32,7 @@ export default function TelaAlunoTrilha(){
     return(
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}
-                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
-            >
+            <main className={Ajuste.container}>
                 <Barra level={level}/>
                 <div className={Style.divConquista}>
                     <h2 className={Style.tituloConquista}>Conquistas</h2>

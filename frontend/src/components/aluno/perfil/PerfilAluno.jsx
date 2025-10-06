@@ -39,7 +39,7 @@ export default function TelaAlunoPerfil(){
         <div className={Ajuste.wrapper}>
             <Header />
             <main className={Ajuste.container}
-                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
+                style={{ background: corDeFundo }}
             >
                 <div className={Style.container}>
                     <div className={Style.divGeral}>
