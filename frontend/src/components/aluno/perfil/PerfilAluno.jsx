@@ -10,9 +10,11 @@ import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoPerfil(){
     // const navigate = useNavigate();
+    const corDeFundo = localStorage.getItem("corDeFundo");
     const [nome, setNome] = useState("");
     const [nivel, setNivel] = useState("");
-    const [caminho, setCaminho] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [borda, setBorda] = useState("");
 
     useEffect(() => {
         const usuarioId = localStorage.getItem("usuarioId");
@@ -25,7 +27,8 @@ export default function TelaAlunoPerfil(){
                 if (usuario) {
                     setNome(usuario.nome);
                     setNivel(usuario.nivel);
-                    setCaminho(usuario.caminhoimg);
+                    setAvatar(usuario.avatar);
+                    setBorda(usuario.borda);
                 }
             })
             .catch(error => console.error(error));
@@ -35,12 +38,18 @@ export default function TelaAlunoPerfil(){
     return(
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}>
+            <main className={Ajuste.container}
+                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
+            >
                 <div className={Style.container}>
                     <div className={Style.divGeral}>
                         <div className={Style.divFotoNome}>
-                            <img src={caminho} className={Style.imgPerfil}
-                            alt="Imagem de Perfil" draggable="false" />
+                            <img src={avatar} className={Style.imgPerfil}
+                            alt="Imagem de Perfil" draggable="false"
+                            style={{
+                                border: `0.8rem solid ${borda}`,
+                                boxShadow: `0 0 10px ${borda}`,
+                            }} />
                             <h1 className={Style.nomeAluno}>{nome}</h1>
                         </div>
                         <div className={Style.divNivelEditar}>

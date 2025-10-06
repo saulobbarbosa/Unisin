@@ -1,73 +1,28 @@
-// import React, { useState, useEffect } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
-// import axios from "axios";
-
-// import Style from "./loja.module.css";
-// import Ajuste from "../containerPadrao.module.css";
-
-// // Import Componentes
-// import Header from "../../layout/headers/HeaderAluno";
-
-// export default function TelaAlunoLoja(){
-//     return(
-//         <div className={Ajuste.wrapper}>
-//             <Header />
-//             <main className={Ajuste.container}>
-//                 <div className={Style.divTituloTop}>
-//                     <h1>Faça Atividades, ganhe pontos</h1>
-//                     <h2>Personalize seu perfil Unisin</h2>
-//                 </div>
-//                 <div className={Style.divContainerBloco}>
-//                     <div className={Style.navbarTop}>
-//                         <h1>Bordas</h1>
-//                         <hr className={Style.linhaNav} />
-//                         <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                         <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                     </div>
-//                     <div className={Style.carrosselItens}>
-//                         <div className={Style.cardItem}>
-//                             <div></div>
-//                             <p>Borda de Avatar Vermelha</p>
-//                             <div>
-//                                 <img src={require('../../../imgs/moeda.png')} alt="moeda"
-//                                 className={Style.imgsMoeda} draggable="false" />
-//                                 <p>800</p>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div className={Style.divContainerBloco}>
-//                     <div className={Style.navbarTop}>
-//                         <h1>Fundos</h1>
-//                         <hr className={Style.linhaNav} />
-//                         <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                         <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                     </div>
-//                 </div>
-//                 <div className={Style.divContainerBloco}>
-//                     <div className={Style.navbarTop}>
-//                         <h1>Avatares</h1>
-//                         <hr className={Style.linhaNav} />
-//                         <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                         <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff', cursor: "pointer" }}></i>
-//                     </div>
-//                 </div>
-//             </main>
-//         </div>
-//     )
-// }
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 
 import Style from "./loja.module.css";
 import Ajuste from "../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoLoja() {
-    const carrosselRef = useRef(null);
+    const corDeFundo = localStorage.getItem("corDeFundo");
+    const carrosselBorda = useRef(null);
+    const carrosselFundo = useRef(null);
+    const carrosselAvatar = useRef(null);
+    const [itens, setItens] = useState(null);
 
-    const scroll = (direction) => {
-        const { current } = carrosselRef;
+    useEffect(() => {
+        axios
+        .get("/loja.json") // caminho dentro da pasta 'public/data'
+        .then((response) => setItens(response.data))
+        .catch((error) => console.error("Erro ao carregar JSON:", error));
+    }, []);
+    
+    if (!itens) return <p>Carregando...</p>;
+
+    const scroll = (ref, direction) => {
+        const { current } = ref;
         if (!current) return;
         const scrollAmount = 300;
         current.scrollBy({
@@ -79,7 +34,9 @@ export default function TelaAlunoLoja() {
     return (
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}>
+            <main className={Ajuste.container}
+                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
+            >
                 <div className={Style.divTituloTop}>
                     <h1>Faça Atividades, ganhe pontos</h1>
                     <h2>Personalize seu perfil no Unisin</h2>
@@ -90,18 +47,85 @@ export default function TelaAlunoLoja() {
                     <div className={Style.navbarTop}>
                         <h1>Bordas</h1>
                         <hr className={Style.linhaNav} />
-                        <i className="pi pi-chevron-left" onClick={() => scroll("left")}></i>
-                        <i className="pi pi-chevron-right" onClick={() => scroll("right")}></i>
+                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselBorda, "left")}></i>
+                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselBorda, "right")}></i>
                     </div>
-
-                    <div className={Style.carrosselItens} ref={carrosselRef}>
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i} className={Style.cardItem}>
-                                <div className={Style.previewBorda}></div>
-                                <p>Borda de Avatar #{i + 1}</p>
+                    <div className={Style.carrosselItens} ref={carrosselBorda}>
+                        {itens.bordas.map((borda) => (
+                            <div key={borda.id} className={Style.cardItem}>
+                                <div className={Style.preview}                                    
+                                    style={{
+                                        border: `0.8rem solid ${borda.color}`,
+                                        boxShadow: `0 0 10px ${borda.color}`,
+                                    }}
+                                >
+                                </div>
+                                <p style={{ marginTop: "1rem" }}>{borda.nome}</p>
                                 <div className={Style.divPreco}>
-                                    <img src={require("../../../imgs/moeda.png")} alt="moeda" draggable="false" />
-                                    <p>800</p>
+                                    <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
+                                    alt="moeda" draggable="false" />
+                                    <p style={{ fontSize: "1.5rem" }}><b>{borda.preco}</b></p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Bloco de Fundos */}
+                <div className={Style.divContainerBloco}>
+                    <div className={Style.navbarTop}>
+                        <h1>Fundos</h1>
+                        <hr className={Style.linhaNav} />
+                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselFundo, "left")}></i>
+                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselFundo, "right")}></i>
+                    </div>
+                    <div className={Style.carrosselItens} ref={carrosselFundo}>
+                        {itens.fundos.map((fundo) => (
+                            <div key={fundo.id} className={Style.cardItem}>
+                                <div className={Style.preview}
+                                    style={{
+                                        backgroundColor: fundo.color,
+                                        boxShadow: `0 0 10px ${fundo.color}`,
+                                    }}
+                                >
+                                </div>
+                                <p style={{ marginTop: "1rem" }}>{fundo.nome}</p>
+                                <div className={Style.divPreco}>
+                                    <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
+                                    alt="moeda" draggable="false" />
+                                    <p style={{ fontSize: "1.5rem" }}><b>{fundo.preco}</b></p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Bloco de Avatares */}
+                <div className={Style.divContainerBloco}>
+                    <div className={Style.navbarTop}>
+                        <h1>Avatares</h1>
+                        <hr className={Style.linhaNav} />
+                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselAvatar, "left")}></i>
+                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        onClick={() => scroll(carrosselAvatar, "right")}></i>
+                    </div>
+                    <div className={Style.carrosselItens} ref={carrosselAvatar}>
+                        {itens.avatares.map((avatar) => (
+                            <div key={avatar.id} className={Style.cardItem}>
+                                <img
+                                    src={avatar.img}
+                                    alt="Avatar Loja"
+                                    className={Style.preview}
+                                    draggable="false"
+                                />
+                                <p style={{ marginTop: "1rem" }}>{avatar.nome}</p>
+                                <div className={Style.divPreco}>
+                                    <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
+                                    alt="moeda" draggable="false" />
+                                    <p style={{ fontSize: "1.5rem" }}><b>{avatar.preco}</b></p>
                                 </div>
                             </div>
                         ))}

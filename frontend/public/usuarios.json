@@ -6,7 +6,9 @@
     "nome": "Guilherme",
     "nivel": 20,
     "moedas": 2500,
-    "caminhoimg": "/imgs/perfil/boy_black.webp"
+    "avatar": "/imgs/perfil/boy_black.webp",
+    "borda": "#FF0000",
+    "fundo": "#000"
   },
   {
     "id": 2,
@@ -15,6 +17,6 @@
     "nome": "Leo",
     "nivel": 15,
     "moedas": 1800,
-    "caminhoimg": "/imgs/perfil/boy_yellow.webp"
+    "avatar": "/imgs/perfil/boy_yellow.webp"
   }
 ]

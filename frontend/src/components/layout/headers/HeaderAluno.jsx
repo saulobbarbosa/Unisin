@@ -12,7 +12,8 @@ export default function CompHeaderAluno(){
     const [mostrar, setMostrar] = useState(false);
     const [nivel, setNivel] = useState("");
     const [moeda, setMoeda] = useState("");
-    const [caminho, setCaminho] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [borda, setBorda] = useState("");
 
     const alertSair = () =>{
         Swal.fire({
@@ -49,7 +50,8 @@ export default function CompHeaderAluno(){
                 if (usuario) {
                     setNivel(usuario.nivel);
                     setMoeda(usuario.moedas);
-                    setCaminho(usuario.caminhoimg);
+                    setAvatar(usuario.avatar);
+                    setBorda(usuario.borda);
                 }
             })
             .catch(error => console.error(error));
@@ -75,8 +77,11 @@ export default function CompHeaderAluno(){
                     onMouseEnter={() => { setMostrar(true) }}
                     onClick={()=>{navigate("/aluno/perfil")}}
                 >
-                    <img src={caminho} className={HeaderStyle.imgPerfil}
-                    alt="Imagem de Perfil" draggable="false" />
+                    <img src={avatar} className={HeaderStyle.imgPerfil}
+                    alt="Imagem de Perfil" draggable="false"
+                    style={{
+                        border: `0.3rem solid ${borda}`
+                    }} />
                 </div>
             </div>
             {/* Parte do Modal */}

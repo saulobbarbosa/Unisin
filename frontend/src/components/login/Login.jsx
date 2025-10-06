@@ -40,6 +40,7 @@ export default function LoginModal({ mostra, fecha }) {
         if (usuario) {        
           // Salva dados do usuário no localStorage
           localStorage.setItem("usuarioId", usuario.id);
+          localStorage.setItem("corDeFundo", usuario.fundo);
           setTimeout(() => {
             navigate("/aluno/home");
           }, 2000);

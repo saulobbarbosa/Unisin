@@ -9,6 +9,7 @@ import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoHome(){
     const navigate = useNavigate();
+    const corDeFundo = localStorage.getItem("corDeFundo");
 
     const array = [
         {text: "Matemática", cor: "#1565C0"},
@@ -25,7 +26,9 @@ export default function TelaAlunoHome(){
     return(
         <div className={Ajuste.wrapper}>
             <Header />
-            <main className={Ajuste.container}>
+            <main className={Ajuste.container}
+                style={{ background: corDeFundo || "linear-gradient(180deg, #366091, #274b6a)" }}
+            >
                 <h1 className={Style.tituloHome}>Área de estudo: escolha seu destino</h1>
                 <div className={Style.divMenu}>
                     {array.map(({ text, cor }, index) => (
