@@ -1,0 +1,21 @@
+.tituloTop{
+    font-size: 3.5rem;
+    color: #fff;
+    margin-top: 5rem;
+}
+
+.divTitulo{
+    width: 68%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 2rem;
+}
+
+.divConquistas{
+    width: 70%;
+    margin-top: 2rem;
+    background-color: #fff;
+    border-radius: 2rem 2rem 0rem 0rem;
+    height: auto;
+    min-height: 64vh;
+}

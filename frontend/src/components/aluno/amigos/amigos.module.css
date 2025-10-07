@@ -1,0 +1,21 @@
+.tituloTop{
+    font-size: 3.5rem;
+    color: #fff;
+    margin-top: 5rem;
+}
+
+.divAcoes{
+    width: 68%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.divAmigos{
+    width: 70%;
+    margin-top: 2rem;
+    background-color: #fff;
+    border-radius: 2rem 2rem 0rem 0rem;
+    height: auto;
+    min-height: 59.6vh;
+}
