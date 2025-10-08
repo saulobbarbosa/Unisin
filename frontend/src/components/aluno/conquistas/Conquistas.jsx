@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
@@ -10,7 +9,13 @@ import Ajuste from "../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaConquistas(){
-    const navigate = useNavigate();
+    const [conquistas, setConquistas] = useState([]);
+    
+    useEffect(() => {
+        axios.get("/conquistas.json")
+        .then(res => setConquistas(res.data))
+        .catch(err => console.error(err));
+    }, []);
 
     return(
         <div className={Ajuste.wrapper}>
@@ -19,8 +24,52 @@ export default function TelaConquistas(){
                 <div className={Style.divTitulo}>
                     <h1 className={Style.tituloTop}>Conquistas</h1>
                 </div>
-                <div className={Style.divConquistas}>
-
+                <div className={Style.gridConquista}>
+                    {/* Topo da Tabela */}
+                    <div></div>
+                    <div></div>
+                    <div className={Style.textoTopoTabela}>
+                        Recompensa
+                    </div>
+                    {/* Dados */}
+                    {conquistas.map(conquista => (
+                        <React.Fragment key={conquista.id}>
+                            <div style={{ color: "#295384" }}>
+                                {conquista.descricao}
+                            </div>
+                            <div style={{ textAlign: "center" }}>
+                                <p>{conquista.qtdAtual}/{conquista.qtdCompleta}</p>
+                            </div>
+                            <div className={Style.ajusteRecompensa}>
+                                {conquista.recompensa.tipo === "moedas" ? (
+                                    <div className={Style.destaqueRecMoeda}>
+                                        <img src={require('../../../imgs/moeda.png')} alt="icone de moeda" 
+                                        className={Style.img} draggable="false" />
+                                        {conquista.recompensa.valor}
+                                    </div>
+                                ) : conquista.recompensa.categoria === "bordas" ? (
+                                    <div className={Style.previewBorda}
+                                    style={{ border: `0.4rem solid ${conquista.recompensa.color}` }}
+                                    title={conquista.recompensa.nome}
+                                    ></div>
+                                ) : conquista.recompensa.categoria === "fundos" ? (
+                                    <div className={Style.previewFundo}
+                                    style={{ backgroundColor: conquista.recompensa.color }}
+                                    title={conquista.recompensa.nome}
+                                    ></div>
+                                ) : conquista.recompensa.categoria === "avatares" ? (
+                                    <img src={conquista.recompensa.img}
+                                        alt={conquista.recompensa.nome}
+                                        className={Style.previewAvatar}
+                                        draggable="false"
+                                        title={conquista.recompensa.nome}
+                                    />   
+                                ) : (
+                                    <h1>Não Encontrado!!!</h1>
+                                )}
+                            </div>
+                        </React.Fragment>
+                    ))}
                 </div>
             </main>
         </div>
