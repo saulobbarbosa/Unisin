@@ -10,6 +10,7 @@ import Atividade from "./components/aluno/atividade/Atividade";
 import AlunoPerfil from "./components/aluno/perfil/PerfilAluno";
 import AlunoLoja from "./components/aluno/loja/Loja";
 import AlunoAmigos from "./components/aluno/amigos/Amigos";
+import AlunoRanking from "./components/aluno/ranking/Ranking";
 import AlunoConquistas from "./components/aluno/conquistas/Conquistas";
 // Import Telas ADM
 
@@ -27,6 +28,7 @@ export default function App() {
                 <Route path="/aluno/perfil" element={<AlunoPerfil />} />
                 <Route path="/aluno/loja" element={<AlunoLoja />} />
                 <Route path="/aluno/amigos" element={<AlunoAmigos />} />
+                <Route path="/aluno/ranking" element={<AlunoRanking />} />
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
 
                 {/* Rotas ADM */}

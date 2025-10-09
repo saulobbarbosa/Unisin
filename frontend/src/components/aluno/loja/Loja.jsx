@@ -46,9 +46,9 @@ export default function TelaAlunoLoja() {
                     <div className={Style.navbarTop}>
                         <h1>Bordas</h1>
                         <hr className={Style.linhaNav} />
-                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselBorda, "left")}></i>
-                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselBorda, "right")}></i>
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselBorda}>
@@ -76,9 +76,9 @@ export default function TelaAlunoLoja() {
                     <div className={Style.navbarTop}>
                         <h1>Fundos</h1>
                         <hr className={Style.linhaNav} />
-                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselFundo, "left")}></i>
-                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselFundo, "right")}></i>
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselFundo}>
@@ -106,9 +106,9 @@ export default function TelaAlunoLoja() {
                     <div className={Style.navbarTop}>
                         <h1>Avatares</h1>
                         <hr className={Style.linhaNav} />
-                        <i className="pi pi-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-left" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselAvatar, "left")}></i>
-                        <i className="pi pi-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
+                        <i className="fa-solid fa-chevron-right" style={{ fontSize: '2rem', color: '#fff' }}
                         onClick={() => scroll(carrosselAvatar, "right")}></i>
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselAvatar}>
