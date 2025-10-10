@@ -13,6 +13,8 @@ import AlunoAmigos from "./components/aluno/amigos/Amigos";
 import AlunoRanking from "./components/aluno/ranking/Ranking";
 import AlunoConquistas from "./components/aluno/conquistas/Conquistas";
 // Import Telas ADM
+import EscolaHome from "./components/adm/escola/EscolaHome";
+import ProfHome from "./components/adm/professor/home/ProfHome";
 
 export default function App() { 
     return(
@@ -32,6 +34,8 @@ export default function App() {
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
 
                 {/* Rotas ADM */}
+                <Route path="/escola/home " element={<EscolaHome />} />
+                <Route path="/professor/home " element={<ProfHome />} />
             </Routes>
         </Routers>
     );

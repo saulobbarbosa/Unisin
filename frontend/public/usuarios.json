@@ -86,5 +86,19 @@
     "avatar": "/imgs/perfil/girl_yellow.webp",
     "borda": "#FFFF00",
     "fundo": "#666"
+  },
+  {
+    "id": 9,
+    "email": "prof.joao@teste.com",
+    "senha": "123",
+    "nome": "Professor João",
+    "tipo": "professor"
+  },
+  {
+    "id": 10,
+    "email": "escola.lins@teste.com",
+    "senha": "123",
+    "nome": "Escola Estadual de Lins",
+    "tipo": "escola"
   }
 ]

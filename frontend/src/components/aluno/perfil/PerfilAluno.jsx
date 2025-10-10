@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 // import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -10,11 +10,11 @@ import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoPerfil(){
     // const navigate = useNavigate();
-    const corDeFundo = localStorage.getItem("corDeFundo");
     const [nome, setNome] = useState("");
     const [nivel, setNivel] = useState("");
     const [avatar, setAvatar] = useState("");
     const [borda, setBorda] = useState("");
+    const [fundo, setFundo] = useState("");
 
     useEffect(() => {
         const usuarioId = localStorage.getItem("usuarioId");
@@ -29,6 +29,7 @@ export default function TelaAlunoPerfil(){
                     setNivel(usuario.nivel);
                     setAvatar(usuario.avatar);
                     setBorda(usuario.borda);
+                    setFundo(usuario.fundo);
                 }
             })
             .catch(error => console.error(error));
@@ -39,7 +40,7 @@ export default function TelaAlunoPerfil(){
         <div className={Ajuste.wrapper}>
             <Header />
             <main className={Ajuste.container}
-                style={{ background: corDeFundo }}
+                style={{ background: fundo }}
             >
                 <div className={Style.container}>
                     <div className={Style.divGeral}>

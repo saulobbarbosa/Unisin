@@ -37,12 +37,21 @@ export default function LoginModal({ mostra, fecha }) {
         // Procura usuário que bate com email e senha
         const usuario = usuarios.find(u => u.email === email && u.senha === senha);
       
-        if (usuario) {        
+        if(usuario) {        
           // Salva dados do usuário no localStorage
           localStorage.setItem("usuarioId", usuario.id);
-          localStorage.setItem("corDeFundo", usuario.fundo);
+          localStorage.setItem("tipoUsuario", usuario.tipo);
+          
+          let destino = "/aluno/home";
+          
+          if(usuario.tipo === "professor"){
+            destino = "/professor/home";
+          }else if(usuario.tipo === "escola"){
+            destino = "/escola/home";
+          }
+
           setTimeout(() => {
-            navigate("/aluno/home");
+            navigate(destino);
           }, 2000);
         } else {
           alertError();
@@ -54,33 +63,6 @@ export default function LoginModal({ mostra, fecha }) {
           icon: "error",
           title: "Erro",
           text: "Não foi possível carregar os usuários.",
-        });
-      }
-    };
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      try {
-        // POST para a API real
-        const response = await axios.post("/api/login", { email, senha });
-      
-        if (response.data.sucesso) {        
-          // Salva token/dados do usuário
-          localStorage.setItem("usuario", JSON.stringify(response.data));
-        
-          setTimeout(() => {
-            navigate("/aluno/home");
-          }, 2000);
-        } else {
-          alertError();
-        }
-      } catch (error) {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Erro de conexão",
-          text: "Não foi possível conectar com o servidor.",
         });
       }
     };

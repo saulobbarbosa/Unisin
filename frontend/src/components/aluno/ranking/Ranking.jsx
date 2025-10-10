@@ -42,10 +42,12 @@ export default function TelaAlunoRanking(){
             <main className={Ajuste.container}>
                 <h1 className={Style.tituloTop}>Ranking Semanal</h1>
                 {/* Botão de troca */}
-                <i className={`fa-solid fa-chevron-${trocar ? "left" : "right"}`}
-                  style={{ fontSize: "2.5rem", color: "#000", cursor: "pointer" }}
-                  onClick={() => setTrocar(!trocar)}
-                ></i>
+                <div className={trocar === false ? Style.divMudaRank1 : Style.divMudaRank2}>
+                    <i className={`fa-solid fa-chevron-${trocar ? "left" : "right"}`}
+                      style={{ fontSize: "4rem", color: "#fff", cursor: "pointer" }}
+                      onClick={() => setTrocar(!trocar)}
+                    ></i>
+                </div>
                 <h2 className={Style.tituloArea}>
                     {trocar ? "Exatas" : "Humanas"}
                 </h2>
