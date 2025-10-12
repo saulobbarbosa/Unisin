@@ -14,6 +14,39 @@ export default function TelaAmigos(){
     const [amigos, setAmigos] = useState([]);
     const [ordem, setOrdem] = useState({ key: null, direction: 'asc' });
 
+    const possiveisAcoes = (amigo) => {
+        Swal.fire({
+            title: `${amigo.nome}`,
+            text: "Escolha uma ação abaixo:",
+            icon: "info",
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonText: "👊 Convidar para X1",
+            denyButtonText: "👤 Ver Perfil",
+            cancelButtonText: "❌ Cancelar",
+            confirmButtonColor: "#3085d6",
+            denyButtonColor: "#6c757d",
+            cancelButtonColor: "#d33",
+            background: "#f0f0f0",
+            color: "#000",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate(`/aluno/lobby/${amigo.id}`);
+            } else if (result.isDenied) {
+                Swal.fire({
+                    title: `Perfil de ${amigo.nome}`,
+                    html: `
+                        <img src="${amigo.avatar}" alt="${amigo.nome}" style="width:100px;height:100px;border-radius:50%;border:3px solid ${amigo.borda};margin-bottom:10px" />
+                        <p><b>Nível:</b> ${amigo.nivel}</p>
+                        <p><b>Moedas:</b> ${amigo.moedas}</p>
+                    `,
+                    confirmButtonText: "Fechar",
+                    confirmButtonColor: "#295384",
+                });
+            }
+        });
+    };
+
     useEffect(() => {
         axios.get("/usuarios.json")
         .then(res => setAmigos(res.data))
@@ -42,7 +75,8 @@ export default function TelaAmigos(){
             if (ordem.direction === 'asc') return a[key] - b[key];
             else return b[key] - a[key];
         }
-    });
+    }).filter(amigo => amigo.tipo !== "professor" && amigo.tipo !== "escola");
+    
 
     return(
         <div className={Ajuste.wrapper}>
@@ -93,7 +127,7 @@ export default function TelaAmigos(){
                                 className={Style.img} draggable="false" />
                                 {amigo.moedas}
                             </div>
-                            <div className={Style.divAcao}>
+                            <div className={Style.divAcao} onClick={()=>{possiveisAcoes(amigo)}}>
                                 <i className="fa-solid fa-ellipsis" style={{ fontSize: "2.5rem", cursor: "pointer", color: "#000" }}></i>
                             </div>
                         </React.Fragment>
