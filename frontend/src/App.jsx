@@ -33,7 +33,7 @@ export default function App() {
                 <Route path="/aluno/amigos" element={<AlunoAmigos />} />
                 <Route path="/aluno/ranking" element={<AlunoRanking />} />
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
-                <Route path="/aluno/lobby/:id" element={<AlunoLobby />} />
+                <Route path="/aluno/lobby/:adversarioId" element={<AlunoLobby />} />
 
                 {/* Rotas ADM */}
                 <Route path="/escola/home " element={<EscolaHome />} />

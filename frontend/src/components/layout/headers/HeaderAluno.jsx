@@ -62,7 +62,7 @@ export default function CompHeaderAluno(){
                 <div className={HeaderStyle.divNMP} onClick={()=>{navigate("/aluno/loja")}}>
                     <img src={require('../../../imgs/moeda.png')} alt="icone de moeda"
                     className={HeaderStyle.imgMoeda} draggable="false" />
-                    <p>{usuario.moeda}</p>
+                    <p>{usuario.moedas}</p>
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
                     onMouseEnter={() => { setMostrar(true) }}

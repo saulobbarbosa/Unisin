@@ -28,11 +28,11 @@ export default function TelaAlunoPerfil() {
 
         if (usuarioId) {
             axios.get("/usuarios.json")
-                .then(res => {
-                    const u = res.data.find(user => user.id === parseInt(usuarioId));
-                    if (u) setUsuario(u);
-                })
-                .catch(error => console.error(error));
+            .then(res => {
+                const u = res.data.find(user => user.id === parseInt(usuarioId));
+                if (u) setUsuario(u);
+            })
+            .catch(error => console.error(error));
         }
     }, []);
 
