@@ -87,7 +87,7 @@ export default function TelaAmigos(){
                     <i className="fa-solid fa-user-plus" style={{ fontSize: "3rem", color: "#000", 
                     marginLeft: "2rem", cursor: "pointer" }}></i>
                     <div>
-                        <i className="fa-solid fa-user" style={{ fontSize: "3rem", color: "#000", 
+                        <i className="fa-solid fa-message" style={{ fontSize: "3rem", color: "#000", 
                         marginLeft: "2rem", cursor: "pointer" }}></i>
                     </div>
                 </div>
