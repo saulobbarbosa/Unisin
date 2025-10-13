@@ -66,7 +66,7 @@ export default function CompHeaderAluno(){
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
                     onMouseEnter={() => { setMostrar(true) }}
-                    onClick={()=>{navigate("/aluno/perfil")}}
+                    onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("usuarioId")}`)}}
                 >
                     <img src={usuario.avatar} className={HeaderStyle.imgPerfil}
                     alt="Imagem de Perfil" draggable="false"
@@ -85,7 +85,7 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Home</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate("/aluno/perfil")}}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("usuarioId")}`)}}>
                     <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>

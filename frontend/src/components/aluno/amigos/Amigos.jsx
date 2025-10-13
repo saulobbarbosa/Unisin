@@ -23,7 +23,7 @@ export default function TelaAmigos(){
             showDenyButton: true,
             confirmButtonText: "👊 Convidar para X1",
             denyButtonText: "👤 Ver Perfil",
-            cancelButtonText: "❌ Cancelar",
+            cancelButtonText: "Cancelar",
             confirmButtonColor: "#3085d6",
             denyButtonColor: "#6c757d",
             cancelButtonColor: "#d33",
@@ -33,16 +33,7 @@ export default function TelaAmigos(){
             if (result.isConfirmed) {
                 navigate(`/aluno/lobby/${amigo.id}`);
             } else if (result.isDenied) {
-                Swal.fire({
-                    title: `Perfil de ${amigo.nome}`,
-                    html: `
-                        <img src="${amigo.avatar}" alt="${amigo.nome}" style="width:100px;height:100px;border-radius:50%;border:3px solid ${amigo.borda};margin-bottom:10px" />
-                        <p><b>Nível:</b> ${amigo.nivel}</p>
-                        <p><b>Moedas:</b> ${amigo.moedas}</p>
-                    `,
-                    confirmButtonText: "Fechar",
-                    confirmButtonColor: "#295384",
-                });
+                navigate(`/aluno/perfil/${amigo.id}`);
             }
         });
     };

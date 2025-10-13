@@ -15,14 +15,11 @@ import AlunoConquistas from "./components/aluno/conquistas/Conquistas";
 import AlunoLobby from "./components/aluno/pvp/lobby/Lobby";
 // Import Telas ADM
 import EscolaHome from "./components/adm/escola/EscolaHome";
-// Import Telas ADM Atividade cadastro
-import AtividadesCriadas from "./components/Atividades/AtividadesCriadas";
-
-
-
-// Import Telas ADM Professor
 import ProfHome from "./components/adm/professor/home/ProfHome";
-import ListaProfessores from "./components/Professores/ListaProfessores";
+
+// Import Telas ADM Atividade cadastro
+// import AtividadesCriadas from "./components/Atividades/AtividadesCriadas";
+// import ListaProfessores from "./components/Professores/ListaProfessores";
 
 export default function App() { 
     return(
@@ -35,21 +32,18 @@ export default function App() {
                 <Route path="/aluno/home" element={<AlunoHome />} />
                 <Route path="/aluno/:materia" element={<AlunoTrilha />} />
                 <Route path="/aluno/:materia/atividade/:id" element={<Atividade />} />
-                <Route path="/aluno/perfil" element={<AlunoPerfil />} />
+                <Route path="/aluno/perfil/:alunoId" element={<AlunoPerfil />} />
                 <Route path="/aluno/loja" element={<AlunoLoja />} />
                 <Route path="/aluno/amigos" element={<AlunoAmigos />} />
                 <Route path="/aluno/ranking" element={<AlunoRanking />} />
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
                 <Route path="/aluno/lobby/:adversarioId" element={<AlunoLobby />} />
 
-                <Route path="/atividade" element={<AtividadesCriadas />} />
-
-
-
                 {/* Rotas ADM */}
                 <Route path="/escola/home " element={<EscolaHome />} />
                 <Route path="/professor/home " element={<ProfHome />} />
-                <Route path="/professores" element={<ListaProfessores />} />
+                {/* <Route path="/professores" element={<ListaProfessores />} /> */}
+                {/* <Route path="/atividade" element={<AtividadesCriadas />} /> */}
             </Routes>
         </Routers>
     );

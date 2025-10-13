@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Style from "./perfil.module.css";
@@ -11,6 +11,7 @@ import Header from "../../layout/headers/HeaderAluno";
 export default function TelaAlunoPerfil() {
     // const navigate = useNavigate();
     const [usuario, setUsuario] = useState({});
+    const { alunoId } = useParams();
     const [materias, setMaterias] = useState([
         { text: "Matemática", cor: "#1565C0", progresso: 10, total: 25 },
         { text: "Português", cor: "#E53935", progresso: 15, total: 30 },
@@ -24,7 +25,7 @@ export default function TelaAlunoPerfil() {
     ]);
 
     useEffect(() => {
-        const usuarioId = localStorage.getItem("usuarioId");
+        const usuarioId = alunoId;
 
         if (usuarioId) {
             axios.get("/usuarios.json")
