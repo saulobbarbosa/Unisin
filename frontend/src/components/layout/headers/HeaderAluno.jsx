@@ -10,10 +10,7 @@ import HeaderStyle from "./header.module.css";
 export default function CompHeaderAluno(){
     const navigate = useNavigate();
     const [mostrar, setMostrar] = useState(false);
-    const [nivel, setNivel] = useState("");
-    const [moeda, setMoeda] = useState("");
-    const [avatar, setAvatar] = useState("");
-    const [borda, setBorda] = useState("");
+    const [usuario, setUsuario] = useState({});
 
     const alertSair = () =>{
         Swal.fire({
@@ -45,14 +42,8 @@ export default function CompHeaderAluno(){
         if (usuarioId) {
             axios.get("/usuarios.json")
             .then(res => {
-                const usuarios = res.data;
-                const usuario = usuarios.find(u => u.id === parseInt(usuarioId));
-                if (usuario) {
-                    setNivel(usuario.nivel);
-                    setMoeda(usuario.moedas);
-                    setAvatar(usuario.avatar);
-                    setBorda(usuario.borda);
-                }
+                const u = res.data.find(user => user.id === parseInt(usuarioId));
+                if (u) setUsuario(u);
             })
             .catch(error => console.error(error));
         }
@@ -66,21 +57,21 @@ export default function CompHeaderAluno(){
             <div className={HeaderStyle.headerMenu} style={{ marginRight: "2rem" }}>
                 <div className={HeaderStyle.divNMP} onClick={()=>{navigate("/aluno/home")}}>
                     <p>Nível</p>
-                    <p>{nivel}</p>
+                    <p>{usuario.nivel}</p>
                 </div>
                 <div className={HeaderStyle.divNMP} onClick={()=>{navigate("/aluno/loja")}}>
                     <img src={require('../../../imgs/moeda.png')} alt="icone de moeda"
                     className={HeaderStyle.imgMoeda} draggable="false" />
-                    <p>{moeda}</p>
+                    <p>{usuario.moedas}</p>
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
                     onMouseEnter={() => { setMostrar(true) }}
                     onClick={()=>{navigate("/aluno/perfil")}}
                 >
-                    <img src={avatar} className={HeaderStyle.imgPerfil}
+                    <img src={usuario.avatar} className={HeaderStyle.imgPerfil}
                     alt="Imagem de Perfil" draggable="false"
                     style={{
-                        border: `0.3rem solid ${borda}`
+                        border: `0.3rem solid ${usuario.borda}`
                     }} />
                 </div>
             </div>

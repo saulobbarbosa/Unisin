@@ -12,6 +12,7 @@ import AlunoLoja from "./components/aluno/loja/Loja";
 import AlunoAmigos from "./components/aluno/amigos/Amigos";
 import AlunoRanking from "./components/aluno/ranking/Ranking";
 import AlunoConquistas from "./components/aluno/conquistas/Conquistas";
+import AlunoLobby from "./components/aluno/pvp/lobby/Lobby";
 // Import Telas ADM
 import EscolaHome from "./components/adm/escola/EscolaHome";
 // Import Telas ADM Atividade cadastro
@@ -39,6 +40,7 @@ export default function App() {
                 <Route path="/aluno/amigos" element={<AlunoAmigos />} />
                 <Route path="/aluno/ranking" element={<AlunoRanking />} />
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
+                <Route path="/aluno/lobby/:adversarioId" element={<AlunoLobby />} />
 
                 <Route path="/atividade" element={<AtividadesCriadas />} />
 
