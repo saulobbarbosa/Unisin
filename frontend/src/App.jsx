@@ -14,7 +14,14 @@ import AlunoRanking from "./components/aluno/ranking/Ranking";
 import AlunoConquistas from "./components/aluno/conquistas/Conquistas";
 // Import Telas ADM
 import EscolaHome from "./components/adm/escola/EscolaHome";
+// Import Telas ADM Atividade cadastro
+import AtividadesCriadas from "./components/Atividades/AtividadesCriadas";
+
+
+
+// Import Telas ADM Professor
 import ProfHome from "./components/adm/professor/home/ProfHome";
+import ListaProfessores from "./components/Professores/ListaProfessores";
 
 export default function App() { 
     return(
@@ -33,9 +40,14 @@ export default function App() {
                 <Route path="/aluno/ranking" element={<AlunoRanking />} />
                 <Route path="/aluno/conquistas" element={<AlunoConquistas />} />
 
+                <Route path="/atividade" element={<AtividadesCriadas />} />
+
+
+
                 {/* Rotas ADM */}
                 <Route path="/escola/home " element={<EscolaHome />} />
                 <Route path="/professor/home " element={<ProfHome />} />
+                <Route path="/professores" element={<ListaProfessores />} />
             </Routes>
         </Routers>
     );
