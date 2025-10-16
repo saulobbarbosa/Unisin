@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 
 import Style from "./conquistas.module.css";
-import Ajuste from "../containerPadrao.module.css";
+import Ajuste from "../../containerPadrao.module.css";
 
 // Import Componentes
 import Header from "../../layout/headers/HeaderAluno";
@@ -26,15 +26,19 @@ export default function TelaConquistas(){
                 </div>
                 <div className={Style.gridConquista}>
                     {/* Topo da Tabela */}
-                    <div></div>
-                    <div></div>
+                    <div style={{ color: "#295384", fontWeight: "bold" }}>
+                        Objetivo
+                    </div>
+                    <div className={Style.textoTopoTabela}>
+                        Status
+                    </div>
                     <div className={Style.textoTopoTabela}>
                         Recompensa
                     </div>
                     {/* Dados */}
                     {conquistas.map(conquista => (
                         <React.Fragment key={conquista.id}>
-                            <div style={{ color: "#295384" }}>
+                            <div>
                                 {conquista.descricao}
                             </div>
                             <div style={{ textAlign: "center" }}>

@@ -4,7 +4,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 
 import Style from "./amigos.module.css";
-import Ajuste from "../containerPadrao.module.css";
+import Ajuste from "../../containerPadrao.module.css";
 
 // Import Componentes
 import Header from "../../layout/headers/HeaderAluno";

@@ -16,10 +16,7 @@ import AlunoLobby from "./components/aluno/pvp/lobby/Lobby";
 // Import Telas ADM
 import EscolaHome from "./components/adm/escola/EscolaHome";
 import ProfHome from "./components/adm/professor/home/ProfHome";
-
-// Import Telas ADM Atividade cadastro
-// import AtividadesCriadas from "./components/Atividades/AtividadesCriadas";
-// import ListaProfessores from "./components/Professores/ListaProfessores";
+import ProfCadAtividade from "./components/adm/professor/cadastro-atividade/CadastroAtividade";
 
 export default function App() { 
     return(
@@ -40,10 +37,9 @@ export default function App() {
                 <Route path="/aluno/lobby/:adversarioId" element={<AlunoLobby />} />
 
                 {/* Rotas ADM */}
-                <Route path="/escola/home " element={<EscolaHome />} />
-                <Route path="/professor/home " element={<ProfHome />} />
-                {/* <Route path="/professores" element={<ListaProfessores />} /> */}
-                {/* <Route path="/atividade" element={<AtividadesCriadas />} /> */}
+                <Route path="/escola/home" element={<EscolaHome />} />
+                <Route path="/professor/home" element={<ProfHome />} />
+                <Route path="/professor/cadastro-atividade" element={<ProfCadAtividade />} />
             </Routes>
         </Routers>
     );
