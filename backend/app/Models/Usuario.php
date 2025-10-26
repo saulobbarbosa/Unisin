@@ -17,5 +17,6 @@ class Usuario extends Model
         'dt_nasc',
         'email',
         'senha',
+        'telefone',
     ];
 }
