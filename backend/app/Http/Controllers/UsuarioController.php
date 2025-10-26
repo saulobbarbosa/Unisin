@@ -19,6 +19,7 @@ class UsuarioController extends Controller
             'dt_nasc' => 'required|date',
             'email' => 'required|string|email|max:255|unique:usuarios,email',
             'senha' => 'required|string|min:6',
+            'telefone' => 'required|string|max:15|unique:usuarios,telefone',
         ]);
 
         // Criptografa a senha antes de criar o usuário
@@ -44,6 +45,7 @@ class UsuarioController extends Controller
             'dt_nasc' => 'required|date',
             'email' => 'required|string|email|max:255|unique:usuarios,email,' . $id . ',id_usuario',
             'senha' => 'required|string|min:6',
+            'telefone' => 'required|string|max:15|unique:usuarios,telefone,' . $id . ',id_usuario',
         ]);
         $data['senha'] = bcrypt($data['senha']);
 

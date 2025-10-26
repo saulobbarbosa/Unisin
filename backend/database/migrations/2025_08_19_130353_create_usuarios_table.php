@@ -17,6 +17,7 @@ return new class extends Migration
             $table->dateTime('dt_nasc');
             $table->string('email', 45)->unique(); // unique() garante que não haverá e-mails repetidos
             $table->string('senha'); // Senhas devem ter mais de 45 caracteres após a criptografia
+            $table->string('telefone', 15)->unique(); // Adiciona a coluna telefone que pode ser nula
             $table->timestamps(); // Cria as colunas created_at e updated_at
         });
     }

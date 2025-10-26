@@ -44,6 +44,7 @@ class AuthController extends Controller
                 'dt_nasc' => 'required|date',
                 'email' => 'required|string|email|max:255|unique:usuarios,email',
                 'senha' => 'required|string|min:6',
+                'telefone' => 'required|string|max:15|unique:usuarios,telefone',
             ]);
 
             // 2. Inicia a transação. Tudo dentro da closure será desfeito em caso de erro.
@@ -55,6 +56,7 @@ class AuthController extends Controller
                     'dt_nasc' => $validated['dt_nasc'],
                     'email' => $validated['email'],
                     'senha' => bcrypt($validated['senha']),
+                    'telefone' => $validated['telefone'],
                 ]);
 
                 // Cria o registro na tabela 'alunos', usando o ID do usuário recém-criado.
