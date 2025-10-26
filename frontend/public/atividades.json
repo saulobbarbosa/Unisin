@@ -1,0 +1,335 @@
+{
+  "Matemática": [
+    {
+      "id": 1,
+      "pergunta": "Quanto é 7 × 8?",
+      "respostas": ["54", "56", "58", "60"],
+      "correta": "56"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual é a raiz quadrada de 81?",
+      "respostas": ["9", "8", "7", "6"],
+      "correta": "9"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual é o resultado de 15 + 27?",
+      "respostas": ["42", "41", "43", "40"],
+      "correta": "42"
+    },
+    {
+      "id": 4,
+      "pergunta": "Qual é o valor de 100 ÷ 4?",
+      "respostas": ["20", "25", "24", "30"],
+      "correta": "25"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual é o próximo número na sequência: 2, 4, 8, 16, ...?",
+      "respostas": ["20", "24", "32", "36"],
+      "correta": "32"
+    },
+    {
+      "id": 6,
+      "pergunta": "Resolva: 5² + 3²",
+      "respostas": ["25", "34", "50", "35"],
+      "correta": "34"
+    },
+    {
+      "id": 7,
+      "pergunta": "Qual é o perímetro de um quadrado de lado 7cm?",
+      "respostas": ["21cm", "28cm", "49cm", "14cm"],
+      "correta": "28cm"
+    },
+    {
+      "id": 8,
+      "pergunta": "Qual é a área de um triângulo com base 10cm e altura 5cm?",
+      "respostas": ["25cm²", "50cm²", "15cm²", "30cm²"],
+      "correta": "25cm²"
+    },
+    {
+      "id": 9,
+      "pergunta": "Quanto é 2³ × 3²?",
+      "respostas": ["36", "72", "18", "54"],
+      "correta": "72"
+    },
+    {
+      "id": 10,
+      "pergunta": "Qual é o valor de π aproximado?",
+      "respostas": ["3,14", "2,71", "3,41", "3,50"],
+      "correta": "3,14"
+    }
+  ],
+  "Português": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o plural de 'cidadão'?",
+      "respostas": ["cidadões", "cidadãos", "cidadães", "cidades"],
+      "correta": "cidadãos"
+    },
+    {
+      "id": 2,
+      "pergunta": "Assinale a frase com concordância correta:",
+      "respostas": [
+        "As menina foi ao parque",
+        "As meninas foram ao parque",
+        "As meninas foi ao parque",
+        "As menina foram ao parque"
+      ],
+      "correta": "As meninas foram ao parque"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual é o antônimo de 'rápido'?",
+      "respostas": ["Devagar", "Lento", "Veloz", "Ágil"],
+      "correta": "Devagar"
+    },
+    {
+      "id": 4,
+      "pergunta": "Escolha a palavra correta: 'Ele ___ à escola todos os dias.'",
+      "respostas": ["vai", "vaii", "vái", "vaí"],
+      "correta": "vai"
+    },
+    {
+      "id": 5,
+      "pergunta": "Assinale a frase correta quanto à crase:",
+      "respostas": [
+        "Vou à escola amanhã",
+        "Vou a à escola amanhã",
+        "Vou a escola amanhã",
+        "Vou á escola amanhã"
+      ],
+      "correta": "Vou à escola amanhã"
+    }
+  ],
+  "Inglês": [
+    {
+      "id": 1,
+      "pergunta": "What is the past tense of 'go'?",
+      "respostas": ["goed", "went", "goes", "going"],
+      "correta": "went"
+    },
+    {
+      "id": 2,
+      "pergunta": "Choose the correct article: ___ apple a day keeps the doctor away.",
+      "respostas": ["A", "An", "The", "No article"],
+      "correta": "An"
+    },
+    {
+      "id": 3,
+      "pergunta": "What does 'library' mean?",
+      "respostas": ["Livraria", "Biblioteca", "Escola", "Livro"],
+      "correta": "Biblioteca"
+    },
+    {
+      "id": 4,
+      "pergunta": "Translate to English: 'Eu gosto de música'.",
+      "respostas": ["I like music", "I likes music", "I liking music", "I liked music"],
+      "correta": "I like music"
+    },
+    {
+      "id": 5,
+      "pergunta": "Choose the correct plural: one mouse, two ___",
+      "respostas": ["mouses", "mouse", "mices", "mice"],
+      "correta": "mice"
+    }
+  ],
+  "História": [
+    {
+      "id": 1,
+      "pergunta": "Quem foi o primeiro presidente do Brasil?",
+      "respostas": ["Dom Pedro II", "Deodoro da Fonseca", "Getúlio Vargas", "Marechal Floriano"],
+      "correta": "Deodoro da Fonseca"
+    },
+    {
+      "id": 2,
+      "pergunta": "Em que ano o Brasil proclamou a república?",
+      "respostas": ["1889", "1822", "1500", "1930"],
+      "correta": "1889"
+    },
+    {
+      "id": 3,
+      "pergunta": "Quem descobriu o Brasil?",
+      "respostas": ["Pedro Álvares Cabral", "Vasco da Gama", "Cristóvão Colombo", "Dom Henrique"],
+      "correta": "Pedro Álvares Cabral"
+    },
+    {
+      "id": 4,
+      "pergunta": "Qual era a capital do Império Romano?",
+      "respostas": ["Roma", "Atenas", "Alexandria", "Cartago"],
+      "correta": "Roma"
+    },
+    {
+      "id": 5,
+      "pergunta": "Quando começou a Segunda Guerra Mundial?",
+      "respostas": ["1939", "1914", "1945", "1929"],
+      "correta": "1939"
+    }
+  ],
+  "Geografia": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o maior país do mundo em extensão territorial?",
+      "respostas": ["Brasil", "China", "Rússia", "Canadá"],
+      "correta": "Rússia"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual é o menor país do mundo?",
+      "respostas": ["Mônaco", "Vaticano", "San Marino", "Liechtenstein"],
+      "correta": "Vaticano"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual continente tem mais países?",
+      "respostas": ["África", "Ásia", "Europa", "América"],
+      "correta": "África"
+    },
+    {
+      "id": 4,
+      "pergunta": "Qual é o rio mais longo do mundo?",
+      "respostas": ["Nilo", "Amazônia", "Yangtzé", "Mississippi"],
+      "correta": "Nilo"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual é a capital da Austrália?",
+      "respostas": ["Sydney", "Canberra", "Melbourne", "Brisbane"],
+      "correta": "Canberra"
+    }
+  ],
+  "Química": [
+    {
+      "id": 1,
+      "pergunta": "Qual é o símbolo químico da água?",
+      "respostas": ["O2", "H2O", "CO2", "HO"],
+      "correta": "H2O"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual é o número atômico do carbono?",
+      "respostas": ["6", "12", "8", "14"],
+      "correta": "6"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual é o ácido presente no estômago humano?",
+      "respostas": ["HCl", "H2SO4", "HNO3", "CH3COOH"],
+      "correta": "HCl"
+    },
+    {
+      "id": 4,
+      "pergunta": "Qual gás é essencial para a respiração?",
+      "respostas": ["O2", "CO2", "N2", "H2"],
+      "correta": "O2"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual é o símbolo do sódio?",
+      "respostas": ["Na", "S", "K", "So"],
+      "correta": "Na"
+    }
+  ],
+  "Física": [
+    {
+      "id": 1,
+      "pergunta": "Qual a unidade de medida da força no SI?",
+      "respostas": ["Joule", "Newton", "Pascal", "Watt"],
+      "correta": "Newton"
+    },
+    {
+      "id": 2,
+      "pergunta": "O que é a velocidade da luz aproximada em km/s?",
+      "respostas": ["300.000 km/s", "150.000 km/s", "1.000 km/s", "3.000 km/s"],
+      "correta": "300.000 km/s"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual a unidade de medida da pressão?",
+      "respostas": ["Pascal", "Newton", "Joule", "Watt"],
+      "correta": "Pascal"
+    },
+    {
+      "id": 4,
+      "pergunta": "O que é energia cinética?",
+      "respostas": [
+        "Energia armazenada",
+        "Energia do movimento",
+        "Energia térmica",
+        "Energia nuclear"
+      ],
+      "correta": "Energia do movimento"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual a aceleração da gravidade na Terra?",
+      "respostas": ["9,8 m/s²", "10 m/s²", "9,0 m/s²", "9,81 km/s²"],
+      "correta": "9,8 m/s²"
+    }
+  ],
+  "Artes": [
+    {
+      "id": 1,
+      "pergunta": "Quem pintou a Mona Lisa?",
+      "respostas": ["Michelangelo", "Leonardo da Vinci", "Van Gogh", "Picasso"],
+      "correta": "Leonardo da Vinci"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual artista é famoso pelo movimento impressionista?",
+      "respostas": ["Monet", "Picasso", "Da Vinci", "Van Gogh"],
+      "correta": "Monet"
+    },
+    {
+      "id": 3,
+      "pergunta": "Qual dessas obras é de Van Gogh?",
+      "respostas": ["Guernica", "Noite Estrelada", "A Última Ceia", "O Grito"],
+      "correta": "Noite Estrelada"
+    },
+    {
+      "id": 4,
+      "pergunta": "Quem pintou 'O Nascimento de Vênus'?",
+      "respostas": ["Botticelli", "Michelangelo", "Da Vinci", "Rembrandt"],
+      "correta": "Botticelli"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual movimento artístico é caracterizado por cores vivas e pinceladas rápidas?",
+      "respostas": ["Impressionismo", "Cubismo", "Realismo", "Surrealismo"],
+      "correta": "Impressionismo"
+    }
+  ],
+  "Educação Física": [
+    {
+      "id": 1,
+      "pergunta": "Quantos jogadores cada time tem no voleibol?",
+      "respostas": ["5", "6", "7", "11"],
+      "correta": "6"
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual a duração oficial de uma partida de futebol?",
+      "respostas": ["90 minutos", "60 minutos", "120 minutos", "45 minutos"],
+      "correta": "90 minutos"
+    },
+    {
+      "id": 3,
+      "pergunta": "Quantas medalhas de ouro o Brasil ganhou nas Olimpíadas de 2016?",
+      "respostas": ["7", "19", "10", "12"],
+      "correta": "7"
+    },
+    {
+      "id": 4,
+      "pergunta": "Quantos jogadores tem no basquete em quadra por equipe?",
+      "respostas": ["5", "6", "7", "11"],
+      "correta": "5"
+    },
+    {
+      "id": 5,
+      "pergunta": "Qual é o número de árbitros em uma partida de vôlei?",
+      "respostas": ["1", "2", "3", "4"],
+      "correta": "2"
+    }
+  ]
+}
