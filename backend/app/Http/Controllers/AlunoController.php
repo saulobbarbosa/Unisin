@@ -17,14 +17,14 @@ class AlunoController extends Controller
     {
         $validated = $request->validate([
             'id_usuario' => 'required|integer|unique:alunos,id_usuario',
-            'moedas'     => 'required|integer|min:0',
+            'moedas' => 'required|integer|min:0',
         ]);
 
         $aluno = Aluno::create($validated);
 
         return response()->json([
             'message' => 'Aluno criado com sucesso!',
-            'aluno'   => $aluno
+            'aluno' => $aluno
         ], 201);
     }
 
@@ -55,7 +55,7 @@ class AlunoController extends Controller
 
         return response()->json([
             'message' => 'Aluno atualizado com sucesso!',
-            'aluno'   => $aluno
+            'aluno' => $aluno
         ]);
     }
 

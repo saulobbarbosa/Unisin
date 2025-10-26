@@ -26,6 +26,8 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/register', [AuthController::class, 'register']);
+
 // Rota para listar todos os usuários
 Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth:sanctum');
 
