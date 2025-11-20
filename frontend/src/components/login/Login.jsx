@@ -25,33 +25,38 @@ export default function LoginModal({ mostra, fecha }) {
     });
   }
 
-  const handleSubmitJSON = async (e) => {
+
+
+  const logar = async (e) => {
     e.preventDefault();
 
     try {
-      // Lê o JSON completo
-      const response = await axios.get("/usuarios.json");
-      const usuarios = response.data;
+      const response = await axios.post("http://localhost:8000/api/login", {
+        email: email,
+        senha: senha
+      });
+      if (response.data.success) {
+        const usuario = response.data.usuario;
+        if (usuario) {
+          // Salva dados do usuário no localStorage
+          localStorage.setItem("usuarioId", usuario.id_usuario);
+          localStorage.setItem("tipoUsuario", usuario.tipo_usuario ?? "aluno");
+          localStorage.setItem("token", response.data.token);
 
-      // Procura usuário que bate com email e senha
-      const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+          let destino = "/aluno/home";
 
-      if (usuario) {
-        // Salva dados do usuário no localStorage
-        localStorage.setItem("usuarioId", usuario.id);
-        localStorage.setItem("tipoUsuario", usuario.tipo);
+          if (usuario.tipo === "professor") {
+            destino = "/professor/home";
+          } else if (usuario.tipo === "escola") {
+            destino = "/escola/home";
+          }
 
-        let destino = "/aluno/home";
-
-        if (usuario.tipo === "professor") {
-          destino = "/professor/home";
-        } else if (usuario.tipo === "escola") {
-          destino = "/escola/home";
+          setTimeout(() => {
+            navigate(destino);
+          }, 2000);
+        } else {
+          alertError();
         }
-
-        setTimeout(() => {
-          navigate(destino);
-        }, 2000);
       } else {
         alertError();
       }
@@ -61,7 +66,7 @@ export default function LoginModal({ mostra, fecha }) {
       Swal.fire({
         icon: "error",
         title: "Erro",
-        text: "Não foi possível carregar os usuários.",
+        text: "Não foi possível fazer login. Verifique as informações.",
       });
     }
   };
@@ -76,7 +81,7 @@ export default function LoginModal({ mostra, fecha }) {
         <h2 className={LoginStyle.modalTitle}>Login</h2>
         <img src={require('../../imgs/logo.jpg')} className={LoginStyle.loginLogo} />
         {/* Formulario */}
-        <form onSubmit={handleSubmitJSON}>
+        <form onSubmit={logar}>
           <label>E-mail</label>
           <input
             type="email"
