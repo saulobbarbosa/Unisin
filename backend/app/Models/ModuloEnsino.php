@@ -15,12 +15,12 @@ class ModuloEnsino extends Model
 
     protected $fillable = [
         'nome',
-        'nivel_ensino_id_nivel_ensino',
+        'nivel',
     ];
 
-    // Relacionamento
-    public function nivelEnsino()
+    // Relação: Módulo tem muitas Perguntas
+    public function perguntas()
     {
-        return $this->belongsTo(NivelEnsino::class, 'nivel_ensino_id_nivel_ensino');
+        return $this->hasMany(Pergunta::class, 'modulo_ensino_id', 'id_modulo_ensino');
     }
 }

@@ -15,8 +15,8 @@ class ModuloEnsinoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nome'                     => 'required|string|max:255',
-            'nivel_ensino_id_nivel_ensino' => 'required|integer|exists:niveis_ensino,id_nivel_ensino',
+            'nome'  => 'required|string|max:255',
+            'nivel' => 'required|integer', // Mudança aqui
         ]);
 
         $modulo = ModuloEnsino::create($data);
@@ -34,8 +34,8 @@ class ModuloEnsinoController extends Controller
         $modulo = ModuloEnsino::findOrFail($id);
 
         $data = $request->validate([
-            'nome'                     => 'required|string|max:255',
-            'nivel_ensino_id_nivel_ensino' => 'required|integer|exists:niveis_ensino,id_nivel_ensino',
+            'nome'  => 'required|string|max:255',
+            'nivel' => 'required|integer', // Mudança aqui
         ]);
 
         $modulo->update($data);

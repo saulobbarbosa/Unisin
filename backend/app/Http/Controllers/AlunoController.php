@@ -39,7 +39,7 @@ class AlunoController extends Controller
         return response()->json($aluno);
     }
 
-    public function update(Request $request, $id)
+public function update(Request $request, $id)
     {
         $aluno = Aluno::find($id);
 
@@ -49,6 +49,9 @@ class AlunoController extends Controller
 
         $validated = $request->validate([
             'moedas' => 'sometimes|integer|min:0',
+            'avatar' => 'sometimes|string|max:255',
+            'borda'  => 'sometimes|string|max:255',
+            'fundo'  => 'sometimes|string|max:255',
         ]);
 
         $aluno->update($validated);

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Professores extends Model
+class Professor extends Model
 {
     use HasFactory;
 
@@ -20,7 +20,6 @@ class Professores extends Model
         'escola_id_escola',
     ];
 
-    // Relacionamentos
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'id_usuario');
@@ -29,5 +28,10 @@ class Professores extends Model
     public function escola()
     {
         return $this->belongsTo(Escola::class, 'escola_id_escola');
+    }
+
+    public function perguntas()
+    {
+        return $this->hasMany(Pergunta::class, 'professor_id_usuario');
     }
 }
