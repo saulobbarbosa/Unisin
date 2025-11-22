@@ -44,8 +44,11 @@ Route::put('/perguntas/status', [AlunoPerguntaController::class, 'atualizarStatu
 
 
 // --- LOJA / COMPRAS ---
-// Rota de Compra (Atualiza Aluno e Desconta Moedas)
 Route::post('/loja/comprar/{alunoId}/{itemId}', [AlunoItemLojaController::class, 'comprarItem']);
+
+
+// --- ALUNOS (DADOS CONSOLIDADOS) ---
+Route::get('/alunos/{id}/dados', [AlunoController::class, 'getDadosCompletos']);
 
 
 // --- ROTAS GERAIS ---
@@ -72,6 +75,9 @@ Route::apiResource('itens-loja', ItemLojaController::class);
 // 1. Alunos <-> Modulos
 Route::post('/alunos-modulos', [AlunoModuloEnsinoController::class, 'store']);
 Route::get('/alunos/{id}/modulos', [AlunoModuloEnsinoController::class, 'modulosPorAluno']);
+// Nova rota de Progresso
+Route::get('/alunos/{id}/progresso', [AlunoModuloEnsinoController::class, 'getProgresso']);
+
 Route::get('/alunos-modulos/{alunoId}/{moduloId}/{nivelId}', [AlunoModuloEnsinoController::class, 'show']);
 Route::delete('/alunos-modulos/{alunoId}/{moduloId}/{nivelId}', [AlunoModuloEnsinoController::class, 'destroy']);
 

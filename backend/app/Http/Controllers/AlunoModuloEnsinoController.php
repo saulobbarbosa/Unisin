@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlunoModuloEnsino;
+use App\Models\ModuloNivelPergunta; // Import necessário
+use App\Models\AlunoPergunta;       // Import necessário
 use Illuminate\Http\Request;
 
 class AlunoModuloEnsinoController extends Controller
@@ -28,11 +30,51 @@ class AlunoModuloEnsinoController extends Controller
             return [
                 'id_modulo'   => $item->modulo_ensino_id_modulo_ensino,
                 'nome_modulo' => $item->moduloEnsino->nome,
-                'nivel'       => $item->nivel->nivel // Retorna o valor inteiro (ex: 1, 2) e não o ID da tabela
+                'nivel'       => $item->nivel->nivel 
             ];
         });
 
         return response()->json($formatado);
+    }
+
+    /**
+     * Retorna o progresso do aluno em cada matéria
+     * Rota: GET /alunos/{id}/progresso
+     */
+    public function getProgresso($alunoId)
+    {
+        // 1. Busca todas as matrículas do aluno
+        $matriculas = AlunoModuloEnsino::where('aluno_id_usuario', $alunoId)
+            ->with(['moduloEnsino'])
+            ->get();
+
+        $progresso = $matriculas->map(function ($matricula) use ($alunoId) {
+            $moduloId = $matricula->modulo_ensino_id_modulo_ensino;
+            $nivelId  = $matricula->nivel_id;
+
+            // 2. Busca todas as perguntas disponíveis para esse Módulo naquele Nível
+            // (Usando a tabela de relacionamento ternário)
+            $idsPerguntasDoNivel = ModuloNivelPergunta::where('modulo_ensino_id', $moduloId)
+                ->where('nivel_id', $nivelId)
+                ->pluck('pergunta_id'); // Retorna apenas uma lista de IDs [1, 5, 9...]
+
+            $totalPerguntas = $idsPerguntasDoNivel->count();
+
+            // 3. Conta quantas dessas perguntas o aluno já respondeu
+            // Consideramos "realizada" se o status for diferente de 'pendente'
+            $realizadas = AlunoPergunta::where('aluno_id_usuario', $alunoId)
+                ->whereIn('pergunta_id', $idsPerguntasDoNivel)
+                ->where('status', '!=', 'pendente')
+                ->count();
+
+            return [
+                'materia'    => $matricula->moduloEnsino->nome,
+                'total_p'    => $totalPerguntas,
+                'realizadas' => $realizadas
+            ];
+        });
+
+        return response()->json($progresso);
     }
 
     public function store(Request $request)
