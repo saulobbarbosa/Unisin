@@ -39,16 +39,16 @@ Route::get('/niveis', [NivelController::class, 'index']);
 
 
 // --- QUIZ GAME ROUTES ---
-// 1. Obter perguntas do quiz (com status do aluno)
-// Ex: GET /api/quiz/1/1/5 (Modulo 1, Nivel 1, Aluno ID 5)
-Route::get('/quiz/{id_modulo}/{numero_nivel}/{id_aluno}', [PerguntaController::class, 'quiz']);
-
-// 2. Atualizar status da pergunta (Resposta do aluno)
-// Body: { "aluno_id": 1, "pergunta_id": 10, "status": "correto" }
+Route::post('/quiz', [PerguntaController::class, 'quiz']);
 Route::put('/perguntas/status', [AlunoPerguntaController::class, 'atualizarStatus']);
 
 
-// --- ROTAS GERAIS DE RECURSOS ---
+// --- LOJA / COMPRAS ---
+// Rota de Compra (Atualiza Aluno e Desconta Moedas)
+Route::post('/loja/comprar/{alunoId}/{itemId}', [AlunoItemLojaController::class, 'comprarItem']);
+
+
+// --- ROTAS GERAIS ---
 Route::get('/perguntas', [PerguntaController::class, 'index']);
 Route::get('/conquistas', [ConquistaController::class, 'index']);
 Route::get('/itens-loja', [ItemLojaController::class, 'index']);
@@ -75,7 +75,7 @@ Route::get('/alunos/{id}/modulos', [AlunoModuloEnsinoController::class, 'modulos
 Route::get('/alunos-modulos/{alunoId}/{moduloId}/{nivelId}', [AlunoModuloEnsinoController::class, 'show']);
 Route::delete('/alunos-modulos/{alunoId}/{moduloId}/{nivelId}', [AlunoModuloEnsinoController::class, 'destroy']);
 
-// 2. Alunos <-> Perguntas (Histórico Geral)
+// 2. Alunos <-> Perguntas
 Route::post('/alunos-perguntas', [AlunoPerguntaController::class, 'store']); 
 Route::get('/alunos-perguntas/{alunoId}/{perguntaId}', [AlunoPerguntaController::class, 'show']); 
 

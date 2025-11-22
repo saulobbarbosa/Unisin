@@ -15,7 +15,10 @@ class ItemLojaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'preco' => 'required|numeric',
+            'nome'     => 'required|string|max:255', // Validação do nome
+            'preco'    => 'required|numeric',
+            'conteudo' => 'required|string|max:255',
+            'tipo'     => 'required|string|max:255',
         ]);
 
         $item = ItemLoja::create($data);
@@ -33,7 +36,10 @@ class ItemLojaController extends Controller
         $item = ItemLoja::findOrFail($id);
 
         $data = $request->validate([
-            'preco' => 'required|numeric',
+            'nome'     => 'sometimes|string|max:255',
+            'preco'    => 'sometimes|numeric',
+            'conteudo' => 'sometimes|string|max:255',
+            'tipo'     => 'sometimes|string|max:255',
         ]);
 
         $item->update($data);
