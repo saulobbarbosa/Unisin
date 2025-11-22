@@ -16,7 +16,7 @@ class ModuloEnsinoController extends Controller
     {
         $data = $request->validate([
             'nome'  => 'required|string|max:255',
-            'nivel' => 'required|integer', // Mudança aqui
+            // Nível removido
         ]);
 
         $modulo = ModuloEnsino::create($data);
@@ -35,7 +35,6 @@ class ModuloEnsinoController extends Controller
 
         $data = $request->validate([
             'nome'  => 'required|string|max:255',
-            'nivel' => 'required|integer', // Mudança aqui
         ]);
 
         $modulo->update($data);

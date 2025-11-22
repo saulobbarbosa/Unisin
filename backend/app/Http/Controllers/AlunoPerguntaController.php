@@ -13,19 +13,15 @@ class AlunoPerguntaController extends Controller
         return response()->json(AlunoPergunta::with(['aluno.usuario', 'pergunta'])->get());
     }
 
-    // Registrar que um aluno respondeu ou visualizou
+    // Registrar que um aluno respondeu ou visualizou (Método Genérico)
     public function store(Request $request)
     {
         $validated = $request->validate([
             'aluno_id_usuario' => 'required|integer|exists:alunos,id_usuario',
             'pergunta_id' => 'required|integer|exists:perguntas,id',
-            'status' => 'required|string', // Ex: 'correto', 'incorreto', 'pendente'
+            'status' => 'required|string', 
         ]);
 
-        // Verifica se já existe registro (ex: aluno tentando responder de novo)
-        // Aqui usamos updateOrCreate para permitir atualizar o status (tentativa nova)
-        // ou você pode bloquear se já estiver 'correto'.
-        
         $registro = AlunoPergunta::updateOrCreate(
             [
                 'aluno_id_usuario' => $validated['aluno_id_usuario'],
@@ -40,6 +36,34 @@ class AlunoPerguntaController extends Controller
             'message' => 'Status da pergunta atualizado.',
             'data' => $registro
         ], 200);
+    }
+
+    /**
+     * Rota específica para atualizar status via Body
+     * Recebe: aluno_id, pergunta_id, status
+     */
+    public function atualizarStatus(Request $request)
+    {
+        $validated = $request->validate([
+            'aluno_id' => 'required|integer|exists:alunos,id_usuario',
+            'pergunta_id' => 'required|integer|exists:perguntas,id',
+            'status' => 'required|string', // ex: 'correto', 'errado'
+        ]);
+
+        $registro = AlunoPergunta::updateOrCreate(
+            [
+                'aluno_id_usuario' => $validated['aluno_id'],
+                'pergunta_id' => $validated['pergunta_id']
+            ],
+            [
+                'status' => $validated['status']
+            ]
+        );
+
+        return response()->json([
+            'message' => 'Status atualizado com sucesso!',
+            'status_atual' => $registro->status
+        ]);
     }
 
     public function show($alunoId, $perguntaId)

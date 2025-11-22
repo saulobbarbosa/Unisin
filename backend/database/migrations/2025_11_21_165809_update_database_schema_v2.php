@@ -32,35 +32,39 @@ return new class extends Migration
         Schema::dropIfExists('niveis_ensino');
 
 
-        // 2. TRANSFORMAR 'ATIVIDADES' EM 'PERGUNTAS' E ADICIONAR RELAÇÃO COM MÓDULO
+        // 2. CRIAR NOVA TABELA 'NIVEIS'
+        Schema::create('niveis', function (Blueprint $table) {
+            $table->id(); 
+            $table->integer('nivel')->unique(); // Ex: 1, 2, 3
+            $table->timestamps();
+        });
+
+
+        // 3. TRANSFORMAR 'ATIVIDADES' EM 'PERGUNTAS'
         Schema::rename('atividades', 'perguntas');
 
         Schema::table('perguntas', function (Blueprint $table) {
             $table->renameColumn('id_atividade', 'id');
             $table->renameColumn('pergunta', 'enunciado');
-            $table->dropColumn('resposta');
-
-            $table->integer('nivel');
-            $table->unsignedBigInteger('professor_id_usuario');
+            $table->dropColumn('resposta'); 
             
-            // NOVO: Relação com Módulo de Ensino
-            // Usamos 'nullable' caso existam perguntas antigas sem módulo, 
-            // mas idealmente deve ser obrigatório.
-            $table->unsignedBigInteger('modulo_ensino_id')->nullable(); 
-
+            $table->unsignedBigInteger('professor_id_usuario');
             $table->foreign('professor_id_usuario')
                 ->references('id_usuario')->on('professores')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            // FK para modulos_ensino
-            $table->foreign('modulo_ensino_id')
-                ->references('id_modulo_ensino')->on('modulos_ensino')
-                ->onDelete('cascade');
+            if (Schema::hasColumn('perguntas', 'nivel')) {
+                $table->dropColumn('nivel');
+            }
+            if (Schema::hasColumn('perguntas', 'modulo_ensino_id')) {
+                $table->dropForeign(['modulo_ensino_id']);
+                $table->dropColumn('modulo_ensino_id');
+            }
         });
 
 
-        // 3. ATUALIZAR TABELA ALUNOS
+        // 4. ATUALIZAR TABELA ALUNOS
         Schema::table('alunos', function (Blueprint $table) {
             $table->string('avatar')->nullable();
             $table->string('borda')->default('padrao');
@@ -68,28 +72,66 @@ return new class extends Migration
         });
 
 
-        // 4. ATUALIZAR TABELA MODULOS_ENSINO
-        Schema::table('modulos_ensino', function (Blueprint $table) {
-            $table->integer('nivel');
+        // 5. ATUALIZAR TABELA MODULOS_ENSINO
+        if (Schema::hasColumn('modulos_ensino', 'nivel')) {
+             Schema::table('modulos_ensino', function (Blueprint $table) {
+                $table->dropColumn('nivel');
+             });
+        }
+
+
+        // 6. ATUALIZAR TABELA ALUNOS_HAS_MODULOS_ENSINO (CORREÇÃO DO ERRO 1553)
+        Schema::table('alunos_has_modulos_ensino', function (Blueprint $table) {
+            // IMPORTANTE: Dropamos as FKs existentes primeiro para liberar o índice PRIMARY
+            $table->dropForeign(['aluno_id_usuario']);
+            $table->dropForeign(['modulo_ensino_id_modulo_ensino']);
+            
+            // Agora podemos dropar a PK sem erro
+            $table->dropPrimary(['aluno_id_usuario', 'modulo_ensino_id_modulo_ensino']);
+        });
+
+        Schema::table('alunos_has_modulos_ensino', function (Blueprint $table) {
+            // Adiciona coluna nivel_id
+            $table->unsignedBigInteger('nivel_id')->default(1); 
+
+            // Recriamos as FKs antigas + a nova FK de nível
+            $table->foreign('aluno_id_usuario')->references('id_usuario')->on('alunos')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('modulo_ensino_id_modulo_ensino')->references('id_modulo_ensino')->on('modulos_ensino')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nivel_id')->references('id')->on('niveis')->onDelete('cascade');
+
+            // Criamos a nova PK composta com os 3 campos
+            $table->primary(['aluno_id_usuario', 'modulo_ensino_id_modulo_ensino', 'nivel_id'], 'pk_alunos_modulos_niveis');
         });
 
 
-        // 5. CRIAR TABELA DE OPCOES
+        // 7. CRIAR TABELA DE RELACIONAMENTO TERNÁRIO
+        Schema::create('modulo_nivel_perguntas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('modulo_ensino_id');
+            $table->unsignedBigInteger('nivel_id');
+            $table->unsignedBigInteger('pergunta_id');
+
+            $table->foreign('modulo_ensino_id')->references('id_modulo_ensino')->on('modulos_ensino')->onDelete('cascade');
+            $table->foreign('nivel_id')->references('id')->on('niveis')->onDelete('cascade');
+            $table->foreign('pergunta_id')->references('id')->on('perguntas')->onDelete('cascade');
+
+            $table->timestamps();
+        });
+
+
+        // 8. CRIAR TABELA DE OPCOES
         Schema::create('opcoes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pergunta_id');
             $table->string('texto_opcao', 255);
             $table->boolean('eh_correta')->default(false);
 
-            $table->foreign('pergunta_id')
-                  ->references('id')->on('perguntas')
-                  ->onDelete('cascade');
-            
+            $table->foreign('pergunta_id')->references('id')->on('perguntas')->onDelete('cascade');
             $table->timestamps();
         });
 
 
-        // 6. CRIAR TABELA INTERMEDIÁRIA (ALUNOS <-> PERGUNTAS)
+        // 9. CRIAR TABELA INTERMEDIÁRIA (ALUNOS <-> PERGUNTAS)
         Schema::create('alunos_has_perguntas', function (Blueprint $table) {
             $table->unsignedBigInteger('aluno_id_usuario');
             $table->unsignedBigInteger('pergunta_id');
@@ -97,16 +139,8 @@ return new class extends Migration
 
             $table->primary(['aluno_id_usuario', 'pergunta_id']);
 
-            $table->foreign('aluno_id_usuario')
-                ->references('id_usuario')->on('alunos')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('pergunta_id')
-                ->references('id')->on('perguntas')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
+            $table->foreign('aluno_id_usuario')->references('id_usuario')->on('alunos')->onDelete('cascade');
+            $table->foreign('pergunta_id')->references('id')->on('perguntas')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -116,41 +150,46 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('modulo_nivel_perguntas');
         Schema::dropIfExists('alunos_has_perguntas');
         Schema::dropIfExists('opcoes');
+        
+        // Reverter Alunos Has Modulos
+        if (Schema::hasColumn('alunos_has_modulos_ensino', 'nivel_id')) {
+            Schema::table('alunos_has_modulos_ensino', function (Blueprint $table) {
+                // Drop das novas chaves
+                $table->dropForeign(['nivel_id']);
+                $table->dropPrimary('pk_alunos_modulos_niveis');
+                
+                // Drop das FKs recriadas para limpar indices
+                $table->dropForeign(['aluno_id_usuario']);
+                $table->dropForeign(['modulo_ensino_id_modulo_ensino']);
+                
+                $table->dropColumn('nivel_id');
+                
+                // Restaura estrutura antiga
+                $table->primary(['aluno_id_usuario', 'modulo_ensino_id_modulo_ensino']);
+                $table->foreign('aluno_id_usuario')->references('id_usuario')->on('alunos')->onDelete('cascade');
+                $table->foreign('modulo_ensino_id_modulo_ensino')->references('id_modulo_ensino')->on('modulos_ensino')->onDelete('cascade');
+            });
+        }
+
+        Schema::dropIfExists('niveis');
 
         Schema::table('alunos', function (Blueprint $table) {
             $table->dropColumn(['avatar', 'borda', 'fundo']);
         });
 
-        Schema::table('modulos_ensino', function (Blueprint $table) {
-            $table->dropColumn('nivel');
-            $table->unsignedBigInteger('nivel_ensino_id_nivel_ensino')->nullable();
-        });
-
         Schema::table('perguntas', function (Blueprint $table) {
             $table->dropForeign(['professor_id_usuario']);
-            $table->dropForeign(['modulo_ensino_id']); // Drop da FK nova
-            $table->dropColumn(['professor_id_usuario', 'nivel', 'modulo_ensino_id']); // Drop da coluna nova
-            
+            $table->dropColumn('professor_id_usuario');
             $table->string('resposta', 255)->nullable();
             $table->renameColumn('enunciado', 'pergunta');
             $table->renameColumn('id', 'id_atividade');
-            $table->unsignedBigInteger('conteudo_id_conteudo')->nullable();
         });
-        
         Schema::rename('perguntas', 'atividades');
 
-        Schema::create('niveis_ensino', function (Blueprint $table) {
-            $table->id('id_nivel_ensino');
-            $table->string('nome', 45);
-        });
-
-        Schema::create('conteudos', function (Blueprint $table) {
-            $table->id('id_conteudo');
-            $table->unsignedBigInteger('id_nivel_ensino');
-            $table->string('nome_conteudo', 45);
-            $table->unsignedBigInteger('professor_id_usuario');
-        });
+        Schema::create('niveis_ensino', function (Blueprint $table) { $table->id('id_nivel_ensino'); });
+        Schema::create('conteudos', function (Blueprint $table) { $table->id('id_conteudo'); });
     }
 };
