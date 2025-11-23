@@ -16,16 +16,18 @@ class AlunoPerguntaController extends Controller
     // Registrar que um aluno respondeu ou visualizou (Método Genérico)
     public function store(Request $request)
     {
+        // Validação
         $validated = $request->validate([
             'aluno_id_usuario' => 'required|integer|exists:alunos,id_usuario',
-            'pergunta_id' => 'required|integer|exists:perguntas,id',
-            'status' => 'required|string', 
+            'pergunta_id'      => 'required|integer|exists:perguntas,id',
+            'status'           => 'required|string',
         ]);
 
+        // Atualiza se existir a combinação aluno+pergunta, ou cria novo
         $registro = AlunoPergunta::updateOrCreate(
             [
                 'aluno_id_usuario' => $validated['aluno_id_usuario'],
-                'pergunta_id' => $validated['pergunta_id']
+                'pergunta_id'      => $validated['pergunta_id']
             ],
             [
                 'status' => $validated['status']
@@ -33,37 +35,9 @@ class AlunoPerguntaController extends Controller
         );
 
         return response()->json([
-            'message' => 'Status da pergunta atualizado.',
-            'data' => $registro
+            'message' => 'Status da pergunta atualizado com sucesso.',
+            'data'    => $registro
         ], 200);
-    }
-
-    /**
-     * Rota específica para atualizar status via Body
-     * Recebe: aluno_id, pergunta_id, status
-     */
-    public function atualizarStatus(Request $request)
-    {
-        $validated = $request->validate([
-            'aluno_id' => 'required|integer|exists:alunos,id_usuario',
-            'pergunta_id' => 'required|integer|exists:perguntas,id',
-            'status' => 'required|string', // ex: 'correto', 'errado'
-        ]);
-
-        $registro = AlunoPergunta::updateOrCreate(
-            [
-                'aluno_id_usuario' => $validated['aluno_id'],
-                'pergunta_id' => $validated['pergunta_id']
-            ],
-            [
-                'status' => $validated['status']
-            ]
-        );
-
-        return response()->json([
-            'message' => 'Status atualizado com sucesso!',
-            'status_atual' => $registro->status
-        ]);
     }
 
     public function show($alunoId, $perguntaId)
