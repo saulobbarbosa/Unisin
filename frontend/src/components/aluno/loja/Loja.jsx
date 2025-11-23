@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 import Style from "./loja.module.css";
 import Ajuste from "../../containerPadrao.module.css";
@@ -13,12 +14,86 @@ export default function TelaAlunoLoja() {
     const carrosselAvatar = useRef(null);
     const [itens, setItens] = useState(null);
 
+    const alertCompra = (idItem) =>{
+        Swal.fire({
+            title: "Deseja Comprar esse Item?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sim, Quero!",
+            cancelButtonColor: "#d33",
+            confirmButtonColor: "#295384"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                comprarItem(idItem);
+            }
+        });
+    }
+
     useEffect(() => {
         axios
-        .get("/loja.json") // caminho dentro da pasta 'public/data'
-        .then((response) => setItens(response.data))
-        .catch((error) => console.error("Erro ao carregar JSON:", error));
+        .get("http://localhost:8000/api/itens-loja")
+        .then((response) => {
+            const dados = response.data;
+            
+            const bordas = dados
+                .filter(item => item.tipo === "borda")
+                .map(item => ({
+                    id: item.id_item_loja,
+                    nome: item.nome,
+                    preco: item.preco,
+                    color: item.conteudo
+                }));
+
+            const fundos = dados
+                .filter(item => item.tipo === "fundo")
+                .map(item => ({
+                    id: item.id_item_loja,
+                    nome: item.nome,
+                    preco: item.preco,
+                    color: item.conteudo
+                }));
+
+            const avatares = dados
+                .filter(item => item.tipo === "avatar")
+                .map(item => ({
+                    id: item.id_item_loja,
+                    nome: item.nome,
+                    preco: item.preco,
+                    img: item.conteudo
+                }));
+
+            setItens({
+                bordas,
+                fundos,
+                avatares
+            });
+        })
+        .catch((error) => console.error("Erro ao carregar API de loja:", error));
     }, []);
+    
+    const comprarItem = async (idItem) => {
+        try{
+            const idAluno = localStorage.getItem("idUsuario");
+
+            const response = await axios.post(
+                `http://localhost:8000/api/loja/comprar/${idAluno}/${idItem}`
+            );
+
+            Swal.fire({
+                title: "Sucesso!",
+                text: response.data.message,
+                icon: "success",
+                confirmButtonColor: "#295384"
+            });
+        }catch(error){
+            Swal.fire({
+                title: "Erro!",
+                text: error.response.data.message,
+                icon: "error",
+                confirmButtonColor: "#295384"
+            });
+        }
+    }
     
     if (!itens) return <p>Carregando...</p>;
 
@@ -53,7 +128,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselBorda}>
                         {itens.bordas.map((borda) => (
-                            <div key={borda.id} className={Style.cardItem}>
+                            <div key={borda.id} className={Style.cardItem}
+                                onClick={() => alertCompra(borda.id)}
+                            >
                                 <div className={Style.preview}                                    
                                     style={{
                                         border: `0.8rem solid ${borda.color}`,
@@ -83,7 +160,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselFundo}>
                         {itens.fundos.map((fundo) => (
-                            <div key={fundo.id} className={Style.cardItem}>
+                            <div key={fundo.id} className={Style.cardItem}
+                                onClick={() => alertCompra(fundo.id)}
+                            >
                                 <div className={Style.preview}
                                     style={{
                                         backgroundColor: fundo.color,
@@ -113,7 +192,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselAvatar}>
                         {itens.avatares.map((avatar) => (
-                            <div key={avatar.id} className={Style.cardItem}>
+                            <div key={avatar.id} className={Style.cardItem}
+                                onClick={() => alertCompra(avatar.id)}
+                            >
                                 <img
                                     src={avatar.img}
                                     alt="Avatar Loja"

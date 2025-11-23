@@ -35,11 +35,11 @@ export default function LoginModal({ mostra, fecha }) {
         email: email,
         senha: senha
       });
-      if (response.data.success) {
+      if (response.data.success){
         const usuario = response.data.usuario;
         if (usuario) {
           // Salva dados do usuário no localStorage
-          localStorage.setItem("usuarioId", usuario.id_usuario);
+          localStorage.setItem("idUsuario", usuario.id_usuario);
           localStorage.setItem("tipoUsuario", usuario.tipo_usuario ?? "aluno");
           localStorage.setItem("token", response.data.token);
 

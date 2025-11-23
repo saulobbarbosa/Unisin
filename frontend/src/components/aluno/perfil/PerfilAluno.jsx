@@ -25,16 +25,13 @@ export default function TelaAlunoPerfil() {
     ]);
 
     useEffect(() => {
-        const usuarioId = alunoId;
+        if (!alunoId) return;
 
-        if (usuarioId) {
-            axios.get("/usuarios.json")
-            .then(res => {
-                const u = res.data.find(user => user.id === parseInt(usuarioId));
-                if (u) setUsuario(u);
-            })
-            .catch(error => console.error(error));
-        }
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
+        .then(res => {
+            setUsuario(res.data);
+        })
+        .catch(error => console.error(error));
     }, []);
 
     return (
@@ -46,7 +43,8 @@ export default function TelaAlunoPerfil() {
                 <div className={Style.container}>
                     <div className={Style.divGeral}>
                         <div className={Style.divFotoNome}>
-                            <img src={usuario.avatar} className={Style.imgPerfil}
+                            <img src={usuario.avatar || "/imgs/perfil/boy_black.webp"}
+                                className={Style.imgPerfil}
                                 alt="Imagem de Perfil" draggable="false"
                                 style={{
                                     border: `0.8rem solid ${usuario.borda}`,
@@ -55,7 +53,7 @@ export default function TelaAlunoPerfil() {
                             <h1 className={Style.nomeAluno}>{usuario.nome}</h1>
                         </div>
                         <div className={Style.divNivelEditar}>
-                            <h1>
+                            <h1 className={Style.divNivel}>
                                 Nível
                                 <span className={Style.nivel}>
                                     {usuario.nivel}

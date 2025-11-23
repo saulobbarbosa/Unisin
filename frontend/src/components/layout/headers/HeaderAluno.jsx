@@ -37,16 +37,23 @@ export default function CompHeaderAluno(){
     };
 
     useEffect(() => {
-        const usuarioId = localStorage.getItem("usuarioId");
+        const idUsuario = localStorage.getItem("idUsuario");
 
-        if (usuarioId) {
-            axios.get("/usuarios.json")
-            .then(res => {
-                const u = res.data.find(user => user.id === parseInt(usuarioId));
-                if (u) setUsuario(u);
-            })
-            .catch(error => console.error(error));
-        }
+        if (!idUsuario) return;
+
+        axios
+        .get(`http://localhost:8000/api/alunos/${idUsuario}/dados`)
+        .then(res => {
+            setUsuario({
+                id: res.data.id,
+                nome: res.data.nome,
+                moedas: res.data.moedas,
+                avatar: res.data.avatar || "/imgs/perfil/boy_black.webp",
+                borda: res.data.borda,
+                fundo: res.data.fundo,
+                nivel: res.data.nivel
+            });
+        }).catch(error => console.error(error));
     }, []);
 
     return(
@@ -66,7 +73,7 @@ export default function CompHeaderAluno(){
                 </div>
                 <div className={HeaderStyle.divPerfil + " " + HeaderStyle.divNMP}
                     onMouseEnter={() => { setMostrar(true) }}
-                    onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("usuarioId")}`)}}
+                    onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("idUsuario")}`)}}
                 >
                     <img src={usuario.avatar} className={HeaderStyle.imgPerfil}
                     alt="Imagem de Perfil" draggable="false"
@@ -85,7 +92,7 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Home</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("usuarioId")}`)}}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate(`/aluno/perfil/${localStorage.getItem("idUsuario")}`)}}>
                     <i className="fa-solid fa-user" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Perfil</h1>
