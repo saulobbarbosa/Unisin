@@ -14,26 +14,19 @@ const classes = [
     "quarto", "quinto", "sexto",
 ]
 
-export default function TelaAlunoTrilha(){
+export default function TelaAlunoTrilha() {
     const navigate = useNavigate();
     const { materia } = useParams();
     const [atividades, setAtividades] = useState([]);
+    const [statusPerguntas, setStatusPerguntas] = useState({});
     const [level, setLevel] = useState("4");
+    const idUsuario = localStorage.getItem("idUsuario");
 
-    useEffect(() => {
-        axios.get("/atividades.json").then((res) => {
-        const data = res.data;
-        if (data[materia]) {
-            setAtividades(data[materia]);
-        }
-        });
-    }, [materia]);
-    
-    return(
+    return (
         <div className={Ajuste.wrapper}>
             <Header />
             <main className={Ajuste.container}>
-                <Barra level={level}/>
+                <Barra level={level} />
                 <div className={Style.divConquista}>
                     <h2 className={Style.tituloConquista}>Conquistas</h2>
                 </div>
@@ -41,15 +34,18 @@ export default function TelaAlunoTrilha(){
                     {atividades.map((atv, index) => {
                         const classeExtra = classes[index % classes.length];
                         const deslocamento = Math.sin(index * 0.7) * 6; // amplitude horizontal
+                        const acertou = statusPerguntas[atv.id] === "correto";
                         return (
-                        <div
-                            key={atv}
-                            className={`${Style.etapa} ${Style[classeExtra]}`}
-                            style={{ marginLeft: `${deslocamento}rem`, marginTop: "1rem" }}
-                            onClick={()=>{navigate(`/aluno/${materia}/atividade/${atv.id}`)}}
-                        >
-                            {atv.id}
-                        </div>
+                            <div
+                                key={atv.id}
+                                className={`${Style.etapa} ${Style[classeExtra]} ${
+                                    acertou ? Style.acertou : ""
+                                }`}
+                                style={{ marginLeft: `${deslocamento}rem`, marginTop: "1rem" }}
+                                onClick={() => { navigate(`/aluno/${materia}/atividade/${atv.id}`) }}
+                            >
+                                {atv.id}
+                            </div>
                         );
                     })}
                 </div>
