@@ -39,7 +39,7 @@ Route::get('/niveis', [NivelController::class, 'index']);
 
 
 // --- QUIZ GAME ROUTES ---
-Route::post('/quiz', [PerguntaController::class, 'quiz']);
+Route::get('/quiz/{id_modulo}/{numero_nivel}/{id_aluno}', [PerguntaController::class, 'quiz']);
 Route::put('/perguntas/status', [AlunoPerguntaController::class, 'atualizarStatus']);
 
 
