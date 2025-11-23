@@ -12,26 +12,45 @@ export default function TelaAlunoPerfil() {
     // const navigate = useNavigate();
     const [usuario, setUsuario] = useState({});
     const { alunoId } = useParams();
-    const [materias, setMaterias] = useState([
-        { text: "Matemática", cor: "#1565C0", progresso: 10, total: 25 },
-        { text: "Português", cor: "#E53935", progresso: 15, total: 30 },
-        { text: "Inglês", cor: "#9575CD", progresso: 8, total: 20 },
-        { text: "História", cor: "#8D6E63", progresso: 12, total: 25 },
-        { text: "Geografia", cor: "#26A69A", progresso: 5, total: 25 },
-        { text: "Química", cor: "#43A047", progresso: 7, total: 25 },
-        { text: "Física", cor: "#366091", progresso: 9, total: 25 },
-        { text: "Artes", cor: "#FF7043", progresso: 6, total: 20 },
-        { text: "Educação-Física", cor: "#6C6C6C", progresso: 4, total: 15 },
-    ]);
+    const [materias, setMaterias] = useState([]);
+
+    const coresPorMateria = {
+        "Matemática": "#1565C0",
+        "Português": "#E53935",
+        "Inglês": "#9575CD",
+        "História": "#8D6E63",
+        "Geografia": "#26A69A",
+        "Química": "#43A047",
+        "Física": "#366091",
+        "Artes": "#FF7043",
+        "Educação Física": "#6C6C6C",
+    };
 
     useEffect(() => {
         if (!alunoId) return;
 
         axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
-        .then(res => {
-            setUsuario(res.data);
-        })
-        .catch(error => console.error(error));
+            .then(res => {
+                setUsuario(res.data);
+            })
+            .catch(error => console.error(error));
+    }, []);
+
+    useEffect(() => {
+        if (!alunoId) return;
+
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/progresso`)
+            .then(res => {
+                const response = res.data.map(item => ({
+                    text: item.materia,
+                    progresso: item.realizadas,
+                    total: item.total_p,
+                    cor: coresPorMateria[item.materia] || "#141531"
+                }));
+
+                setMaterias(response);
+            })
+            .catch(error => console.error(error));
     }, []);
 
     return (
