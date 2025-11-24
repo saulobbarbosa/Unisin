@@ -6,27 +6,26 @@ use App\Models\Pergunta;
 use App\Models\Opcao;
 use App\Models\ModuloNivelPergunta;
 use App\Models\Nivel;
-use App\Models\AlunoPergunta; // Importante para buscar o status
+use App\Models\AlunoPergunta; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PerguntaController extends Controller
 {
-    /**
-     * Retorna todas as perguntas (ADMIN)
-     */
     public function index()
     {
         return response()->json(Pergunta::with(['opcoes', 'contexto.modulo', 'contexto.nivel'])->get());
     }
 
     /**
-     * QUIZ: Retorna perguntas filtradas por Modulo, Numero do Nivel e STATUS do Aluno
-     * Rota: /api/quiz/{id_modulo}/{numero_nivel}/{id_aluno}
+     * QUIZ: Retorna a LISTA de IDs das perguntas filtradas por Modulo e Nivel com o STATUS.
+     * Rota: GET /api/quiz/{id_modulo}/{nivel}/{id_aluno}
+     * Parametros: id_modulo (int), nivel (int - numero visual), id_aluno (int)
+     * Retorno: Lista leve com IDs e Status.
      */
     public function quiz($id_modulo, $numero_nivel, $id_aluno)
     {
-        // 1. Descobrir o ID do nível baseado no número
+        // 1. Descobrir o ID do nível baseado no número visual (ex: Nível 1, Nível 2)
         $nivelModel = Nivel::where('nivel', $numero_nivel)->first();
 
         if (!$nivelModel) {
@@ -34,9 +33,9 @@ class PerguntaController extends Controller
         }
 
         // 2. Busca na tabela DE RELACIONAMENTO (ModuloNivelPergunta)
+        // Filtra pelo módulo e pelo ID real do nível encontrado
         $relacoes = ModuloNivelPergunta::where('modulo_ensino_id', $id_modulo)
                                        ->where('nivel_id', $nivelModel->id)
-                                       ->with(['pergunta.opcoes'])
                                        ->get();
 
         if ($relacoes->isEmpty()) {
@@ -44,38 +43,44 @@ class PerguntaController extends Controller
         }
 
         // 3. Buscar o status das perguntas para ESTE aluno
-        // Pegamos todos os IDs de pergunta encontrados
         $perguntasIds = $relacoes->pluck('pergunta_id');
 
-        // Buscamos no banco apenas os status dessas perguntas para esse aluno
         $statusMap = AlunoPergunta::where('aluno_id_usuario', $id_aluno)
                                   ->whereIn('pergunta_id', $perguntasIds)
                                   ->pluck('status', 'pergunta_id'); 
-                                  // Retorna array tipo: [id_pergunta => 'correto', id_pergunta => 'incorreto']
 
-        // 4. Formata a saída mesclando com o status
+        // 4. Formata a saída simplificada (ID + Status)
         $formatadas = $relacoes->map(function ($relacao) use ($numero_nivel, $statusMap) {
-            $p = $relacao->pergunta;
             
-            if (!$p) return null;
-
-            $opcaoCorreta = $p->opcoes->where('eh_correta', true)->first();
-
-            // Pega o status do map ou define como 'pendente' se não existir
-            $statusAluno = $statusMap[$p->id] ?? 'pendente';
+            $perguntaId = $relacao->pergunta_id;
+            $statusAluno = $statusMap[$perguntaId] ?? 'pendente';
 
             return [
-                'id' => $p->id,
-                'pergunta' => $p->enunciado,
-                'respostas' => $p->opcoes->pluck('texto_opcao')->values()->toArray(),
-                'correta' => $opcaoCorreta ? $opcaoCorreta->texto_opcao : null,
+                'id'        => $perguntaId,
                 'modulo_id' => $relacao->modulo_ensino_id,
-                'nivel' => $numero_nivel,
-                'status' => $statusAluno // Campo novo solicitado
+                'nivel'     => (int)$numero_nivel,
+                'status'    => $statusAluno
             ];
-        })->filter();
+        });
 
         return response()->json($formatadas->values());
+    }
+
+    /**
+     * Retorna os detalhes de UMA pergunta específica para jogar.
+     * Rota: GET /api/perguntas/{id}/jogar
+     */
+    public function getDetalhesPergunta($id)
+    {
+        $pergunta = Pergunta::with('opcoes')->findOrFail($id);
+
+        $opcaoCorreta = $pergunta->opcoes->where('eh_correta', true)->first();
+
+        return response()->json([
+            'pergunta'  => $pergunta->enunciado,
+            'respostas' => $pergunta->opcoes->pluck('texto_opcao')->values()->toArray(),
+            'correta'   => $opcaoCorreta ? $opcaoCorreta->texto_opcao : null
+        ]);
     }
 
     public function store(Request $request)
@@ -85,7 +90,6 @@ class PerguntaController extends Controller
             'tipo' => 'required|string',
             'professor_id_usuario' => 'required|integer|exists:professores,id_usuario',
             
-            // IDs para a tabela de relacionamento
             'modulo_ensino_id' => 'required|integer|exists:modulos_ensino,id_modulo_ensino',
             'nivel_id' => 'required|integer|exists:niveis,id',
             

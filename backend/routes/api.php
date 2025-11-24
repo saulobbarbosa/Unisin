@@ -39,8 +39,12 @@ Route::get('/niveis', [NivelController::class, 'index']);
 
 
 // --- QUIZ GAME ROUTES ---
-Route::get('/quiz/{id_modulo}/{numero_nivel}/{id_aluno}', [PerguntaController::class, 'quiz']);
-Route::put('/perguntas/status', [AlunoPerguntaController::class, 'atualizarStatus']);
+// 1. Obter LISTA de perguntas (IDs e Status) para montar o menu da fase
+// Rota atualizada: GET com parametros na URL
+Route::get('/quiz/{id_modulo}/{nivel}/{id_aluno}', [PerguntaController::class, 'quiz']);
+
+// 2. Obter DETALHES de uma pergunta específica para jogar
+Route::get('/perguntas/{id}/jogar', [PerguntaController::class, 'getDetalhesPergunta']);
 
 
 // --- LOJA / COMPRAS ---
@@ -75,7 +79,6 @@ Route::apiResource('itens-loja', ItemLojaController::class);
 // 1. Alunos <-> Modulos
 Route::post('/alunos-modulos', [AlunoModuloEnsinoController::class, 'store']);
 Route::get('/alunos/{id}/modulos', [AlunoModuloEnsinoController::class, 'modulosPorAluno']);
-// Nova rota de Progresso
 Route::get('/alunos/{id}/progresso', [AlunoModuloEnsinoController::class, 'getProgresso']);
 
 Route::get('/alunos-modulos/{alunoId}/{moduloId}/{nivelId}', [AlunoModuloEnsinoController::class, 'show']);
