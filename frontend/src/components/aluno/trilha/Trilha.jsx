@@ -16,11 +16,26 @@ const classes = [
 
 export default function TelaAlunoTrilha() {
     const navigate = useNavigate();
-    const { materia } = useParams();
+    const { materia, idMateria } = useParams();
     const [atividades, setAtividades] = useState([]);
-    const [statusPerguntas, setStatusPerguntas] = useState({});
-    const [level, setLevel] = useState("4");
+    const [level, setLevel] = useState(1);
     const idUsuario = localStorage.getItem("idUsuario");
+
+    useEffect(() => {
+        async function carregarQuiz() {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/quiz/${idMateria}/${level}/${idUsuario}`
+                );
+
+                setAtividades(response.data);
+            } catch (err) {
+                console.error("Erro ao carregar perguntas:", err);
+            }
+        }
+
+        carregarQuiz();
+    }, [materia, idMateria, idUsuario]);
 
     return (
         <div className={Ajuste.wrapper}>
@@ -34,17 +49,24 @@ export default function TelaAlunoTrilha() {
                     {atividades.map((atv, index) => {
                         const classeExtra = classes[index % classes.length];
                         const deslocamento = Math.sin(index * 0.7) * 6; // amplitude horizontal
-                        const acertou = statusPerguntas[atv.id] === "correto";
+                        const classeStatus =
+                            atv.status === "correto"
+                                ? Style.correto
+                                : atv.status === "errado"
+                                ? Style.errado
+                                : Style.pendente;
                         return (
                             <div
                                 key={atv.id}
-                                className={`${Style.etapa} ${Style[classeExtra]} ${
-                                    acertou ? Style.acertou : ""
-                                }`}
+                                className={`${Style.etapa} ${Style[classeExtra]} ${classeStatus}`}
                                 style={{ marginLeft: `${deslocamento}rem`, marginTop: "1rem" }}
-                                onClick={() => { navigate(`/aluno/${materia}/atividade/${atv.id}`) }}
+                                onClick={() => {
+                                    if(atv.status != "correto"){
+                                        navigate(`/aluno/${materia}/${idMateria}/atividade/${atv.id}`)
+                                    }
+                                }}
                             >
-                                {atv.id}
+                                {index + 1} 
                             </div>
                         );
                     })}

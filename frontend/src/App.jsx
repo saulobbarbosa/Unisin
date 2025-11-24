@@ -27,8 +27,8 @@ export default function App() {
 
                 {/* Rotas Aluno */}
                 <Route path="/aluno/home" element={<AlunoHome />} />
-                <Route path="/aluno/:materia" element={<AlunoTrilha />} />
-                <Route path="/aluno/:materia/atividade/:id" element={<Atividade />} />
+                <Route path="/aluno/:materia/:idMateria" element={<AlunoTrilha />} />
+                <Route path="/aluno/:materia/:idMateria/atividade/:idAtividade" element={<Atividade />} />
                 <Route path="/aluno/perfil/:alunoId" element={<AlunoPerfil />} />
                 <Route path="/aluno/loja" element={<AlunoLoja />} />
                 <Route path="/aluno/amigos" element={<AlunoAmigos />} />

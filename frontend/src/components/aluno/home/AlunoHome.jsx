@@ -25,7 +25,6 @@ export default function TelaAlunoHome(){
         "Artes": "#FF7043",
         "Educação-Física": "#6C6C6C",
     };
-
     
     useEffect(() => {
         if (!idUsuario) return;
@@ -34,6 +33,7 @@ export default function TelaAlunoHome(){
             .then(res => {
                 const formatados = res.data.map(item => ({
                     text: item.nome_modulo,
+                    id: item.id_modulo,
                     cor: cores[item.nome_modulo] || "#141531"
                 }));
                 setModulos(formatados);
@@ -47,9 +47,9 @@ export default function TelaAlunoHome(){
             <main className={Ajuste.container}>
                 <h1 className={Style.tituloHome}>Área de estudo: escolha seu destino</h1>
                 <div className={Style.divMenu}>
-                    {modulos.map(({ text, cor }, index) => (
+                    {modulos.map(({ text, cor, id }, index) => (
                         <div key={index} className={Style.divEscolha} style={{ color: cor }} 
-                            onClick={()=>{navigate(`/aluno/${text}`)}}
+                            onClick={()=>{navigate(`/aluno/${text}/${id}`)}}
                         >
                             <h2>{text}</h2>
                         </div>

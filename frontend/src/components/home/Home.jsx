@@ -12,6 +12,8 @@ import Footer from "../layout/footers/FooterHome";
 
 export default function TelaHome(){
     const [mostrar, setMostrar] = useState(false);
+
+    
     return(
         <div className={HomeStyle.container} id="home">
             <Header />

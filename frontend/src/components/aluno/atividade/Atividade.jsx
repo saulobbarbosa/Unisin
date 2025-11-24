@@ -12,18 +12,39 @@ import Barra from "../barra-top/BarraTop";
 
 export default function TelaAtividade() {
     const navigate = useNavigate();
-    const { materia, id } = useParams();
+    const { materia, idMateria, idAtividade } = useParams();
     const [atividade, setAtividade] = useState(null);
-    const [level, setLevel] = useState("4");
+    const [level, setLevel] = useState(1);
     const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+    const idUsuario = localStorage.getItem("idUsuario");
 
     useEffect(() => {
-        axios.post("http://localhost:8000/api/quiz", { id: parseInt(id) })
-            .then(res => {
-                setAtividade(res.data);
-            })
-            .catch(err => console.error(err));
-    }, [id]);
+        async function carregarQuiz() {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/api/perguntas/${idAtividade}/jogar`
+                );
+
+                setAtividade(response.data);
+            } catch (err) {
+                console.error("Erro ao carregar perguntas:", err);
+            }
+        }
+
+        carregarQuiz();
+    }, [materia, idMateria, idUsuario]);
+
+    const registrarStatus = async (status) => {
+        try {
+            await axios.post("http://localhost:8000/api/alunos-perguntas", {
+                aluno_id_usuario: idUsuario,
+                pergunta_id: idAtividade,
+                status: status
+            });
+        } catch (err) {
+            console.error("Erro ao registrar status:", err);
+        }
+    };
 
     const acerto = () => {
         Swal.fire({
@@ -46,13 +67,15 @@ export default function TelaAtividade() {
         });
     }
 
-    const handleRespostaClick = (resp) => {
+    const handleRespostaClick = async (resp) => {
         if (respostaSelecionada) return;
         setRespostaSelecionada(resp);
 
         if (resp === atividade.correta) {
+            await registrarStatus("correto");
             acerto();
         } else {
+            await registrarStatus("errado");
             errou();
         }
     }

@@ -39,7 +39,7 @@ export default function CadastroAlunoModal({ mostra, fecha, abrirLogin }) {
             
             // 3. Em caso de sucesso (status 2xx), o código continua aqui.
             // Os dados da resposta do Laravel já estão em `response.data`.
-            navigate("/aluno/home");
+            fecha();
         } catch (err) {
             // 4. Axios joga um erro para respostas com status 4xx ou 5xx.
             // A resposta do servidor (incluindo os erros de validação) fica em `err.response.data`.
