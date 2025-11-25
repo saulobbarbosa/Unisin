@@ -110,7 +110,7 @@ export default function CompHeaderAluno(){
                     <h1 className={HeaderStyle.textEscolhas}>Loja</h1>
                 </div>
                 <hr className={HeaderStyle.linhaModal}/>
-                <div className={HeaderStyle.divEscolhas}>
+                <div className={HeaderStyle.divEscolhas} onClick={()=>{navigate(`/aluno/inventario/${localStorage.getItem("idUsuario")}`)}}>
                     <i className="fa-solid fa-cubes" style={{ fontSize: "2.5rem", color: "#000", 
                     marginLeft: "2rem" }}></i>
                     <h1 className={HeaderStyle.textEscolhas}>Inventário</h1>
