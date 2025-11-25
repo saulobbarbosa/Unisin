@@ -17,7 +17,26 @@ class AlunoItemLojaController extends Controller
     }
 
     /**
-     * Realiza a compra e equipa o item no aluno.
+     * Retorna somente os itens que o usuário tem.
+     * Rota: GET /alunos/{id}/itens
+     */
+    public function itensPorAluno($alunoId)
+    {
+        // Busca os relacionamentos e carrega os dados do item da loja
+        $itensDoAluno = AlunoItemLoja::where('aluno_id_usuario', $alunoId)
+                                     ->with('itemLoja')
+                                     ->get();
+
+        // Formata para retornar uma lista limpa dos itens
+        $formatado = $itensDoAluno->map(function ($registro) {
+            return $registro->itemLoja; 
+        });
+
+        return response()->json($formatado);
+    }
+
+    /**
+     * Realiza a compra (APENAS COMPRA, NÃO EQUIPA).
      * Rota: POST /loja/comprar/{alunoId}/{itemId}
      */
     public function comprarItem($alunoId, $itemId)
@@ -34,42 +53,34 @@ class AlunoItemLojaController extends Controller
             return response()->json(['message' => 'Item não encontrado.'], 404);
         }
 
-        // 2. Verificar se tem moedas suficientes
+        // 2. Verificar se já possui o item
+        $jaPossui = AlunoItemLoja::where('aluno_id_usuario', $alunoId)
+                                 ->where('item_loja_id_item_loja', $itemId)
+                                 ->exists();
+
+        if ($jaPossui) {
+            return response()->json(['message' => 'Aluno já possui este item.'], 409);
+        }
+
+        // 3. Verificar se tem moedas suficientes
         if ($aluno->moedas < $item->preco) {
             return response()->json([
                 'message' => 'Saldo insuficiente.',
                 'saldo_atual' => $aluno->moedas,
                 'preco_item' => $item->preco
-            ], 400); // Bad Request
+            ], 400); 
         }
 
-        // 3. Transação: Descontar moedas + Atualizar atributo + Registrar compra
+        // 4. Transação: Descontar moedas + Registrar compra
         try {
             DB::transaction(function () use ($aluno, $item) {
                 // A. Desconta as moedas
                 $aluno->moedas -= $item->preco;
-
-                // B. Altera o atributo do usuário de acordo com o tipo do item
-                // Verifica o tipo e atualiza a coluna correspondente na tabela 'alunos'
-                // Tipos esperados: 'borda', 'fundo', 'avatar'
-                switch ($item->tipo) {
-                    case 'borda':
-                        $aluno->borda = $item->conteudo;
-                        break;
-                    case 'fundo':
-                        $aluno->fundo = $item->conteudo;
-                        break;
-                    case 'avatar':
-                        $aluno->avatar = $item->conteudo;
-                        break;
-                    // Adicione outros casos se houver novos tipos no futuro
-                }
-
                 $aluno->save();
 
-                // C. Opcional: Registrar que o aluno possui o item na tabela de relacionamento
-                // Use firstOrCreate para não duplicar se ele comprar novamente (caso a lógica permita)
-                AlunoItemLoja::firstOrCreate([
+                // B. Registrar a compra (tabela de relacionamento)
+                // OBS: Removemos a parte que alterava 'avatar', 'borda', etc.
+                AlunoItemLoja::create([
                     'aluno_id_usuario' => $aluno->id_usuario,
                     'item_loja_id_item_loja' => $item->id_item_loja
                 ]);
@@ -77,13 +88,56 @@ class AlunoItemLojaController extends Controller
 
             return response()->json([
                 'message' => 'Compra realizada com sucesso!',
-                'aluno' => $aluno, // Retorna o aluno atualizado
-                'item_equipado' => $item->nome
+                'saldo_restante' => $aluno->moedas,
+                'item_comprado' => $item->nome
             ], 200);
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'Erro ao processar a compra.', 'error' => $e->getMessage()], 500);
         }
+    }
+
+    public function equiparItem($alunoId, $itemId)
+    {
+        // 1. Verificar se o aluno realmente possui este item
+        $posse = AlunoItemLoja::where('aluno_id_usuario', $alunoId)
+                              ->where('item_loja_id_item_loja', $itemId)
+                              ->first();
+
+        if (!$posse) {
+            return response()->json(['message' => 'Você não possui este item para equipar.'], 403); // Forbidden
+        }
+
+        $aluno = Aluno::find($alunoId);
+        $item  = ItemLoja::find($itemId);
+
+        if (!$aluno || !$item) {
+            return response()->json(['message' => 'Aluno ou Item não encontrado.'], 404);
+        }
+
+        // 2. Atualizar o campo correto no Aluno com base no tipo do Item
+        // Tipos esperados: 'borda', 'fundo', 'avatar'
+        switch ($item->tipo) {
+            case 'borda':
+                $aluno->borda = $item->conteudo;
+                break;
+            case 'fundo':
+                $aluno->fundo = $item->conteudo;
+                break;
+            case 'avatar':
+                $aluno->avatar = $item->conteudo;
+                break;
+            default:
+                return response()->json(['message' => 'Tipo de item desconhecido, não foi possível equipar.'], 400);
+        }
+
+        $aluno->save();
+
+        return response()->json([
+            'message' => 'Item equipado com sucesso!',
+            'tipo' => $item->tipo,
+            'novo_valor' => $item->conteudo
+        ]);
     }
 
     public function store(Request $request)
