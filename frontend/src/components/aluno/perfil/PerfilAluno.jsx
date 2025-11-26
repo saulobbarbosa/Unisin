@@ -29,16 +29,11 @@ export default function TelaAlunoPerfil() {
     useEffect(() => {
         if (!alunoId) return;
 
-        axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
-            .then(res => {
-                setUsuario(res.data);
-            })
-            .catch(error => console.error(error));
-    }, []);
+        carregarDados();
+        carregarProgresso();
+    }, [alunoId]);
 
-    useEffect(() => {
-        if (!alunoId) return;
-
+    const carregarProgresso = () => {
         axios.get(`http://localhost:8000/api/alunos/${alunoId}/progresso`)
             .then(res => {
                 const response = res.data.map(item => ({
@@ -51,13 +46,23 @@ export default function TelaAlunoPerfil() {
                 setMaterias(response);
             })
             .catch(error => console.error(error));
-    }, []);
+    }
+
+    const carregarDados = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
+            .then(res => {
+                setUsuario(res.data);
+            })
+            .catch(error => console.error(error));
+    }
 
     return (
         <div className={Ajuste.wrapper}>
             <Header />
             <main className={Ajuste.container}
-                style={{ background: usuario.fundo }}
+                style={{
+                    backgroundColor: usuario.fundo,
+                }}
             >
                 <div className={Style.container}>
                     <div className={Style.divGeral}>

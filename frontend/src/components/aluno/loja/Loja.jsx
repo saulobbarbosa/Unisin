@@ -9,6 +9,7 @@ import Ajuste from "../../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoLoja() {
+    const idAluno = localStorage.getItem("idUsuario");
     const carrosselBorda = useRef(null);
     const carrosselFundo = useRef(null);
     const carrosselAvatar = useRef(null);
@@ -31,7 +32,7 @@ export default function TelaAlunoLoja() {
 
     useEffect(() => {
         axios
-        .get("http://localhost:8000/api/itens-loja")
+        .get(`http://localhost:8000/api/itens-loja/aluno/${idAluno}`)
         .then((response) => {
             const dados = response.data;
             
@@ -41,7 +42,8 @@ export default function TelaAlunoLoja() {
                     id: item.id_item_loja,
                     nome: item.nome,
                     preco: item.preco,
-                    color: item.conteudo
+                    color: item.conteudo,
+                    status: item.status
                 }));
 
             const fundos = dados
@@ -50,7 +52,8 @@ export default function TelaAlunoLoja() {
                     id: item.id_item_loja,
                     nome: item.nome,
                     preco: item.preco,
-                    color: item.conteudo
+                    color: item.conteudo,
+                    status: item.status
                 }));
 
             const avatares = dados
@@ -59,7 +62,8 @@ export default function TelaAlunoLoja() {
                     id: item.id_item_loja,
                     nome: item.nome,
                     preco: item.preco,
-                    img: item.conteudo
+                    img: item.conteudo,
+                    status: item.status
                 }));
 
             setItens({
@@ -73,8 +77,6 @@ export default function TelaAlunoLoja() {
     
     const comprarItem = async (idItem) => {
         try{
-            const idAluno = localStorage.getItem("idUsuario");
-
             const response = await axios.post(
                 `http://localhost:8000/api/loja/comprar/${idAluno}/${idItem}`
             );
@@ -128,8 +130,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselBorda}>
                         {itens.bordas.map((borda) => (
-                            <div key={borda.id} className={Style.cardItem}
-                                onClick={() => alertCompra(borda.id)}
+                            <div key={borda.id} 
+                                className={`${Style.cardItem} ${borda.status === "comprado" ? Style.itemApagado : ""}`}
+                                onClick={() => {alertCompra(borda.id)}}
                             >
                                 <div className={Style.preview}                                    
                                     style={{
@@ -142,7 +145,9 @@ export default function TelaAlunoLoja() {
                                 <div className={Style.divPreco}>
                                     <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
                                     alt="moeda" draggable="false" />
-                                    <p style={{ fontSize: "1.5rem" }}><b>{borda.preco}</b></p>
+                                    <p style={{ fontSize: "1.5rem" }}>
+                                        <b>{borda.status === "disponivel" ? borda.preco : "Comprado"}</b>
+                                    </p>
                                 </div>
                             </div>
                         ))}
@@ -160,8 +165,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselFundo}>
                         {itens.fundos.map((fundo) => (
-                            <div key={fundo.id} className={Style.cardItem}
-                                onClick={() => alertCompra(fundo.id)}
+                            <div key={fundo.id} 
+                                className={`${Style.cardItem} ${fundo.status === "comprado" ? Style.itemApagado : ""}`}
+                                onClick={() => {alertCompra(fundo.id)}}
                             >
                                 <div className={Style.preview}
                                     style={{
@@ -174,7 +180,9 @@ export default function TelaAlunoLoja() {
                                 <div className={Style.divPreco}>
                                     <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
                                     alt="moeda" draggable="false" />
-                                    <p style={{ fontSize: "1.5rem" }}><b>{fundo.preco}</b></p>
+                                    <p style={{ fontSize: "1.5rem" }}>
+                                        <b>{fundo.status === "disponivel" ? fundo.preco : "Comprado"}</b>
+                                    </p>
                                 </div>
                             </div>
                         ))}
@@ -192,8 +200,9 @@ export default function TelaAlunoLoja() {
                     </div>
                     <div className={Style.carrosselItens} ref={carrosselAvatar}>
                         {itens.avatares.map((avatar) => (
-                            <div key={avatar.id} className={Style.cardItem}
-                                onClick={() => alertCompra(avatar.id)}
+                            <div key={avatar.id}
+                                className={`${Style.cardItem} ${avatar.status === "comprado" ? Style.itemApagado : ""}`}
+                                onClick={() => {alertCompra(avatar.id)}}
                             >
                                 <img
                                     src={avatar.img}
@@ -205,7 +214,9 @@ export default function TelaAlunoLoja() {
                                 <div className={Style.divPreco}>
                                     <img src={require("../../../imgs/moeda.png")} className={Style.imgMoeda}
                                     alt="moeda" draggable="false" />
-                                    <p style={{ fontSize: "1.5rem" }}><b>{avatar.preco}</b></p>
+                                    <p style={{ fontSize: "1.5rem" }}>
+                                        <b>{avatar.status === "disponivel" ? avatar.preco : "Comprado"}</b>
+                                    </p>
                                 </div>
                             </div>
                         ))}

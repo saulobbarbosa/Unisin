@@ -78,3 +78,10 @@
 .imgMoeda{
     width: 2rem;
 }
+
+.itemApagado {
+    opacity: 0.35;        /* Fica apagado */
+    filter: grayscale(100%); /* Preto e branco opcional */
+    pointer-events: none;  /* Desativa clique */
+    transition: 0.3s ease;
+}

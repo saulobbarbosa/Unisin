@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 import Style from "./inventario.module.css";
 import Ajuste from "../../containerPadrao.module.css";
@@ -8,41 +10,66 @@ import Ajuste from "../../containerPadrao.module.css";
 import Header from "../../layout/headers/HeaderAluno";
 
 export default function TelaAlunoHome() {
-    const [itemsEquipados, setItemsEquipados] = useState({
-        avatar: null,
-        borda: null,
-        fundo: null
-    });
-    const [items, setItems] = useState([]);
+    const [usuario, setUsuario] = useState({});
+    const { alunoId } = useParams();
+    const [itens, setItens] = useState([]);
+    const [equipado, setEquipado] = useState([]);
 
     useEffect(() => {
-        axios.get("/inventario.json") // troque para sua rota real
-            .then(response => {
-                const dados = response.data;
+        if (!alunoId) return;
 
-                // separa por tipo
-                const avatars = dados.filter(i => i.tipo === "avatar");
-                const bordas = dados.filter(i => i.tipo === "borda");
-                const fundos = dados.filter(i => i.tipo === "fundo");
-
-                // salva no state
-                setItems(dados);
-
-                // equipa automaticamente o primeiro item
-                setItemsEquipados({
-                    avatar: avatars[0] || null,
-                    borda: bordas[0] || null,
-                    fundo: fundos[1] || null
-                });
-            })
-            .catch(err => console.error(err));
+        carregarUsuario();
+        carregarItemEquipado();
+        carregarItens();
     }, []);
 
-    const equipar = (tipo, item) => {
-        setItemsEquipados(prev => ({
-            ...prev,
-            [tipo]: item
-        }));
+    const carregarUsuario = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
+            .then(res => {
+                setUsuario(res.data);
+            })
+            .catch(error => console.error(error));
+    }
+
+    const carregarItemEquipado = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/equipados`)
+            .then(res => {
+                setEquipado(res.data);
+            })
+            .catch(error => console.error(error));
+    }
+
+    const carregarItens = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/itens`)
+            .then(res => {
+                setItens(res.data);
+            })
+            .catch(error => console.error(error));
+    }
+
+    const equipar = async (idItem) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:8000/api/loja/equipar/${alunoId}/${idItem}`
+            );
+
+            Swal.fire({
+                title: "Sucesso!",
+                text: response.data.message,
+                icon: "success",
+                confirmButtonColor: "#295384"
+            });
+            carregarUsuario();
+            carregarItemEquipado();
+            carregarItens();
+        } catch (error) {
+            Swal.fire({
+                title: "Erro!",
+                text: error.response.data.message,
+                icon: "error",
+                confirmButtonColor: "#295384"
+            });
+        }
     }
 
     return (
@@ -55,57 +82,58 @@ export default function TelaAlunoHome() {
                     <div className={Style.divPreviewEstilo}>
                         <div className={Style.divPreview}
                             style={{
-                                backgroundColor: itemsEquipados.fundo?.color,
+                                backgroundColor: usuario.fundo,
                             }}
                         >
-                            <img src={itemsEquipados.avatar?.img} alt="avatar"
+                            <img src={usuario.avatar || "/imgs/perfil/boy_black.webp"} alt="avatar"
                                 className={Style.imgAvatar}
+                                draggable="false"
                                 style={{
-                                    border: `0.5rem solid ${itemsEquipados.borda?.color}`
+                                    border: `0.5rem solid ${usuario.borda}`
                                 }}
                             />
                         </div>
-                        <h1>Nome Usuário</h1>
+                        <h1>{usuario.nome}</h1>
                         <div className={Style.divEspecificacao}>
                             <div className={Style.cardEspecificacao}>
                                 <h1>Avatar</h1>
-                                <h2>{itemsEquipados.avatar?.nome}</h2>
+                                <h2>{equipado.avatar}</h2>
                             </div>
                             <div className={Style.cardEspecificacao}>
                                 <h1>Borda</h1>
-                                <h2>{itemsEquipados.borda?.nome}</h2>
+                                <h2>{equipado.borda}</h2>
                             </div>
                             <div className={Style.cardEspecificacao}>
                                 <h1>Fundo</h1>
-                                <h2>{itemsEquipados.fundo?.nome}</h2>
+                                <h2>{equipado.fundo}</h2>
                             </div>
                         </div>
                     </div>
                     {/* Segundo Bloco do Inventario */}
-                    <div className={Style.divTodosItems}>
-                        {items.map(item => (
-                            <div key={`${item.tipo}-${item.itemId}`}
+                    <div className={Style.divTodosItens}>
+                        {itens.map(item => (
+                            <div key={item.itemId}
                                 className={Style.divPreviewMini}
                             >
                                 {item.tipo === "avatar" && (
                                     <img
-                                        src={item.img}
+                                        src={item.conteudo}
                                         alt={item.nome}
                                         className={Style.imgAvatarMini}
                                     />
                                 )}
-                                
+
                                 {item.tipo === "borda" && (
                                     <div
                                         className={Style.fundoBordaAvatar}
-                                        style={{ border: `0.5rem solid ${item.color}` }}
+                                        style={{ border: `0.5rem solid ${item.conteudo}` }}
                                     ></div>
                                 )}
 
                                 {item.tipo === "fundo" && (
                                     <div
                                         className={Style.fundoBordaAvatar}
-                                        style={{ backgroundColor: item.color }}
+                                        style={{ backgroundColor: item.conteudo }}
                                     ></div>
                                 )}
 
@@ -113,7 +141,7 @@ export default function TelaAlunoHome() {
 
                                 <div
                                     className={Style.btnEquipar}
-                                    onClick={() => equipar(item.tipo, item)}
+                                    onClick={() => equipar(item.id_item_loja)}
                                 >
                                     <h1>Equipar</h1>
                                 </div>
