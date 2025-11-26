@@ -15,6 +15,8 @@ export default function TelaAlunoHome() {
     const [itens, setItens] = useState([]);
     const [equipado, setEquipado] = useState([]);
 
+    const [atualizarHeader, setAtualizarHeader] = useState(false);
+
     useEffect(() => {
         if (!alunoId) return;
 
@@ -62,6 +64,7 @@ export default function TelaAlunoHome() {
             carregarUsuario();
             carregarItemEquipado();
             carregarItens();
+            setAtualizarHeader(prev => !prev); 
         } catch (error) {
             Swal.fire({
                 title: "Erro!",
@@ -74,7 +77,7 @@ export default function TelaAlunoHome() {
 
     return (
         <div className={Ajuste.wrapper}>
-            <Header />
+            <Header atualizar={atualizarHeader} />
             <main className={Ajuste.container}>
                 <h1 className={Style.titulo}>Inventário de Cosméticos</h1>
                 <div className={Style.layoutPrincipal}>
@@ -112,7 +115,7 @@ export default function TelaAlunoHome() {
                     {/* Segundo Bloco do Inventario */}
                     <div className={Style.divTodosItens}>
                         {itens.map(item => (
-                            <div key={item.itemId}
+                            <div key={item.id_item_loja}
                                 className={Style.divPreviewMini}
                             >
                                 {item.tipo === "avatar" && (
