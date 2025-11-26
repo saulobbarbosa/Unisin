@@ -49,6 +49,7 @@
     Route::post('/loja/equipar/{alunoId}/{itemId}', [AlunoItemLojaController::class, 'equiparItem']);
     // 2. Listar Itens que o Aluno Tem
     Route::get('/alunos/{id}/itens', [AlunoItemLojaController::class, 'itensPorAluno']);
+    Route::get('/alunos/{id}/equipados', [AlunoItemLojaController::class, 'itensEquipados']);
 
     // 3. Listar Itens da Loja com Status (Comprado/Disponivel) para um Aluno
     // Rota Nova: parametro na URL

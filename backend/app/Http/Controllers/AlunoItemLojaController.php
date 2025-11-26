@@ -140,6 +140,53 @@ class AlunoItemLojaController extends Controller
         ]);
     }
 
+    public function itensEquipados($alunoId)
+    {
+        $aluno = Aluno::find($alunoId);
+
+        if (!$aluno) {
+            return response()->json(['message' => 'Aluno não encontrado.'], 404);
+        }
+
+        $equipados = [
+            'avatar' => null,
+            'borda'  => null,
+            'fundo'  => null
+        ];
+
+        // Busca o nome do item de Avatar
+        if ($aluno->avatar && $aluno->avatar !== 'padrao') {
+            $itemAvatar = ItemLoja::where('tipo', 'avatar')
+                                  ->where('conteudo', $aluno->avatar)
+                                  ->first();
+            $equipados['avatar'] = $itemAvatar ? $itemAvatar->nome : 'Item Desconhecido';
+        } else {
+            $equipados['avatar'] = 'Padrão';
+        }
+
+        // Busca o nome do item de Borda
+        if ($aluno->borda && $aluno->borda !== 'padrao') {
+            $itemBorda = ItemLoja::where('tipo', 'borda')
+                                 ->where('conteudo', $aluno->borda)
+                                 ->first();
+            $equipados['borda'] = $itemBorda ? $itemBorda->nome : 'Item Desconhecido';
+        } else {
+            $equipados['borda'] = 'Padrão';
+        }
+
+        // Busca o nome do item de Fundo
+        if ($aluno->fundo && $aluno->fundo !== 'padrao') {
+            $itemFundo = ItemLoja::where('tipo', 'fundo')
+                                 ->where('conteudo', $aluno->fundo)
+                                 ->first();
+            $equipados['fundo'] = $itemFundo ? $itemFundo->nome : 'Item Desconhecido';
+        } else {
+            $equipados['fundo'] = 'Padrão';
+        }
+
+        return response()->json($equipados);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
