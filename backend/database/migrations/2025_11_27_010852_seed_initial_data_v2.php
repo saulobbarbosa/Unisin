@@ -12,6 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // GARANTIR QUE A TABELA PERGUNTAS TENHA TIMESTAMPS
+        // (Caso não tenha sido criada com eles nas migrations anteriores)
+        if (!Schema::hasColumn('perguntas', 'created_at')) {
+            Schema::table('perguntas', function (Blueprint $table) {
+                $table->timestamps();
+            });
+        }
+
         // Inicia uma transação manual para garantir atomicidade
         DB::transaction(function () {
             
@@ -22,7 +30,7 @@ return new class extends Migration
                 'nome' => 'Professor Padrão',
                 'dt_nasc' => '1990-01-01 00:00:00',
                 'email' => 'prof@escola.com',
-                'senha' => bcrypt('senha123'), // Recomendado usar hash, mas se seu sistema usa plain text, ajuste aqui
+                'senha' => bcrypt('senha123'), 
                 'telefone' => '11999999999',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -41,8 +49,6 @@ return new class extends Migration
 
 
             // 2. ITENS DA LOJA
-            // Como não temos ID fixo no JSON, vamos inserir normalmente.
-            // Se quiser evitar duplicatas, poderia usar updateOrInsert verificando pelo nome.
             $itens = [
                 // Bordas
                 ['nome' => 'Borda Vermelha', 'preco' => 500.00, 'conteudo' => '#FF0000', 'tipo' => 'borda'],
@@ -67,7 +73,6 @@ return new class extends Migration
             ];
 
             foreach ($itens as $item) {
-                // Evita duplicar se já existir um item com esse nome
                 if (!DB::table('itens_loja')->where('nome', $item['nome'])->exists()) {
                     DB::table('itens_loja')->insert($item);
                 }
@@ -75,15 +80,14 @@ return new class extends Migration
 
 
             // 3. PERGUNTAS (NÍVEL 1)
-            // Função auxiliar para inserir pergunta, opções e vincular ao módulo/nível
             $inserirPergunta = function ($moduloId, $enunciado, $opcoes) {
-                // Verifica se a pergunta já existe para não duplicar
+                // Verifica se a pergunta já existe
                 $existe = DB::table('perguntas')
                             ->where('enunciado', $enunciado)
                             ->where('professor_id_usuario', 1)
                             ->first();
                 
-                if ($existe) return; // Pula se já existir
+                if ($existe) return;
 
                 // Insere Pergunta
                 $perguntaId = DB::table('perguntas')->insertGetId([
@@ -94,10 +98,10 @@ return new class extends Migration
                     'updated_at' => now(),
                 ]);
 
-                // Vincula ao Módulo e Nível (Nível 1 fixo conforme pedido)
+                // Vincula ao Módulo e Nível (Nível 1 fixo)
                 DB::table('modulo_nivel_perguntas')->insert([
                     'modulo_ensino_id' => $moduloId,
-                    'nivel_id' => 1, // ID do nível 1 na tabela 'niveis'
+                    'nivel_id' => 1, 
                     'pergunta_id' => $perguntaId,
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -116,19 +120,10 @@ return new class extends Migration
             };
 
             // ================= MATEMÁTICA (ID 1) =================
-            // Assumindo que na migration anterior, Matemática recebeu ID 1.
-            // Se não tiver certeza, poderia buscar o ID pelo nome: 
-            // $idMat = DB::table('modulos_ensino')->where('nome', 'Matemática')->value('id_modulo_ensino');
-            
-            // P1
             $inserirPergunta(1, 'Quanto é 2 + 2?', ['3'=>0, '4'=>1, '5'=>0, '22'=>0]);
-            // P2
             $inserirPergunta(1, 'Qual número vem depois do 9?', ['8'=>0, '10'=>1, '11'=>0, '90'=>0]);
-            // P3
             $inserirPergunta(1, 'Se você tem 5 maçãs e come 2, quantas sobram?', ['3'=>1, '2'=>0, '7'=>0, '5'=>0]);
-            // P4
             $inserirPergunta(1, 'Qual forma geométrica tem 3 lados?', ['Quadrado'=>0, 'Círculo'=>0, 'Triângulo'=>1, 'Retângulo'=>0]);
-            // P5
             $inserirPergunta(1, 'Quanto é 10 dividido por 2?', ['2'=>0, '10'=>0, '5'=>1, '8'=>0]);
 
 
@@ -203,16 +198,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // O método down seria complexo pois precisaria identificar exatamente o que foi criado.
-        // Em ambiente de desenvolvimento, geralmente usamos migrate:fresh.
-        // Para produção, deixaremos vazio ou com uma lógica de limpeza específica se necessário.
-        
-        // Exemplo de limpeza simples (Cuidado: apaga tudo destas tabelas):
-        /*
-        DB::table('modulo_nivel_perguntas')->truncate();
-        DB::table('opcoes')->truncate();
-        DB::table('perguntas')->delete(); // Delete para cascata se não truncar
-        DB::table('itens_loja')->truncate();
-        */
+        // Se precisar reverter, remove a coluna created_at/updated_at se tiver sido adicionada
+        if (Schema::hasColumn('perguntas', 'created_at')) {
+            Schema::table('perguntas', function (Blueprint $table) {
+                $table->dropTimestamps();
+            });
+        }
     }
 };
