@@ -41,19 +41,20 @@ return new class extends Migration
             AFTER UPDATE ON alunos_has_perguntas
             FOR EACH ROW
             BEGIN
-                -- A lógica aqui roda 'toda vez' que atualiza.
-                -- Nota: Isso significa que se atualizar de 'incorreto' para 'correto',
-                -- ele vai ganhar 500 (recuperando parte do prejuízo anterior).
-                
-                IF NEW.status = 'correto' THEN
-                    UPDATE alunos 
-                    SET moedas = moedas + 500 
-                    WHERE id_usuario = NEW.aluno_id_usuario;
-                
-                ELSEIF NEW.status = 'errado' THEN
-                    UPDATE alunos 
-                    SET moedas = moedas - 600 
-                    WHERE id_usuario = NEW.aluno_id_usuario;
+                -- Só executa se realmente mudou o status
+                IF NEW.status <> OLD.status THEN
+                    
+                    IF NEW.status = 'correto' THEN
+                        UPDATE alunos
+                        SET moedas = moedas + 500
+                        WHERE id_usuario = NEW.aluno_id_usuario;
+
+                    ELSEIF NEW.status = 'errado' THEN
+                        UPDATE alunos
+                        SET moedas = moedas - 600
+                        WHERE id_usuario = NEW.aluno_id_usuario;
+                    END IF;
+
                 END IF;
             END
         ");

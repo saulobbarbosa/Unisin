@@ -10,16 +10,26 @@ class AlunoPergunta extends Model
     use HasFactory;
 
     protected $table = 'alunos_has_perguntas';
+
+    // A tabela NÃO tem ID automático
     public $incrementing = false;
-    // Definimos chave composta no banco, mas o Eloquent lida melhor se não definirmos PK aqui ou usarmos traits especificas.
-    // Para simplificar uso em controllers:
-    protected $primaryKey = null; 
-    
+
+    // Define que a chave é composta
+    protected $primaryKey = ['aluno_id_usuario', 'pergunta_id'];
+
     protected $fillable = [
         'aluno_id_usuario',
         'pergunta_id',
         'status',
     ];
+
+    protected function setKeysForSaveQuery($query)
+    {
+        // Laravel usa esse método para montar o WHERE da atualização
+        return $query
+            ->where('aluno_id_usuario', '=', $this->getAttribute('aluno_id_usuario'))
+            ->where('pergunta_id', '=', $this->getAttribute('pergunta_id'));
+    }
 
     public function aluno()
     {
