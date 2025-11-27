@@ -14,6 +14,9 @@ class ItemLoja extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'nome',     // Novo campo
         'preco',
+        'conteudo', 
+        'tipo',     
     ];
 }

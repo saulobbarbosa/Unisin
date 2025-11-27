@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NivelEnsino extends Model
+class Nivel extends Model
 {
     use HasFactory;
 
-    protected $table = 'niveis_ensino';
-    protected $primaryKey = 'id_nivel_ensino';
-    public $timestamps = false;
+    protected $table = 'niveis';
 
     protected $fillable = [
-        'nome',
+        'nivel', // O valor inteiro (1, 2, 3...)
     ];
 }
