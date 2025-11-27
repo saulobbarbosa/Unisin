@@ -21,9 +21,6 @@
     text-shadow: 0 0 8px #00eaff;
     cursor: pointer;
 }
-.divMudaRank1 .divMudaRank2, i:hover{
-    transform: scale(1.2);
-}
 
 .tituloArea{
     text-align: center;

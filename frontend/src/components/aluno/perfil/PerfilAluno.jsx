@@ -12,41 +12,63 @@ export default function TelaAlunoPerfil() {
     // const navigate = useNavigate();
     const [usuario, setUsuario] = useState({});
     const { alunoId } = useParams();
-    const [materias, setMaterias] = useState([
-        { text: "Matemática", cor: "#1565C0", progresso: 10, total: 25 },
-        { text: "Português", cor: "#E53935", progresso: 15, total: 30 },
-        { text: "Inglês", cor: "#9575CD", progresso: 8, total: 20 },
-        { text: "História", cor: "#8D6E63", progresso: 12, total: 25 },
-        { text: "Geografia", cor: "#26A69A", progresso: 5, total: 25 },
-        { text: "Química", cor: "#43A047", progresso: 7, total: 25 },
-        { text: "Física", cor: "#366091", progresso: 9, total: 25 },
-        { text: "Artes", cor: "#FF7043", progresso: 6, total: 20 },
-        { text: "Educação-Física", cor: "#6C6C6C", progresso: 4, total: 15 },
-    ]);
+    const [materias, setMaterias] = useState([]);
+
+    const coresPorMateria = {
+        "Matemática": "#1565C0",
+        "Português": "#E53935",
+        "Inglês": "#9575CD",
+        "História": "#8D6E63",
+        "Geografia": "#26A69A",
+        "Química": "#43A047",
+        "Física": "#366091",
+        "Artes": "#FF7043",
+        "Educação Física": "#6C6C6C",
+    };
 
     useEffect(() => {
-        const usuarioId = alunoId;
+        if (!alunoId) return;
 
-        if (usuarioId) {
-            axios.get("/usuarios.json")
+        carregarDados();
+        carregarProgresso();
+    }, [alunoId]);
+
+    const carregarProgresso = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/progresso`)
             .then(res => {
-                const u = res.data.find(user => user.id === parseInt(usuarioId));
-                if (u) setUsuario(u);
+                const response = res.data.map(item => ({
+                    text: item.materia,
+                    progresso: item.realizadas,
+                    total: item.total_p,
+                    cor: coresPorMateria[item.materia] || "#141531"
+                }));
+
+                setMaterias(response);
             })
             .catch(error => console.error(error));
-        }
-    }, []);
+    }
+
+    const carregarDados = () => {
+        axios.get(`http://localhost:8000/api/alunos/${alunoId}/dados`)
+            .then(res => {
+                setUsuario(res.data);
+            })
+            .catch(error => console.error(error));
+    }
 
     return (
         <div className={Ajuste.wrapper}>
             <Header />
             <main className={Ajuste.container}
-                style={{ background: usuario.fundo }}
+                style={{
+                    backgroundColor: usuario.fundo,
+                }}
             >
                 <div className={Style.container}>
                     <div className={Style.divGeral}>
                         <div className={Style.divFotoNome}>
-                            <img src={usuario.avatar} className={Style.imgPerfil}
+                            <img src={usuario.avatar || "/imgs/perfil/boy_black.webp"}
+                                className={Style.imgPerfil}
                                 alt="Imagem de Perfil" draggable="false"
                                 style={{
                                     border: `0.8rem solid ${usuario.borda}`,
@@ -55,7 +77,7 @@ export default function TelaAlunoPerfil() {
                             <h1 className={Style.nomeAluno}>{usuario.nome}</h1>
                         </div>
                         <div className={Style.divNivelEditar}>
-                            <h1>
+                            <h1 className={Style.divNivel}>
                                 Nível
                                 <span className={Style.nivel}>
                                     {usuario.nivel}

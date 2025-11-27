@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Style from "./escolaHome.module.css";
 import logo from "../../../imgs/logo.png"; 
 
+import Header from "../../layout/headers/HeaderAdm";
+
+import Ajuste from "../../containerPadrao.module.css";
 
 export default function TelaEscolaHome() {
   // Estado local simulando os professores (depois pode vir da API)
@@ -18,30 +21,29 @@ export default function TelaEscolaHome() {
   };
 
   return (
-    <div className={Style.container}>
-      <header className={Style.header}>
-        <img src={logo} className={Style.logo} />
-        <h1 className={Style.Escola}>Escola</h1>
-      </header>
+    <div className={Ajuste.wrapper}>
+      <Header titulo={"Escola"} />
 
-      <h2 className={Style.nomeEscola}>Exemplo de Nome de Escola</h2>
-
-      <div className={Style.listaContainer}>
-        <div className={Style.tituloLista}>
-          <h3>Lista de Professores(as)</h3>
-          <i className="fas fa-user-plus"  onClick={adicionarProfessor}style={{ fontSize: '2rem', cursor: 'pointer', color: 'black' }}></i>
+      <main className={Ajuste.container}>
+        <h2 className={Style.nomeEscola}>Exemplo de Nome de Escola</h2>
+    
+        <div className={Style.listaContainer}>
+          <div className={Style.tituloLista}>
+            <h3>Lista de Professores(as)</h3>
+            <i className="fas fa-user-plus"  onClick={adicionarProfessor}style={{ fontSize: '2rem', cursor: 'pointer', color: 'black' }}></i>
+          </div>
+    
+          <ul className={Style.lista}>
+            {professores.map((prof) => (
+              <li key={prof.id} className={Style.item}>
+                <span className={Style.id}>{prof.id}</span>
+                <span className={Style.nome}>{prof.nome}</span>
+                <span className={Style.acoes}>  <i className="fas fa-ellipsis-h"></i></span>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <ul className={Style.lista}>
-          {professores.map((prof) => (
-            <li key={prof.id} className={Style.item}>
-              <span className={Style.id}>{prof.id}</span>
-              <span className={Style.nome}>{prof.nome}</span>
-              <span className={Style.acoes}>  <i className="fas fa-ellipsis-h"></i></span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      </main>
     </div>
   );
 }

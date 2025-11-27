@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AlunoStyle from "../login/login.module.css";
 import axios from 'axios'; // 1. Importe o axios
 
 export default function CadastroAlunoModal({ mostra, fecha, abrirLogin }) {
+    const navigate = useNavigate();
     const [nome, setNome] = useState("");
     const [datanascimento, setDataNascimento] = useState("");
     const [email, setEmail] = useState("");
@@ -37,10 +39,7 @@ export default function CadastroAlunoModal({ mostra, fecha, abrirLogin }) {
             
             // 3. Em caso de sucesso (status 2xx), o código continua aqui.
             // Os dados da resposta do Laravel já estão em `response.data`.
-            alert(response.data.message || 'Cadastro realizado com sucesso!');
             fecha();
-            abrirLogin();
-
         } catch (err) {
             // 4. Axios joga um erro para respostas com status 4xx ou 5xx.
             // A resposta do servidor (incluindo os erros de validação) fica em `err.response.data`.

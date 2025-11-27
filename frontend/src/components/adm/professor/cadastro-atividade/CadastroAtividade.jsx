@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Style from "./atividade.module.css";
 import logo from "../../../../imgs/logo.png";
 
-
 export default function TelaProfCadAtividade() {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 

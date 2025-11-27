@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Style from "./barraTop.module.css";
 
-export default function CompBarraTop({ nomeMateria, level }){
+export default function CompBarraTop({ level }){
     const navigate = useNavigate();
     const { materia } = useParams();
 
