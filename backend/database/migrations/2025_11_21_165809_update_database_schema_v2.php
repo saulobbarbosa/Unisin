@@ -66,7 +66,7 @@ return new class extends Migration
 
         // 4. ATUALIZAR TABELA ALUNOS
         Schema::table('alunos', function (Blueprint $table) {
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('/imgs/perfil/boy_black.webp');
             $table->string('borda')->default('padrao');
             $table->string('fundo')->default('padrao');
         });
